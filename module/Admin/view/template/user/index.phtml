@@ -1,0 +1,52 @@
+
+<?php
+$title = 'Users Management';
+$this->headTitle($title);
+?>
+<div class="row">
+    <?php
+        if ($this->messages) {
+            echo '<ul>';
+            foreach ($this->messages as $message) {
+                echo '<li>' . $message . '</li>';
+            }
+            echo '</ul>';
+        }
+    ?>
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <p>
+        <a href="<?php echo $this->serverUrl($this->url('admin-user', array('action'=>'add')));?>">Add new user</a>
+    </p>
+
+    <table class="table">
+        <tr style="background-color:#2a6496;color: #ffffff">
+            <th>Id</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Created At</th>
+            <th>Last Login At</th>
+            <th>&nbsp;</th>
+        </tr>
+        <?php foreach ($users as $val) : ?>
+            <tr style="background-color: <?php echo $this->cycle(array('#FFF', '#F0F0F0'))->next(); ?>">
+                <td><?php echo $this->escapeHtml($val->id);?></td>
+                <td><?php echo $this->escapeHtml($val->firstname);?></td>
+                <td><?php echo $this->escapeHtml($val->lastname);?></td>
+                <td><?php echo $this->escapeHtml($val->email);?></td>
+                <td><?php echo $this->escapeHtml($val->state);?></td>
+                <td><?php echo $this->escapeHtml($val->country);?></td>
+                <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
+                <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->lastloginat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
+                <td>
+                    <a href="<?php echo $this->serverUrl($this->url('admin-user',
+                        array('action'=>'edit', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-edit"></i></a> &nbsp;
+                    <a href="<?php echo $this->serverUrl($this->url('admin-user',
+                        array('action'=>'delete', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

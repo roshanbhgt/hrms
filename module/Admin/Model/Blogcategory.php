@@ -1,0 +1,20 @@
+<?php
+namespace Admin\Model;
+
+class Blogcategory
+{
+    public $id;
+    public $title;
+    public $contents;
+    public $createdat;
+    public $updatedat;
+
+    public function exchangeArray($data)
+    {
+        $this->id = (!empty($data['id'])) ? $data['id'] : null;
+        $this->title = (!empty($data['title'])) ? $data['title'] : null;
+        $this->contents  = (!empty($data['contents'])) ? $data['contents'] : null;
+        $this->createdat  = (!empty($data['createdat'])) ? $data['createdat'] : null;
+        $this->updatedat  = (!empty($data['updatedat'])) ? $data['updatedat'] : null;
+    }
+}

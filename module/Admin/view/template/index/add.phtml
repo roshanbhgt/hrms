@@ -1,0 +1,43 @@
+<div class="row">
+    <h3>Creating new admin</h3>
+    <form class="form-horizontal" role="form" id="tab" method="post" action="<?php echo $this->serverUrl($this->url('admin', array('action'=>'register'))); ?>">
+        <input type="hidden" name="password" value="password" />
+        <div class="form-group">
+            <label for="firstname" class="col-md-2 control-label">First Name</label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" value="<?php echo $admin->firstname; ?>" name="firstname" placeholder="First Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastname" class="col-md-2 control-label">Last Name</label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" value="<?php echo $admin->lastname; ?>" name="lastname" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-md-2 control-label">Email</label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" value="<?php echo $admin->username; ?>" name="username" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="state" class="col-md-2 control-label">State</label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" value="<?php echo $admin->state; ?>" name="state" placeholder="State">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="country" class="col-md-2 control-label">Country</label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" name="country" value="<?php echo $admin->country; ?>" placeholder="Country">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-5">
+                <button id="btn-signup" type="submit" class="btn btn-primary"><i class="icon-hand-right"></i>
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

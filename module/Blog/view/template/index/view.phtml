@@ -1,0 +1,143 @@
+<?php
+    function HSV_TO_RGB ($H, $S, $V)  // HSV Values:Number 0-1
+    {                                 // RGB Results:Number 0-255
+        $RGB = array();
+
+        if($S == 0)
+        {
+                $R = $G = $B = $V * 255;
+        }
+        else
+        {
+                $var_H = $H * 6;
+                $var_i = floor( $var_H );
+                $var_1 = $V * ( 1 - $S );
+                $var_2 = $V * ( 1 - $S * ( $var_H - $var_i ) );
+                $var_3 = $V * ( 1 - $S * (1 - ( $var_H - $var_i ) ) );
+
+                if       ($var_i == 0) { $var_R = $V     ; $var_G = $var_3  ; $var_B = $var_1 ; }
+                else if  ($var_i == 1) { $var_R = $var_2 ; $var_G = $V      ; $var_B = $var_1 ; }
+                else if  ($var_i == 2) { $var_R = $var_1 ; $var_G = $V      ; $var_B = $var_3 ; }
+                else if  ($var_i == 3) { $var_R = $var_1 ; $var_G = $var_2  ; $var_B = $V     ; }
+                else if  ($var_i == 4) { $var_R = $var_3 ; $var_G = $var_1  ; $var_B = $V     ; }
+                else                   { $var_R = $V     ; $var_G = $var_1  ; $var_B = $var_2 ; }
+
+                $R = $var_R * 255;
+                $G = $var_G * 255;
+                $B = $var_B * 255;
+        }
+
+        $RGB['R'] = $R;
+        $RGB['G'] = $G;
+        $RGB['B'] = $B;
+
+        return $RGB;
+    }
+    function getColorForWord($word) {
+        // get the percent of the first letter ranging from 0-1
+        $first_letter_code = (ord(strtolower($word[0]))-97)/25.0;
+
+        // add a phase depending on where you want to start on the color spectrum
+        // red is 0, green is 0.25, cyan is 0.5, blue is ~0.75, and 1 is back to red
+        $hue = $first_letter_code + 0.25;
+
+        // you may also want to divide by how much of the spectrum you want to cover
+        // (making the colors range only from green to blue, for instance)
+        // but i'll leave that as an exercise
+
+        // constrain it to 0-1
+        if ($hue > 1.0)
+                $hue -= 1.0;
+
+        // the second value is the saturation ("colorfulness", ranging from gray to fully-colored)
+        // the third is the value (brightness)
+        $rgb = HSV_TO_RGB($hue, 1, 0.75);
+
+        $hexstring = "";
+
+        foreach ($rgb as $c)
+                $hexstring .= str_pad(dechex($c), 2, "0", STR_PAD_LEFT);
+
+        return $hexstring;
+    }
+    function initials($str) {
+        $ret = '';
+        foreach (explode(' ', $str) as $word)
+            $ret .= strtoupper($word[0]);
+        return $ret;
+    }
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <!-- the actual blog post: title/author/date/content -->
+        <h1><a href=""><?php echo $blog->title; ?></a></h1>
+        <p class="lead"><i class="glyphicon glyphicon-user"></i> by <a href=""><?php echo $blog->author; ?></a>
+        </p>
+        <hr>
+        <p><i class="glyphicon glyphicon-calendar"></i> Posted on <?php echo $this->dateFormat(new DateTime($blog->createdat), IntlDateFormatter::LONG, IntlDateFormatter::MEDIUM); ?></p>
+        <p><i class="glyphicon glyphicon-tags"></i> Tags: <a href=""><span class="badge badge-info">Bootstrap</span></a> <a href=""><span class="badge badge-info">Web</span></a> <a href=""><span class="badge badge-info">CSS</span></a> <a href=""><span class="badge badge-info">HTML</span></a></p>
+
+        <hr>
+        <img src="http://placehold.it/900x300" class="img-responsive">
+        <hr>
+        <p class="lead"><?php echo $blog->description; ?></p>
+        <br/>
+        <p><h4>I like the post? Like this!</h4></p>
+        <br/>
+        <hr>
+        <!-- the comment box -->
+        <div class="well">
+            <h4><i class="glyphicon glyphicon-send"></i> Leave a Comment:</h4>
+            <form role="form" class="form-horizontal" method="post" action="<?php echo $this->serverUrl($this->url('comments',
+                            array('action'=>'post')));?>">
+                <input type="hidden" name="postid" value="<?php echo $blog->id; ?>" />
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="name">Name</label>
+                    <div class="col-md-8">
+                        <input class="form-control" placeholder="Name" type="text" name="name" value="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="email">Email</label>
+                    <div class="col-md-8">
+                        <input class="form-control" placeholder="Email" type="text" name="email" value="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="title">Title</label>
+                    <div class="col-md-8">
+                        <input class="form-control" placeholder="Title your comments" type="text" name="title" value="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="message">Message</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" placeholder="Your comments" rows="3" name="message"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label"></label>
+                    <div class="col-md-8">
+                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-share-alt"></i> Submit</button>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        <script src="https://apis.google.com/js/plusone.js">
+        </script>
+        
+        <!-- the comments -->
+        <div class="listing">
+            <h3><i class="glyphicon glyphicon-comment"></i> Recent Comments</h3>
+            <?php foreach ($comments as $val) { ?>
+            <h5>
+                <img class="img-circle" src="http://placehold.it/25/<?php echo getColorForWord($val->name); ?>/fff&amp;text=<?php echo initials($val->name); ?>" /> <?php echo $val->name; ?> says <strong><?php echo $val->title; ?></strong>
+            </h5>
+            <p><?php echo ($val->message); ?></p>
+            <p><small><i class="glyphicon glyphicon-calendar"></i> <?php echo $this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::LONG, IntlDateFormatter::MEDIUM); ?></small></p>
+            <hr/>
+            <?php } ?>
+        </div>
+    </div>
+</div>
