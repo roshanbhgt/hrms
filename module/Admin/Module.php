@@ -20,6 +20,8 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Admin\Model\Admin;
 use Admin\Model\AdminTable;
+use Admin\Model\Banner;
+use Admin\Model\BannerTable;
 use Admin\Model\Blog;
 use Admin\Model\BlogTable;
 use Admin\Model\Blogcategory;
@@ -91,6 +93,17 @@ Feature\BootstrapListenerInterface
                     $authService->setAdapter($dbTableAuthAdapter);
                     $authService->setStorage($sm->get('Admin\Model\AdminAuthStorage'));
                     return $authService;
+                },
+                'Admin\Model\BannerTable' =>  function($sm) {
+                    $tableGateway = $sm->get('BannerTableGateway');
+                    $table = new BannerTable($tableGateway);
+                    return $table;
+                },
+                'BannerTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Banner());
+                    return new TableGateway('banner', $dbAdapter, null, $resultSetPrototype);
                 },
 		'Admin\Model\BlogTable' =>  function($sm) {
                     $tableGateway = $sm->get('BlogTableGateway');

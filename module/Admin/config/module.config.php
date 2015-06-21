@@ -54,6 +54,17 @@ return array(
                     ),
                 ),
             ),
+            'admin-banner' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/banner',
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Banner',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
             'admin-blog-cat' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -113,6 +124,22 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'Admin\Controller\Index',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
+            'admin-banner' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/banner[/:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Banner',
                         'action'     => 'index',
                         'layout'     => 'layout/admin',
                     ),
@@ -227,6 +254,7 @@ return array(
             'Admin\Controller\Blogcategory' => 'Admin\Controller\BlogcategoryController',
             'Admin\Controller\User' => 'Admin\Controller\UserController',
             'Admin\Controller\Page' => 'Admin\Controller\PageController',
+            'Admin\Controller\Banner' => 'Admin\Controller\BannerController',
         ),
     ),
     'view_manager' => array(
@@ -242,6 +270,9 @@ return array(
             'admin/index/edit' => __DIR__ . '/../view/template/index/edit.phtml',
             'admin/index/login' => __DIR__ . '/../view/template/index/login.phtml',
             'admin/index/forgetpass' => __DIR__ . '/../view/template/index/forgetpass.phtml',
+            'admin/banner/index' => __DIR__ . '/../view/template/banner/index.phtml',
+            'admin/banner/add' => __DIR__ . '/../view/template/banner/add.phtml',
+            'admin/banner/edit' => __DIR__ . '/../view/template/banner/edit.phtml',
             'admin/blog/index' => __DIR__ . '/../view/template/blog/index.phtml',
             'admin/blog/add' => __DIR__ . '/../view/template/blog/add.phtml',
             'admin/blog/edit' => __DIR__ . '/../view/template/blog/edit.phtml',
@@ -265,6 +296,10 @@ return array(
             array(
                 'label' => 'Page',
                 'route' => 'admin-page',
+            ),
+            array(
+                'label' => 'Banner',
+                'route' => 'admin-banner',
             ),
             array(
                 'label' => 'Blog',

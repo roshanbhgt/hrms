@@ -1,6 +1,6 @@
 
 <?php
-$title = 'Blogs Management';
+$title = 'Banner Management';
 $this->headTitle($title);
 ?>
 <div class="row">
@@ -15,35 +15,35 @@ $this->headTitle($title);
     ?>
     <h1><?php echo $this->escapeHtml($title); ?></h1>
     <p>
-        <a href="<?php echo $this->serverUrl($this->url('admin-blog', array('action'=>'add')));?>">Add new post</a>
+        <a href="<?php echo $this->serverUrl($this->url('admin-banner', array('action'=>'add')));?>">Add new banner</a>
     </p>
 
     <table class="table">
         <tr style="background-color:#2a6496;color: #ffffff">
             <th>Id</th>
             <th>Title</th>
-            <th>URL Path</th>
-            <th>Author</th>
-            <th>Description</th>
+            <th>Banner</th>
+            <th>URL</th>
+            <th>Sort Order</th>
+            <th>Status</th>
             <th width="200">Created At</th>
             <th width="200">Updated At</th>
-            <th width="90">&nbsp;</th>
+            <th width="75">&nbsp;</th>
         </tr>
-        <?php foreach ($blogs as $val) : ?>
+        <?php foreach ($banners as $val) : ?>
             <tr style="background-color: <?php echo $this->cycle(array('#FFF', '#F0F0F0'))->next(); ?>">
                 <td><?php echo $this->escapeHtml($val->id);?></td>
                 <td><?php echo $this->escapeHtml($val->title);?></td>
-                <td><?php echo $this->escapeHtml($val->identifier);?></td>
-                <td><?php echo $this->escapeHtml($val->author);?></td>
-                <td><?php echo $this->escapeHtml($val->description);?></td>
+                <td><img src="<?php echo $this->escapeHtml($val->banner);?>" alt="<?php echo $this->escapeHtml($val->banner);?>" width="100" height="100" /></td>
+                <td><?php echo $this->escapeHtml($val->urlpath);?></td>
+                <td><?php echo $this->escapeHtml($val->sortorder);?></td>
+                <td><?php if($val->status == 1){ echo 'Active'; }else{ echo 'Inactive'; } ?></td>
                 <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
                 <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->updatedat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
                 <td>
-                    <a href="<?php echo $this->serverUrl($this->url('admin-blog-comments',
-                        array('action'=>'index', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-comment"></i></a> &nbsp;
-                    <a href="<?php echo $this->serverUrl($this->url('admin-blog',
+                    <a href="<?php echo $this->serverUrl($this->url('admin-banner',
                         array('action'=>'edit', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-edit"></i></a> &nbsp;
-                    <a href="<?php echo $this->serverUrl($this->url('admin-blog',
+                    <a href="<?php echo $this->serverUrl($this->url('admin-banner',
                         array('action'=>'delete', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-trash"></i></a>
                 </td>
             </tr>

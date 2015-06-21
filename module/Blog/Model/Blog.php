@@ -5,6 +5,7 @@ class Blog
 {
     public $id;
     public $title;
+    public $identifier;
     public $description;
     public $author;
     public $createdat;
@@ -14,6 +15,7 @@ class Blog
     {
         $this->id     = (!empty($data['id'])) ? $data['id'] : null;
         $this->title = (!empty($data['title'])) ? $data['title'] : null;
+        $this->identifier = (!empty($data['identifier'])) ? $data['identifier'] : null;
         $this->description  = (!empty($data['description'])) ? $data['description'] : null;
         $this->author  = (!empty($data['author'])) ? $data['author'] : null;
         $this->createdat  = (!empty($data['createdat'])) ? $data['createdat'] : null;
