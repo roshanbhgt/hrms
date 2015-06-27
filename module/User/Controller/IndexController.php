@@ -162,18 +162,17 @@ class IndexController extends AbstractActionController
 		return $this->redirect()->toRoute('login');
     }
 	
-	public function registeremployeeAction()
+    public function registercompanyAction()
     {
-		/* 
-			//if already login, redirect to success page
-			if ($this->getAuthService()->hasIdentity()){
-				return $this->redirect()->toRoute('user');
-			}
-			
-			$view = new ViewModel(array( 'messages'  => $this->flashmessenger()->getMessages()));
-			return $view;
-		*/
-		return $this->redirect()->toRoute('login');
+		 
+        //if already login, redirect to success page
+        if ($this->getAuthService()->hasIdentity()){
+                return $this->redirect()->toRoute('user');
+        }
+
+        $view = new ViewModel(array( 'messages'  => $this->flashmessenger()->getMessages()));
+        return $view;
+		
     }
 
     public function logoutAction()

@@ -2,6 +2,7 @@
 namespace Admin\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Application\Model\Url;
 
 class PageTable
 {
@@ -31,6 +32,7 @@ class PageTable
 
     public function savePage($page)
     {
+        $url = new Url();
         $data = array(
             'title' => $page->title,
             'contents'  => $page->contents,
@@ -38,6 +40,8 @@ class PageTable
 
         $id = (int)$page->id;
         if ($id == 0) {
+            $identifier = 'page/'.$url->formatUrlKey($page->title);
+            $data['identifier'] = $identifier;
             $data['createdat'] = date('y-m-d h:i:s');
             $this->tableGateway->insert($data);
         } else {

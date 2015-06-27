@@ -13,6 +13,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\File\Transfer\Adapter\Http;
 use Zend\Json;
+use Application\Model\Password;
 
 
 class IndexController extends AbstractActionController
@@ -93,10 +94,12 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
 
         if ($request->isPost()){
+            $password = new Password();
+            $encyPass = $password->verify($request->getPost('password'));
             //check authentication...
             $this->getAuthService()->getAdapter()
                 ->setIdentity($request->getPost('username'))
-                ->setCredential($request->getPost('password'));
+                ->setCredential($encyPass);
 
             $result = $this->getAuthService()->authenticate();
 

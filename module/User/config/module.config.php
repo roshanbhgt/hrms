@@ -71,17 +71,17 @@ return array(
                     ),
                 ),
             ),
-            'registeremployee' => array(
+            'registercompany' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/user/index/registeremployee',
+                    'route'    => '/user/index/registercompany',
                     'defaults' => array(
                         'controller' => 'User\Controller\Index',
-                        'action'     => 'registeremployee',
+                        'action'     => 'registercompany',
                     ),
                 ),
             ),
-			'registerjobseeker' => array(
+            'registerjobseeker' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/user/index/registerjobseeker',
@@ -178,6 +178,8 @@ return array(
             'user/index/index' => __DIR__ . '/../view/template/index/index.phtml',
             'user/index/login' => __DIR__ . '/../view/template/index/login.phtml',
             'user/index/register' => __DIR__ . '/../view/template/index/register.phtml',
+            'user/index/forgetpass' => __DIR__ . '/../view/template/index/forgetpass.phtml',
+            'user/index/registercompany' => __DIR__ . '/../view/template/index/companyregister.phtml',
             'user/index/forgetpass' => __DIR__ . '/../view/template/index/forgetpass.phtml',
         ),
         'template_path_stack' => array(

@@ -2,6 +2,7 @@
 namespace Admin\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Application\Model\Password;
 
 class AdminTable
 {
@@ -31,11 +32,11 @@ class AdminTable
 
     public function saveAdmin($admin)
     {   
+        $password = new Password();
         $data = array(
             'firstname' => $admin->firstname,
             'lastname'  => $admin->lastname,
             'username' => $admin->username,
-            'password'  => $admin->password,
             'state' => $admin->state,
             'country'  => $admin->country,
         );
@@ -43,6 +44,7 @@ class AdminTable
         $id = (int)$admin->id;
         if ($id == 0) {
             $data['createdat'] = date('Y-m-d h:m:s');
+            $data['password'] = $password->create($admin->password);
             return $this->tableGateway->insert($data);
         } else {
             if ($this->getAdmin($id)) {

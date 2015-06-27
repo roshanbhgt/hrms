@@ -2,6 +2,7 @@
 namespace Admin\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Application\Model\Url;
 
 class BlogTable
 {
@@ -31,6 +32,7 @@ class BlogTable
 
     public function saveBlog($blog)
     {
+        $url = new Url();
         $data = array(
             'title' => $blog->title,
             'description'  => $blog->description,
@@ -39,6 +41,8 @@ class BlogTable
 
         $id = (int)$blog->id;
         if ($id == 0) {
+            $identifier = 'blog/'.$url->formatUrlKey($blog->title);
+            $data['identifier'] = $identifier;
             $data['createdat'] = date('y-m-d h:i:s');
             $this->tableGateway->insert($data);
         } else {
