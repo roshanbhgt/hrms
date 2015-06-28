@@ -18,6 +18,8 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use User\Model\User;
 use User\Model\UserTable;
+use User\Model\UserCompany;
+use User\Model\UserCompanyTable;
 
 class Module
 {
@@ -87,6 +89,17 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new User());
                     return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
+                },
+                'User\Model\UserCompanyTable' =>  function($sm) {
+                    $tableGateway = $sm->get('UserCompanyTableGateway');
+                    $table = new UserCompanyTable($tableGateway);
+                    return $table;
+                },
+                'UserCompanyTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new User());
+                    return new TableGateway('user_company', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

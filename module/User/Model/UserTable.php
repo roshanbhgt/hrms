@@ -2,6 +2,7 @@
 
 namespace User\Model;
 use Zend\Db\TableGateway\TableGateway;
+use Application\Model\Password;
 
 class UserTable
 {
@@ -32,26 +33,31 @@ class UserTable
 
     public function saveUser($user)
     {
+        $password = new Password();
         $data = array(
             'firstname' => $user->firstname,
             'lastname'  => $user->lastname,
             'email' => $user->email,
-            'password'  => $user->password,
+            'state' => $user->state,
+            'country' => $user->country,
         );
 
         $id = (int)$user->id;
         if ($id == 0) {
+            $data['type']  = $user->type;
+            $data['password']  = $password->create($user->password);
             $data['createdat'] = date('Y-m-d h:m:s');
             $this->tableGateway->insert($data);
+            $id = $this->tableGateway->lastInsertValue;
         } else {
-            if ($this->getUser($id))
-            {
+            if ($this->getUser($id)) {
                 $data['lastloginat'] = date('Y-m-d h:m:s');
                 $this->tableGateway->update($data, array('id' => $id));
             } else {
                 throw new \Exception('User with id does not exist');
             }
         }
+        return $id;
     }
 
     public function updateUser($user)
@@ -85,5 +91,15 @@ class UserTable
     public function deleteUser($id)
     {
         $this->tableGateway->delete(array('id' => $id));
+    }
+    
+    public function isDuplcateEmail($email, $type){
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('email' => $id, 'type'=> $type));
+        $row = $rowset->current();
+        if (!$row) {
+            return FALSE;
+        }
+        return $row;
     }
 }

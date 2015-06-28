@@ -11,12 +11,14 @@ namespace User\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Model\Password;
 
 class IndexController extends AbstractActionController
 {
     protected $storage;
     protected $authservice;
     protected $userTable;
+    protected $usercompanyTable;
 
     public function getAuthService()
     {
@@ -51,6 +53,15 @@ class IndexController extends AbstractActionController
         }
         return $this->userTable;
     }
+    
+    public function getUserCompanyTable()
+    {
+        if (!$this->usercompanyTable) {
+            $sm = $this->getServiceLocator();
+            $this->usercompanyTable = $sm->get('User\Model\UserCompanyTable');
+        }
+        return $this->usercompanyTable;
+    }
 
     public function indexAction()
     {
@@ -83,10 +94,11 @@ class IndexController extends AbstractActionController
         $redirect = 'login';
 
         if ($request->isPost()){
+            $pass = new Password();
             //check authentication...
             $this->getAuthService()->getAdapter()
                 ->setIdentity($request->getPost('email'))
-                ->setCredential($request->getPost('password'));
+                ->setCredential($pass->verify($request->getPost('password')));
 
             $result = $this->getAuthService()->authenticate();
 
@@ -114,6 +126,7 @@ class IndexController extends AbstractActionController
                     array('id'          => $row->id,
                         'firstname'   => $row->firstname,
                         'email'   => $request->getPost('email'),
+                        'type'   => $request->getPost('type'),
                         'ip_address' => $this->getRequest()->getServer('REMOTE_ADDR'),
                         'user_agent'    => $request->getServer('HTTP_USER_AGENT'))
                 );
@@ -191,11 +204,34 @@ class IndexController extends AbstractActionController
         }
 
         $request = $this->getRequest();
+        
+        if ($this->getUserTable()->isDuplcateEmail($request->getPost('email'),$request->getPost('type'))) {
+            $this->flashmessenger()->addMessage('Account with email id already exist');
+            if($request->getPost('type') == 'employer'){
+                return $this->redirect()->toRoute('registercompany');
+            }elseif($request->getPost('type') == 'jobseeker'){
+                return $this->redirect()->toRoute('registerjobseeker');
+            }
+            
+        }
 
         if ($request->isPost()){
-            if($this->getUserTable()->saveUser($request->getPost())){
+            $userid = $this->getUserTable()->saveUser($request->getPost());
+            if($userid){
                 $this->flashmessenger()->addMessage('You account have been created successfully.');
             }
+            $data = $request->getPost();
+            $data['userid'] = $userid;
+            if ($request->getPost('type') == 'employer') {
+                if($this->getUserCompanyTable()->saveCompany($data)){
+                    $this->flashmessenger()->addMessage('Your company information saved successfully.');
+                }
+            } elseif($request->getPost('type') == 'jobseeker') {
+                if($this->getUserTable()->saveUser($request->getPost())){
+                    $this->flashmessenger()->addMessage('You personal information saved successfully.');
+                }
+            }
+            
         }
         
         return $this->redirect()->toRoute('login');

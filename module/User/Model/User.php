@@ -14,6 +14,7 @@ class User
     public $country;
     public $createdat;
     public $lastloginat;
+    public $type;
 
     public function exchangeArray($data)
     {
@@ -26,5 +27,6 @@ class User
         $this->country  = (!empty($data['country'])) ? $data['country'] : null;
         $this->createdat = (!empty($data['createdat'])) ? $data['createdat'] : null;
         $this->lastloginat  = (!empty($data['lastloginat'])) ? $data['lastloginat'] : null;
+        $this->type  = (!empty($data['type'])) ? $data['type'] : null;
     }
 }

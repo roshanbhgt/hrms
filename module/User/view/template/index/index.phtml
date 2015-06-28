@@ -24,7 +24,7 @@
                 </blockquote>
                 <p>
                     <i class="glyphicon glyphicon-envelope"></i> <?php echo $user->email; ?> <br>
-                    <i class="glyphicon glyphicon-globe"></i> www.roshanbhagat.com <br>
+                    <i class="glyphicon glyphicon-globe"></i> <?php // echo $user->url; ?> <br>
                     <i class="glyphicon glyphicon-time"></i> Since <?php echo $this->dateFormat(new DateTime($user->createdat), IntlDateFormatter::LONG,IntlDateFormatter::MEDIUM); ?>
                 </p>
             </div>
