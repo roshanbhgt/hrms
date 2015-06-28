@@ -1,0 +1,127 @@
+<?php
+$html = '<ul class="' .$this->navigation('admin-nav')->menu()->getUlClass(). '">';
+
+foreach ($this->container as $page) 
+{
+
+    $check = $page->isActive();
+    if($check)
+    {
+        $marker = "active";
+    }
+    else
+    {
+        $marker = "inactive";
+    }
+    $submenucount = count($page->pages);
+    $class = '';
+    if($submenucount){
+        $marker .= ' '.'dropdown';
+        $class = ' class="dropdown-toggle" data-toggle="dropdown" ';
+    }
+    $html .= '<li class="' . $marker . '">';
+    if ($href = $page->getHref()) $html .= "<a  $class  href=\"{$href}\">";
+                 $html .= "<span>";
+
+
+            $html .= $page->getLabel();
+
+            if ($href) $html .= "</a>";
+             $html .= "</span>";
+    // $html .= $this->navigation('admin-nav')->htmlify($page) . PHP_EOL;
+    if(count($page->pages)){
+        $html .= '<ul class="dropdown-menu">';
+        foreach ($page->pages as $subpage) 
+        {
+            $check = $subpage->isActive();
+            if($check)
+            {
+                $submarker = "active";              
+
+            }
+            else
+            {
+                $submarker = "inactive";
+
+            }
+            $html .= '<li class="' . $submarker . '">';
+            if ($href = $subpage->getHref()) $html .= "<a href=\"{$href}\">";
+                 $html .= "<span>";
+
+
+            $html .= $subpage->getLabel();
+
+            if ($href) $html .= "</a>";
+             $html .= "</span>";
+
+            $html .= "</li>";
+
+
+            // $subitem[$subpage->getHref()] = '';
+
+        }
+        $html .= "</ul>";
+    }
+    $html .= "</li>";
+ }
+
+$html .= "</ul>";
+echo $html;
+   
+
+// get the page asked for
+// $uri = Zend_Controller_Action::getInstance()->getRequest()->getRequestUri();
+// $con = Zend_Controller_Action::getInstance()->getRequest()->getControllerName();
+// $act = Zend_Controller_Action::getInstance()->getRequest()->getActionName();
+
+// check for child pages
+// $list = $this->container;
+// $menuItems = $list->toArray();
+// $function = new AppFiles_Functions_FunctionsHooks();
+// $current = $list->findOneBy('action', $act);
+// $isChildof = $function->find_parent($menuItems, $act);
+
+// print($isChildof);
+
+  /* $subhtml = '<ul class="navigation">';
+            foreach ($current->pages as $subpage) 
+            {
+
+                $check = $subpage->isActive();
+                if($check)
+                {
+                    $submarker = "active";              
+
+                }
+                else
+                {
+                    $submarker = "inactive";
+
+                }
+                $subhtml .= '<li class="' . $submarker . '">';
+                if ($href = $subpage->getHref()) $subhtml .= "<a href=\"{$href}\">";
+                else $subhtml .= "<span>";
+
+
+                $subhtml .= $subpage->getLabel();
+
+                if ($href) $subhtml .= "</a>";
+                else $subhtml .= "</span>";
+
+                $subhtml .= "</li>";
+
+
+                $subitem[$subpage->getHref()] = '';
+
+            }
+    $subhtml .= "</ul>";
+
+// print a container for the child pages            
+
+ ?>
+
+<div id="sub-menu" class="">
+<?php echo $subhtml; ?>
+</div>
+   */ ?>
+   */

@@ -24,6 +24,7 @@ $this->headTitle($title);
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
+            <th>Type</th>
             <th>State</th>
             <th>Country</th>
             <th>Created At</th>
@@ -36,6 +37,7 @@ $this->headTitle($title);
                 <td><?php echo $this->escapeHtml($val->firstname);?></td>
                 <td><?php echo $this->escapeHtml($val->lastname);?></td>
                 <td><?php echo $this->escapeHtml($val->email);?></td>
+                <td><?php echo $this->escapeHtml($val->type);?></td>
                 <td><?php echo $this->escapeHtml($val->state);?></td>
                 <td><?php echo $this->escapeHtml($val->country);?></td>
                 <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
@@ -43,6 +45,8 @@ $this->headTitle($title);
                 <td>
                     <a href="<?php echo $this->serverUrl($this->url('admin-user',
                         array('action'=>'edit', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-edit"></i></a> &nbsp;
+                    <a href="<?php echo $this->serverUrl($this->url('admin-user',
+                        array('action'=>'factinfo', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-info-sign"></i></a> &nbsp;
                     <a href="<?php echo $this->serverUrl($this->url('admin-user',
                         array('action'=>'delete', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-trash"></i></a>
                 </td>

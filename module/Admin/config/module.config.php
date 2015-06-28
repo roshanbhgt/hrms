@@ -304,14 +304,30 @@ return array(
             array(
                 'label' => 'Blog',
                 'route' => 'admin-blog',
-            ),
-            array(
-                'label' => 'Blog Category',
-                'route' => 'admin-blog-cat',
+                'pages' => array(
+                                array(
+                                    'label' => 'Manage Posts',
+                                    'route' => 'admin-blog',
+                                ),
+                                array(
+                                    'label' => 'Manage Category',
+                                    'route' => 'admin-blog-cat',
+                                )
+                            ),
             ),
             array(
                 'label' => 'User',
                 'route' => 'admin-user',
+                'pages' => array(
+                                array(
+                                    'label' => 'Manage Company',
+                                    'route' => 'admin-blog',
+                                ),
+                                array(
+                                    'label' => 'Manage Jobseeker',
+                                    'route' => 'admin-blog-cat',
+                                )
+                            ),
             ),
             array(
                 'label' => 'My Account',

@@ -60,11 +60,20 @@
             <a class="navbar-brand" href="<?php echo $this->url('admin') ?>"><img src="<?php echo $this->basePath('backend/img/logo.png') ?>" alt="HR Consultancy - Admin"/>&nbsp;<?php echo $this->translate('') ?></a>
         </div>
         <div class="collapse navbar-collapse">
-            <?php echo $this->navigation('admin-nav')
-                ->menu()
-                ->setUlClass('nav navbar-nav')
-                ->setMaxDepth(0)
-                ->setRenderInvisible(false)?>
+            <?php
+                 
+            echo $this->navigation('admin-nav')->menu()
+                    ->setUlClass('nav navbar-nav')
+                    ->setPartial('partial/menu.phtml')
+                    ->render();
+                /*echo $this->navigation('admin-nav')
+                    ->menu()
+                    ->setUlClass('nav navbar-nav')
+                    ->setMinDepth(0)
+                    ->setMaxDepth(0)
+                    ->setRenderInvisible(true); */
+                 
+             ?>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
