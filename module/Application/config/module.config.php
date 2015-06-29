@@ -93,7 +93,7 @@ return array(
     ),
     'navigation' => array(
         'default' => array(),
-        'left' => array(
+        /* 'left' => array(
             array(
                 'label' => 'Home',
                 'route' => 'home',
@@ -107,7 +107,7 @@ return array(
                 'route' => 'blog',
                 'action'=> 'index',
             ),
-        ),
+        ), */
         'right' => array(
             array(
                 'label' => 'My Account',

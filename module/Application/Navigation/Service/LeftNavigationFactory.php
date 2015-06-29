@@ -1,20 +1,21 @@
 <?php
 namespace Application\Navigation\Service;
-use Zend\Navigation\Service\DefaultNavigationFactory;
+ 
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+ 
 /**
-* Factory for the Admin admin navigation
+* Factory for the frontend navigation
 *
 * @package    Application
 * @subpackage Navigation\Service
 */
-class LeftNavigationFactory extends DefaultNavigationFactory
+class LeftNavigationFactory implements FactoryInterface
 {
-/**
-* @{inheritdoc}
-*/
-protected function getName()
-{
-    return 'left';
-}
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $navigation =  new LeftNavigation();
+        return $navigation->createService($serviceLocator);
+    }
 }
 ?>

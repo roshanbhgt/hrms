@@ -7,7 +7,7 @@ use Zend\Navigation\Service\DefaultNavigationFactory;
 * @package    Application
 * @subpackage Navigation\Service
 */
-class RightNavigationFactory extends DefaultNavigationFactory
+class RightNavigation extends DefaultNavigationFactory
 {
 /**
 * @{inheritdoc}

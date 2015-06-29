@@ -15,7 +15,11 @@ use Zend\Session\SessionManager;
 use Zend\Session\Container;
 use Zend\Session\Config\SessionConfig;
 use Zend\EventManager\EventInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Captcha\ReCaptcha;
+use Application\Model\Menu;
+use Application\Model\MenuTable;
 
 class Module
 {
@@ -51,8 +55,19 @@ class Module
         return array(
             'factories' => array(
                 'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-                'right' => 'Application\Navigation\Service\RightNavigationFactory',
-                'left' => 'Application\Navigation\Service\LeftNavigationFactory',
+                'right' => 'Application\Navigation\Service\RightNavigation',
+                'left' => 'Application\Navigation\Service\LeftNavigation',
+                'Application\Model\MenuTable' => function ($sm) {
+                    $tableGateway = $sm->get('MenuTableGateway');
+                    $table = new MenuTable($tableGateway);
+                    return $table;
+                },
+                'MenuTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Menu());
+                    return new TableGateway('menu', $dbAdapter, null, $resultSetPrototype);
+                },
                 'Zend\Session\SessionManager' => function ($sm) {
                     $config = $sm->get('config');
                     if (isset($config['session'])) {
