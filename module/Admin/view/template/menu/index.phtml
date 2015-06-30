@@ -1,0 +1,48 @@
+
+<?php
+$title = 'Menu Management';
+$this->headTitle($title);
+?>
+<div class="row">
+    <?php
+        if ($this->messages) {
+            echo '<ul>';
+            foreach ($this->messages as $message) {
+                echo '<li>' . $message . '</li>';
+            }
+            echo '</ul>';
+        }
+    ?>
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <p>
+        <a href="<?php echo $this->serverUrl($this->url('admin-menu', array('action'=>'add')));?>">Add new page</a>
+    </p>
+
+    <table class="table">
+        <tr style="background-color:#2a6496;color: #ffffff">
+            <th>Id</th>
+            <th>Title</th>
+            <th>Label</th>
+            <th>Route</th>
+            <th width="200">Created At</th>
+            <th width="200">Updated At</th>
+            <th width="75">&nbsp;</th>
+        </tr>
+        <?php foreach ($menus as $val) : ?>
+            <tr style="background-color: <?php echo $this->cycle(array('#FFF', '#F0F0F0'))->next(); ?>">
+                <td><?php echo $this->escapeHtml($val->id);?></td>
+                <td><?php echo $this->escapeHtml($val->title);?></td>
+                <td><?php echo $this->escapeHtml($val->label);?></td>
+                <td><?php echo $this->escapeHtml($val->route);?></td>
+                <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
+                <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->updatedat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
+                <td>
+                    <a href="<?php echo $this->serverUrl($this->url('admin-menu',
+                        array('action'=>'edit', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-edit"></i></a> &nbsp;
+                    <a href="<?php echo $this->serverUrl($this->url('admin-menu',
+                        array('action'=>'delete', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

@@ -109,6 +109,17 @@ return array(
                     ),
                 ),
             ),
+			'admin-menu' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/menu',
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Menu',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -225,6 +236,22 @@ return array(
                     ),
                 ),
             ),
+			'admin-menu' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/menu[/:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Menu',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -255,6 +282,7 @@ return array(
             'Admin\Controller\User' => 'Admin\Controller\UserController',
             'Admin\Controller\Page' => 'Admin\Controller\PageController',
             'Admin\Controller\Banner' => 'Admin\Controller\BannerController',
+			'Admin\Controller\Menu' => 'Admin\Controller\MenuController',
         ),
     ),
     'view_manager' => array(
@@ -286,6 +314,9 @@ return array(
             'admin/blogcategory/index' => __DIR__ . '/../view/template/blogcategory/index.phtml',
             'admin/blogcategory/add' => __DIR__ . '/../view/template/blogcategory/add.phtml',
             'admin/blogcategory/edit' => __DIR__ . '/../view/template/blogcategory/edit.phtml',
+			'admin/menu/index' => __DIR__ . '/../view/template/menu/index.phtml',
+            'admin/menu/add' => __DIR__ . '/../view/template/menu/add.phtml',
+            'admin/menu/edit' => __DIR__ . '/../view/template/menu/edit.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -294,6 +325,10 @@ return array(
     'navigation' => array(
         'admin' => array(
             array(
+                'label' => 'Menu',
+                'route' => 'admin-menu',
+            ),
+			array(
                 'label' => 'Page',
                 'route' => 'admin-page',
             ),

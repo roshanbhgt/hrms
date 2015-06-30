@@ -29,7 +29,7 @@ class MenuTable
         return $row;
     }
 
-    public function saveMenu(Menu $menu)
+    public function saveMenu($menu)
     {
         $data = array(
             'title' => $menu->title,
@@ -39,9 +39,11 @@ class MenuTable
 
         $id = (int)$menu->id;
         if ($id == 0) {
+			$data['createdat'] = date('Y-m-d h:m:s');
             $this->tableGateway->insert($data);
         } else {
             if ($this->getMenu($id)) {
+				$data['updatedat'] = date('Y-m-d h:m:s');
                 $this->tableGateway->update($data, array('id' => $id));
             } else {
                 throw new \Exception('Form id does not exist');
