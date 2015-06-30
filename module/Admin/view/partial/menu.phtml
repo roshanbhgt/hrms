@@ -25,10 +25,12 @@ foreach ($this->container as $page)
 
 
             $html .= $page->getLabel();
-
+$html .= "</span>";
+if($submenucount){ 
+$html .= '<span class="caret"></span>';
+}
             if ($href) $html .= "</a>";
-             $html .= "</span>";
-    // $html .= $this->navigation('admin-nav')->htmlify($page) . PHP_EOL;
+             
     if(count($page->pages)){
         $html .= '<ul class="dropdown-menu">';
         foreach ($page->pages as $subpage) 

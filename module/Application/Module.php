@@ -20,6 +20,10 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Captcha\ReCaptcha;
 use Application\Model\Menu;
 use Application\Model\MenuTable;
+use Application\Model\Country;
+use Application\Model\CountryTable;
+use Application\Model\Region;
+use Application\Model\RegionTable;
 
 class Module
 {
@@ -67,6 +71,28 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Menu());
                     return new TableGateway('menu', $dbAdapter, null, $resultSetPrototype);
+                },
+				'Application\Model\CountryTable' => function ($sm) {
+                    $tableGateway = $sm->get('CountryTableGateway');
+                    $table = new CountryTable($tableGateway);
+                    return $table;
+                },
+                'CountryTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Country());
+                    return new TableGateway('country', $dbAdapter, null, $resultSetPrototype);
+                },
+				'Application\Model\RegionTable' => function ($sm) {
+                    $tableGateway = $sm->get('RegionTableGateway');
+                    $table = new RegionTable($tableGateway);
+                    return $table;
+                },
+                'RegionTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Region());
+                    return new TableGateway('country_region', $dbAdapter, null, $resultSetPrototype);
                 },
                 'Zend\Session\SessionManager' => function ($sm) {
                     $config = $sm->get('config');

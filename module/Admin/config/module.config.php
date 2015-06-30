@@ -120,6 +120,28 @@ return array(
                     ),
                 ),
             ),
+			'admin-country' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/country',
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Country',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
+			'admin-region' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/region',
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Region',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -252,6 +274,38 @@ return array(
                     ),
                 ),
             ),
+			'admin-country' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/country[/:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Country',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
+			'admin-region' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/region[/:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Region',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -283,6 +337,8 @@ return array(
             'Admin\Controller\Page' => 'Admin\Controller\PageController',
             'Admin\Controller\Banner' => 'Admin\Controller\BannerController',
 			'Admin\Controller\Menu' => 'Admin\Controller\MenuController',
+			'Admin\Controller\Country' => 'Admin\Controller\CountryController',
+			'Admin\Controller\Region' => 'Admin\Controller\RegionController',
         ),
     ),
     'view_manager' => array(
@@ -317,6 +373,12 @@ return array(
 			'admin/menu/index' => __DIR__ . '/../view/template/menu/index.phtml',
             'admin/menu/add' => __DIR__ . '/../view/template/menu/add.phtml',
             'admin/menu/edit' => __DIR__ . '/../view/template/menu/edit.phtml',
+			'admin/country/index' => __DIR__ . '/../view/template/country/index.phtml',
+            'admin/country/add' => __DIR__ . '/../view/template/country/add.phtml',
+            'admin/country/edit' => __DIR__ . '/../view/template/country/edit.phtml',
+			'admin/region/index' => __DIR__ . '/../view/template/region/index.phtml',
+            'admin/region/add' => __DIR__ . '/../view/template/region/add.phtml',
+            'admin/region/edit' => __DIR__ . '/../view/template/region/edit.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -361,6 +423,20 @@ return array(
                                 array(
                                     'label' => 'Manage Jobseeker',
                                     'route' => 'admin-blog-cat',
+                                )
+                            ),
+            ),
+			array(
+                'label' => 'System',
+                'route' => 'home',
+                'pages' => array(
+                                array(
+                                    'label' => 'Manage Country',
+                                    'route' => 'admin-country',
+                                ),
+                                array(
+                                    'label' => 'Manage Region',
+                                    'route' => 'admin-region',
                                 )
                             ),
             ),
