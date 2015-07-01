@@ -36,7 +36,7 @@ class RegionTable
             'code'  => $region->code,
             'default_name'  => $region->default_name,
         );
-
+        
         $id = (int)$region->id;
         if ($id == 0) {
 			$data['createdat'] = date('Y-m-d h:m:s');

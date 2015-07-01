@@ -4,15 +4,6 @@ $title = 'Region Management';
 $this->headTitle($title);
 ?>
 <div class="row">
-    <?php
-        if ($this->messages) {
-            echo '<ul>';
-            foreach ($this->messages as $message) {
-                echo '<li>' . $message . '</li>';
-            }
-            echo '</ul>';
-        }
-    ?>
     <h1><?php echo $this->escapeHtml($title); ?></h1>
     <p>
         <a href="<?php echo $this->serverUrl($this->url('admin-region', array('action'=>'add')));?>">Add new region</a>
@@ -31,7 +22,7 @@ $this->headTitle($title);
         <?php foreach ($regions as $val) : ?>
             <tr style="background-color: <?php echo $this->cycle(array('#FFF', '#F0F0F0'))->next(); ?>">
                 <td><?php echo $this->escapeHtml($val->id);?></td>
-                <td><?php echo $this->escapeHtml($val->ciuntry_id);?></td>
+                <td><?php echo $this->escapeHtml($val->country_id);?></td>
                 <td><?php echo $this->escapeHtml($val->code);?></td>
                 <td><?php echo $this->escapeHtml($val->default_name);?></td>
                 <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>

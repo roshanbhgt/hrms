@@ -96,7 +96,7 @@ class RegionController extends AbstractActionController {
 
         if($request->getPost()){
             if($this->getRegionTable()->saveRegion($request->getPost())){
-                $this->flashmessenger()->addMessage('New region has been updated successfully.');
+                $this->flashmessenger()->addSuccessMessage('New region has been updated successfully.');
             }
         }
 

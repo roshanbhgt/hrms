@@ -82,7 +82,6 @@ class IndexController extends AbstractActionController
         $captcha = $this->getServiceLocator()->get('ReCaptchaService')->generate();
 
         $view = new ViewModel(array(
-            'messages' => $this->flashmessenger()->getMessages(),
             'captcha'  => $captcha
         ));
         return $view;
@@ -106,7 +105,7 @@ class IndexController extends AbstractActionController
             foreach($result->getMessages() as $message)
             {
                 //save message temporary into flashmessenger
-                $this->flashmessenger()->addMessage("You have been login successfully.");
+                $this->flashmessenger()->addSuccessMessage("You have been login successfully.");
             }
 
 
@@ -171,7 +170,7 @@ class IndexController extends AbstractActionController
 
         if ($request->isPost()){
             if($this->getAdminTable()->saveAdmin($request->getPost())){
-                $this->flashmessenger()->addMessage('You have successfully register.');
+                $this->flashmessenger()->addSuccessMessage('You have successfully register.');
             }
         }
         return $this->redirect()->toRoute('admin');
@@ -182,7 +181,7 @@ class IndexController extends AbstractActionController
         $this->getSessionStorage()->forgetMe();
         $this->getAuthService()->clearIdentity();
 
-        $this->flashmessenger()->addMessage("You've been logged out");
+        $this->flashmessenger()->addSuccessMessage("You've been logged out");
         return $this->redirect()->toRoute('admin-login');
     }
 
@@ -207,7 +206,7 @@ class IndexController extends AbstractActionController
 
         if ($request->isPost()){
             if($this->getAdminTable()->updateAdmin($request->getPost())){
-                $this->flashmessenger()->addMessage('Your account has been updated successfully.');
+                $this->flashmessenger()->addSuccessMessage('Your account has been updated successfully.');
             }
         }
 
@@ -236,7 +235,7 @@ class IndexController extends AbstractActionController
 
         $id = (int) $this->params()->fromRoute('id', 0);
         if($this->getAdminTable()->deleteAdmin($id)){
-            $this->flashmessenger()->addMessage('Account has been deleted successfully.');
+            $this->flashmessenger()->addSuccessMessage('Account has been deleted successfully.');
         }
 
         return $this->redirect()->toRoute('admin');

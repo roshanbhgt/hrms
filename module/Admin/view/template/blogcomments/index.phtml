@@ -3,15 +3,6 @@
     $this->headTitle($title);
 ?>
 <div class="row">
-    <?php
-        if ($this->messages) {
-            echo '<ul>';
-            foreach ($this->messages as $message) {
-                echo '<li>' . $message . '</li>';
-            }
-            echo '</ul>';
-        }
-    ?>
     <h1><?php echo $this->escapeHtml($title); ?></h1>
     <table class="table">
         <tr style="background-color:#2a6496;color: #ffffff">

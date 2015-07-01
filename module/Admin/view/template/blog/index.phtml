@@ -4,15 +4,6 @@ $title = 'Blogs Management';
 $this->headTitle($title);
 ?>
 <div class="row">
-    <?php
-        if ($this->messages) {
-            echo '<ul>';
-            foreach ($this->messages as $message) {
-                echo '<li>' . $message . '</li>';
-            }
-            echo '</ul>';
-        }
-    ?>
     <h1><?php echo $this->escapeHtml($title); ?></h1>
     <p>
         <a href="<?php echo $this->serverUrl($this->url('admin-blog', array('action'=>'add')));?>">Add new post</a>

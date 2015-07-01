@@ -4,17 +4,6 @@ $title = 'My Dashboard';
 $this->headTitle($title);
 ?>
 <div class="row">
-    <?php
-        if ($this->messages) {
-            echo '<div  id="login-alert" class="alert alert-danger col-sm-12">';
-                echo '<ul>';
-                foreach ($this->messages as $message) {
-                    echo '<li>' . $message . '</li>';
-                }
-                echo '</ul>';
-            echo '</div>';
-        }
-    ?>
     <div class="row">
     <div class="col-md-12">
         <div class="col-md-2">
