@@ -63,7 +63,7 @@ class RegionController extends AbstractActionController {
             ->get('AuthService')->hasIdentity()){
             return $this->redirect()->toRoute('admin-login');
         }
-
+        
         return new ViewModel(
             array(
                 'region' => $this->getRequest()->getPost(),
@@ -96,10 +96,10 @@ class RegionController extends AbstractActionController {
 
         if($request->getPost()){
             if($this->getRegionTable()->saveRegion($request->getPost())){
-                $this->flashmessenger()->addSuccessMessage('New region has been updated successfully.');
+                $this->flashMessenger()->addSuccessMessage('New region has been updated successfully.');
             }
         }
-
+        
         return $this->redirect()->toRoute('admin-region');
 
     }
@@ -114,7 +114,7 @@ class RegionController extends AbstractActionController {
         $id = (int) $this->params()->fromRoute('id', 0);
 
         if($this->getRegionTable()->deleteRegion($id)){
-            $this->flashmessenger()->addMessage('Region has been deleted successfully.');
+            $this->flashmessenger()->addSuccessMessage('Region has been deleted successfully.');
         }
 
         return $this->redirect()->toRoute('admin-region');

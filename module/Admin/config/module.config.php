@@ -387,71 +387,70 @@ return array(
     'navigation' => array(
         'admin' => array(
             array(
-                'label' => 'Menu',
-                'route' => 'admin-menu',
-            ),
-			array(
-                'label' => 'Page',
-                'route' => 'admin-page',
-            ),
-            array(
-                'label' => 'Banner',
-                'route' => 'admin-banner',
-            ),
-            array(
-                'label' => 'Blog',
-                'route' => 'admin-blog',
-                'pages' => array(
-                                array(
-                                    'label' => 'Manage Posts',
-                                    'route' => 'admin-blog',
+                    'label' => 'Menu',
+                    'route' => 'admin-menu',
+                    'icon' => ''
+                ),
+                array(
+                    'label' => 'Banner',
+                    'route' => 'admin-banner',
+                    'icon' => ''
+                ),
+                array(
+                    'label' => 'Pages',
+                    'route' => 'admin-page',
+                    'icon' => ''
+                ),
+                array(
+                    'label' => 'Blog',
+                    'uri' => '#',
+                    'icon' => '',
+                    'pages' => array(
+                        array(
+                            'label' => 'Manage Post',
+                            'route' => 'admin-blog',
+                            'icon' => '',
+                        ),
+                        array(
+                            'label' => 'Manage Category',
+                            'route' => 'admin-blog-cat',
+                            'icon' => '',
+                        ),
+                    )
+                ),
+                array(
+                    'label' => 'User',
+                    'uri' => '#',
+                    'icon' => '',
+                    'pages' => array(
+                        array(
+                            'label' => 'Manage Employer',
+                            'route' => 'admin-user',
+                            'icon' => ''
+                        ),
+                        array(
+                            'label' => 'Manage Jobseeker',
+                            'route' => 'admin-user',
+                            'icon' => ''
+                        ),
+                    )
+                ),
+                array(
+                    'label' => 'System',
+                    'uri' => '#',
+                    'icon' => '',
+                    'pages' => array(
+                                    array(
+                                        'label' => 'Manage Country',
+                                        'route' => 'admin-country',
+                                    ),
+                                    array(
+                                        'label' => 'Manage Region',
+                                        'route' => 'admin-region',
+                                    )
                                 ),
-                                array(
-                                    'label' => 'Manage Category',
-                                    'route' => 'admin-blog-cat',
-                                )
-                            ),
+                ),
             ),
-            array(
-                'label' => 'User',
-                'route' => 'admin-user',
-                'pages' => array(
-                                array(
-                                    'label' => 'Manage Company',
-                                    'route' => 'admin-blog',
-                                ),
-                                array(
-                                    'label' => 'Manage Jobseeker',
-                                    'route' => 'admin-blog-cat',
-                                )
-                            ),
-            ),
-			array(
-                'label' => 'System',
-                'route' => 'home',
-                'pages' => array(
-                                array(
-                                    'label' => 'Manage Country',
-                                    'route' => 'admin-country',
-                                ),
-                                array(
-                                    'label' => 'Manage Region',
-                                    'route' => 'admin-region',
-                                )
-                            ),
-            ),
-            array(
-                'label' => 'My Account',
-                'route' => 'admin',
-                'action' => 'index',
-            ),
-            array(
-                'label' => 'Logout',
-                'route' => 'admin',
-                'action' => 'logout',
-            ),
-        ),
-        'login' => array(),
     ),
     // Placeholder for console routes
     'console' => array(
