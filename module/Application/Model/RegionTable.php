@@ -28,6 +28,17 @@ class RegionTable
         }
         return $row;
     }
+    
+    public function getRegionByCountry($country)
+    {
+        $country  =  trim($country);
+        $row = $this->tableGateway->select(array('country_id' => $country));
+        // $row = $rowset->current();
+        if (!$row) {
+            return false;
+        }
+        return $row;
+    }
 
     public function saveRegion($region)
     {

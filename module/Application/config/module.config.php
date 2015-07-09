@@ -20,6 +20,16 @@ return array(
                     ),
                 ),
             ),
+            'ajax' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/ajax',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Ajax',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -50,6 +60,22 @@ return array(
                     ),
                 ),
             ),
+            'ajax' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/ajax[/:action][/:param]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'param'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Ajax',
+                        'action'     => 'index',
+                        'layout'     => 'layout/two-column-right',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -73,7 +99,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Ajax' => 'Application\Controller\AjaxController'
         ),
     ),
     'view_manager' => array(
@@ -86,6 +113,7 @@ return array(
         'template_map' => array(
             'layout/layout'           => __DIR__ . '/../view/layout/one-column.phtml',
             'application/index/index' => __DIR__ . '/../view/template/index/index.phtml',
+            'application/ajax/region' => __DIR__ . '/../view/template/index/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
