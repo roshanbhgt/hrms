@@ -18,6 +18,16 @@ class UserTable {
 
         return $resultSet;
     }
+    
+    public function getUserByType($type)
+    {
+        
+        $row = $this->tableGateway->select(array('type' => $type));
+        if (!$row) {
+            throw new \Exception("Could not find rows");
+        }
+        return $row;
+    }
 
     public function getUser($id)
     {

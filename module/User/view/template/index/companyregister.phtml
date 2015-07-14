@@ -117,7 +117,7 @@
 
                             <div class="col-md-6">
                                 <select id="country" class="form-control" onchange="getregion(this) " name="country">
-                                    <option selected="" value="-1">---Select Country---</option>
+                                    <option selected="" value="-1">---- Select country ----</option>
                                     <?php foreach($countrys as $val){ ?>
                                     <option value="<?php echo $val->iso; ?>"><?php echo $val->nicename; ?></option>
                                     <?php } ?>
@@ -127,9 +127,10 @@
                         <div class="form-group">
                             <label for="state" class="col-md-3 control-label">State</label>
                             <div class="col-md-6">
-                                <select id="state" class="form-control" name="state">
-                                    <option value="-1">Select State</option>
+                                <select id="statedrop" class="form-control" name="state">
+                                    <option value="">---- Select state ----</option>
                                 </select>
+                                <input id="statetext" type="text" class="form-control" name="state" placeholder="State" style="display:none">
                             </div>
                         </div>
                         <div class="form-group">
@@ -191,14 +192,20 @@
 		dataType: 'JSON',
 		data: {'country': jQuery('#country').val()},
 		success: function(data, status){
+                    $('#statedrop').find('option').remove().end().append('<option value="">---- Select state ----</option>').val(' ');
                     if(data.status == 'error'){
                         // Perform any operation on error
+                        $('#statetext').css("display","block");
+                        $('#statedrop').css("display","none");
+                        $('#statetext').val("");
+                        
                     }else{
+                        $('#statetext').css("display","none");
+                        $('#statedrop').css("display","block");
                         // Perform any operation on success);
                         var region = JSON.parse(JSON.stringify(data.region));
-                        $('#state').find('option').remove().end().append('<option value="">---- Select state ----</option>').val(' ');
                         for(i = 0; i < data.region.length; i++){
-                            $('#state').append($('<option>', { 
+                            $('#statedrop').append($('<option>', { 
                                 value: region[i].code,
                                 text : region[i].title 
                             }));

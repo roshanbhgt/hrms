@@ -12,9 +12,8 @@ namespace User\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Password;
-use Zend\Session\Container;
 
-class IndexController extends AbstractActionController
+class JobseekerController extends AbstractActionController
 {
     protected $storage;
     protected $authservice;
@@ -120,6 +119,7 @@ class IndexController extends AbstractActionController
             }
 
             if ($result->isValid()) {
+                $redirect = 'user';
                 //check if it has rememberMe :
                 if ($request->getPost('rememberme') == 1 ) {
                     $this->getSessionStorage()
@@ -133,30 +133,16 @@ class IndexController extends AbstractActionController
                 $this->getUserTable()->saveUser($row);
 
                 $this->getAuthService()->getStorage()->write(
-                    array(
-                        'id'      => $row->id,
+                    array('id'          => $row->id,
+                        'firstname'   => $row->firstname,
                         'email'   => $request->getPost('email'),
-                        'type'   => $row->type,
+                        'type'   => $request->getPost('type'),
                         'ip_address' => $this->getRequest()->getServer('REMOTE_ADDR'),
-                        'user_agent'    => $request->getServer('HTTP_USER_AGENT')
-                    )
+                        'user_agent'    => $request->getServer('HTTP_USER_AGENT'))
                 );
-                // Store username in session
-		$usersession = new Container('user');
-		$usersession->id = $row->id;
-                $usersession->firstname = $row->firstname;
-                $usersession->type = $row->type;
             }
         }
-        
-        if($row->type == 'employer'){
-            return $this->redirect()->toRoute('employer', array('action' =>  'index'));
-        } elseif($row->type == 'jobseeker') {
-            return $this->redirect()->toRoute('user', array(
-                        'controller' => 'jobseeker',
-                        'action' =>  'index'
-                ));
-        }
+
         return $this->redirect()->toRoute($redirect);
     }
 

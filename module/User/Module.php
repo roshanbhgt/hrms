@@ -12,6 +12,7 @@ namespace User;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Authentication\Storage;
+use Zend\Session\Container;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 use Zend\Db\ResultSet\ResultSet;
@@ -42,6 +43,8 @@ class Module
             $logout = $container->findBy('route' , 'logout');
             $container->removePage($logout);
         }
+        
+        // $this->_initUserSession();
     }
 
     public function getConfig()
@@ -104,4 +107,22 @@ class Module
             ),
         );
     }
+    
+    public function setLayout($e)
+    {
+        // IF only for this module 
+        $matches    = $e->getRouteMatch();
+        $controller = $matches->getParam('controller');
+        if (false === strpos($controller, __NAMESPACE__)) {
+                // not a controller from this module
+                return;
+        }
+        // END IF
+        // Set the layout template
+        $template = $e->getViewModel();
+        $sidebar = new ViewModel();
+        $sidebar->setTemplate('user/sidebar/sidebar');
+        $template->addChild($sidebar, 'sidebar');
+    }
+    
 }

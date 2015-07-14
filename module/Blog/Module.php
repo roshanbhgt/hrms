@@ -85,9 +85,6 @@ class Module
                 return;
         }
         // END IF
-
-
-
         // Set the layout template
         $template = $e->getViewModel();
         $sidebar = new ViewModel();

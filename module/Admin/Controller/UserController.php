@@ -45,15 +45,31 @@ class UserController extends AbstractActionController {
         return $this->userTable;
     }
 
-    public function indexAction()
+    public function employerAction()
+    {
+        if (! $this->getServiceLocator()
+            ->get('AuthService')->hasIdentity()){
+            return $this->redirect()->toRoute('admin-login');
+        }
+        
+        $users = $this->getUserTable()->getUserByType('employer');
+        
+        return new ViewModel(array(
+            'users' => $users,
+        ));
+    }
+    
+    public function jobseekerAction()
     {
         if (! $this->getServiceLocator()
             ->get('AuthService')->hasIdentity()){
             return $this->redirect()->toRoute('admin-login');
         }
 
+        $users = $this->getUserTable()->getUserByType('jobseeker');
+        
         return new ViewModel(array(
-            'users' => $this->getUserTable()->fetchAll(),
+            'users' => $users,
         ));
     }
     

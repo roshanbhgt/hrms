@@ -111,6 +111,17 @@ return array(
                     ),
                 ),
             ),
+            'employer' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/user/employer/',
+                    'defaults' => array(
+                        'controller' => 'User\Controller\Employer',
+                        'action'     => 'index',
+                        'layout'     => 'layout/two-column-left',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -141,6 +152,22 @@ return array(
                     ),
                 ),
             ),
+            'employer' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/user/employer[/:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'User\Controller\Employer',
+                        'action'     => 'index',
+                        'layout'     => 'layout/two-column-left',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -164,7 +191,9 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'User\Controller\Index' => 'User\Controller\IndexController'
+            'User\Controller\Index' => 'User\Controller\IndexController',
+            'User\Controller\Employer' => 'User\Controller\EmployerController',
+            'User\Controller\Jobseeker' => 'User\Controller\JobseekerController'
         ),
     ),
     'view_manager' => array(
@@ -176,11 +205,13 @@ return array(
         'layout' => 'layout/layout',
         'template_map' => array(
             'user/index/index' => __DIR__ . '/../view/template/index/index.phtml',
+            'user/employer/index' => __DIR__ . '/../view/template/employer/dashboard.phtml',
             'user/index/login' => __DIR__ . '/../view/template/index/login.phtml',
             'user/index/register' => __DIR__ . '/../view/template/index/register.phtml',
             'user/index/forgetpass' => __DIR__ . '/../view/template/index/forgetpass.phtml',
             'user/index/registercompany' => __DIR__ . '/../view/template/index/companyregister.phtml',
             'user/index/forgetpass' => __DIR__ . '/../view/template/index/forgetpass.phtml',
+            'user/sidebar/sidebar' => __DIR__ . '/../view/sidebar/sidebar.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

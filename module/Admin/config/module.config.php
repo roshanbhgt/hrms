@@ -360,7 +360,8 @@ return array(
             'admin/blog/index' => __DIR__ . '/../view/template/blog/index.phtml',
             'admin/blog/add' => __DIR__ . '/../view/template/blog/add.phtml',
             'admin/blog/edit' => __DIR__ . '/../view/template/blog/edit.phtml',
-            'admin/user/index' => __DIR__ . '/../view/template/user/index.phtml',
+            'admin/user/employer' => __DIR__ . '/../view/template/user/employer.phtml',
+            'admin/user/jobseeker' => __DIR__ . '/../view/template/user/jobseeker.phtml',
             'admin/user/add' => __DIR__ . '/../view/template/user/add.phtml',
             'admin/user/edit' => __DIR__ . '/../view/template/user/edit.phtml',
             'admin/page/index' => __DIR__ . '/../view/template/page/index.phtml',
@@ -370,13 +371,13 @@ return array(
             'admin/blogcategory/index' => __DIR__ . '/../view/template/blogcategory/index.phtml',
             'admin/blogcategory/add' => __DIR__ . '/../view/template/blogcategory/add.phtml',
             'admin/blogcategory/edit' => __DIR__ . '/../view/template/blogcategory/edit.phtml',
-			'admin/menu/index' => __DIR__ . '/../view/template/menu/index.phtml',
+            'admin/menu/index' => __DIR__ . '/../view/template/menu/index.phtml',
             'admin/menu/add' => __DIR__ . '/../view/template/menu/add.phtml',
             'admin/menu/edit' => __DIR__ . '/../view/template/menu/edit.phtml',
-			'admin/country/index' => __DIR__ . '/../view/template/country/index.phtml',
+            'admin/country/index' => __DIR__ . '/../view/template/country/index.phtml',
             'admin/country/add' => __DIR__ . '/../view/template/country/add.phtml',
             'admin/country/edit' => __DIR__ . '/../view/template/country/edit.phtml',
-			'admin/region/index' => __DIR__ . '/../view/template/region/index.phtml',
+            'admin/region/index' => __DIR__ . '/../view/template/region/index.phtml',
             'admin/region/add' => __DIR__ . '/../view/template/region/add.phtml',
             'admin/region/edit' => __DIR__ . '/../view/template/region/edit.phtml',
         ),
@@ -426,11 +427,13 @@ return array(
                         array(
                             'label' => 'Manage Employer',
                             'route' => 'admin-user',
+                            'action'=> 'employer',
                             'icon' => ''
                         ),
                         array(
                             'label' => 'Manage Jobseeker',
                             'route' => 'admin-user',
+                            'action'=> 'jobseeker',
                             'icon' => ''
                         ),
                     )
