@@ -11,6 +11,7 @@ namespace User\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 use Application\Model\Password;
 
 class EmployerController extends AbstractActionController
@@ -18,7 +19,7 @@ class EmployerController extends AbstractActionController
     protected $storage;
     protected $authservice;
     protected $userTable;
-    protected $usercompanyTable;
+    protected $companyTable;
     protected $countryTable;
 
     public function getAuthService()
@@ -64,13 +65,13 @@ class EmployerController extends AbstractActionController
         return $this->countryTable;
     }
     
-    public function getUserCompanyTable()
+    public function getCompanyTable()
     {
-        if (!$this->usercompanyTable) {
+        if (!$this->companyTable) {
             $sm = $this->getServiceLocator();
-            $this->usercompanyTable = $sm->get('User\Model\UserCompanyTable');
+            $this->companyTable = $sm->get('User\Model\UserCompanyTable');
         }
-        return $this->usercompanyTable;
+        return $this->companyTable;
     }
 
     public function indexAction()
@@ -79,10 +80,24 @@ class EmployerController extends AbstractActionController
             ->get('UserAuthService')->hasIdentity()){
             return $this->redirect()->toRoute('login');
         }
+        
+        $id = $this->getSession()->id;
+        $company = $this->getCompanyTable()->getCompany($id);
+        
+        // echo '<pre>';
+        // print_r($company);
+        // exit;
+        
+        // Store data in session
+        $usersession = new Container('user');
+        $usersession->id = $company->id;
+        $usersession->companytitle = $company->companyname;
+        $usersession->companytype = $company->industrytype;
+        $usersession->companylogo = $company->companylogo;
+        $usersession->type = $this->getSession()->type;
 
         return new ViewModel(array(
-            'user' => $this->getUserTable()->getUser($this->getSession()->id),
-            'messages'  => $this->flashmessenger()->getMessages(),
+            'company' => $company,
         ));
     }
     

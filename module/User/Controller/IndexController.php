@@ -131,7 +131,7 @@ class IndexController extends AbstractActionController
                 $row = $this->getAuthService()->getAdapter()->getResultRowObject();
 
                 $this->getUserTable()->saveUser($row);
-
+                
                 $this->getAuthService()->getStorage()->write(
                     array(
                         'id'      => $row->id,
@@ -141,21 +141,19 @@ class IndexController extends AbstractActionController
                         'user_agent'    => $request->getServer('HTTP_USER_AGENT')
                     )
                 );
-                // Store username in session
-		$usersession = new Container('user');
-		$usersession->id = $row->id;
-                $usersession->firstname = $row->firstname;
-                $usersession->type = $row->type;
+                
+                if($row->type == 'jobseeker'){
+                    $usersession->id = $row->id;
+                    $usersession->name = $row->firstname.' '.$row->lastname;
+                    $usersession->type = $row->type;
+                }
             }
         }
         
         if($row->type == 'employer'){
-            return $this->redirect()->toRoute('employer', array('action' =>  'index'));
+            return $this->redirect()->toRoute('employer', array('action' => 'index'));
         } elseif($row->type == 'jobseeker') {
-            return $this->redirect()->toRoute('user', array(
-                        'controller' => 'jobseeker',
-                        'action' =>  'index'
-                ));
+            return $this->redirect()->toRoute('jobseeker', array('action' => 'index'));
         }
         return $this->redirect()->toRoute($redirect);
     }

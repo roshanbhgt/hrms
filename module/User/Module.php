@@ -12,6 +12,7 @@ namespace User;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Authentication\Storage;
+use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
@@ -27,6 +28,7 @@ class Module
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
+        $eventManager->attach('dispatch', array($this, 'setLayout'));
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         $app = $e->getApplication();

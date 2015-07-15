@@ -24,10 +24,10 @@ class UserCompanyTable
         $id  = (int) $id;
         $rowset = $this->tableGateway->select(array('userid' => $id));
         $row = $rowset->current();
-        if ($row) {
-            return TRUE;
+        if (!$row) {
+            return FALSE;
         }
-        return FALSE;
+        return $row;
     }
 
     public function saveCompany($company)
