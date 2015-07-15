@@ -69,7 +69,7 @@ class EmployerController extends AbstractActionController
     {
         if (!$this->companyTable) {
             $sm = $this->getServiceLocator();
-            $this->companyTable = $sm->get('User\Model\UserCompanyTable');
+            $this->companyTable = $sm->get('User\Model\CompanyTable');
         }
         return $this->companyTable;
     }
@@ -84,20 +84,17 @@ class EmployerController extends AbstractActionController
         $id = $this->getSession()->id;
         $company = $this->getCompanyTable()->getCompany($id);
         
-        // echo '<pre>';
-        // print_r($company);
-        // exit;
-        
         // Store data in session
         $usersession = new Container('user');
         $usersession->id = $company->id;
         $usersession->companytitle = $company->companyname;
         $usersession->companytype = $company->industrytype;
-        $usersession->companylogo = $company->companylogo;
+        $usersession->companylogo = $company->logo;
         $usersession->type = $this->getSession()->type;
 
         return new ViewModel(array(
             'company' => $company,
+            'user' => $this->getUserTable()->getUser($id),
         ));
     }
     

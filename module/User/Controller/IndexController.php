@@ -19,7 +19,7 @@ class IndexController extends AbstractActionController
     protected $storage;
     protected $authservice;
     protected $userTable;
-    protected $usercompanyTable;
+    // protected $usercompanyTable;
     protected $countryTable;
 
     public function getAuthService()
@@ -65,14 +65,14 @@ class IndexController extends AbstractActionController
         return $this->countryTable;
     }
     
-    public function getUserCompanyTable()
+    /* public function getUserCompanyTable()
     {
         if (!$this->usercompanyTable) {
             $sm = $this->getServiceLocator();
             $this->usercompanyTable = $sm->get('User\Model\UserCompanyTable');
         }
         return $this->usercompanyTable;
-    }
+    } */
 
     public function indexAction()
     {

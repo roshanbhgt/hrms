@@ -3,7 +3,7 @@
 namespace User\Model;
 use Zend\Db\TableGateway\TableGateway;
 
-class UserCompanyTable
+class CompanyTable
 {
 
     protected $tableGateway;
@@ -48,6 +48,7 @@ class UserCompanyTable
             'fax' => $company->fax,
             'description' => $company->description,
             'url' => $company->url,
+            'logo' => $company->logo,
         );
         
         $id = (int)$company->userid;

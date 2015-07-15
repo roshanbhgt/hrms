@@ -3,85 +3,16 @@
         <div class="col-md-9">
             <div class="span4">
                 <blockquote>
-                    <p>Welcome <?php echo $user->firstname; ?>!</p>
-                    <small><cite title="Source Title"><?php echo $user->state.', '.$user->country; ?>  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+                    <p>Welcome <?php echo $company->companyname; ?>!</p>
+                    <small><cite title="Source Title"><?php echo $company->state.', '.$company->country; ?>  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
                 </blockquote>
                 <p>
                     <i class="glyphicon glyphicon-envelope"></i> <?php echo $user->email; ?> <br>
-                    <i class="glyphicon glyphicon-globe"></i> <?php // echo $user->url; ?> <br>
+                    <i class="glyphicon glyphicon-globe"></i> <?php echo $company->url; ?> <br>
                     <i class="glyphicon glyphicon-time"></i> Since <?php echo $this->dateFormat(new DateTime($user->createdat), IntlDateFormatter::LONG,IntlDateFormatter::MEDIUM); ?>
                 </p>
             </div>
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
-                <li><a href="#profile" data-toggle="tab">Password</a></li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-                <div class="tab-pane active in" id="home">
-                    <div class="panel-body">
-                        <form class="form-horizontal" role="form" id="tab" method="post" action="<?php echo $this->serverUrl($this->url('update')); ?>">
-                            <input type="hidden" name="id" value="<?php echo $user->id; ?>" />
-                            <div class="form-group">
-                                <label for="firstname" class="col-md-2 control-label">First Name</label>
-                                <div class="col-md-5">
-                                    <input type="text" class="form-control" value="<?php echo $user->firstname; ?>" name="firstname" placeholder="First Name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastname" class="col-md-2 control-label">Last Name</label>
-                                <div class="col-md-5">
-                                    <input type="text" class="form-control" value="<?php echo $user->lastname; ?>" name="lastname" placeholder="Last Name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="col-md-2 control-label">Email</label>
-                                <div class="col-md-5">
-                                    <input type="text" class="form-control" value="<?php echo $user->email; ?>" name="email" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="state" class="col-md-2 control-label">State</label>
-                                <div class="col-md-5">
-                                    <input type="text" class="form-control" value="<?php echo $user->state; ?>" name="state" placeholder="State">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="country" class="col-md-2 control-label">Country</label>
-                                <div class="col-md-5">
-                                    <input type="text" class="form-control" name="country" value="<?php echo $user->country; ?>" placeholder="Country">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-5">
-                                    <button id="btn-signup" type="submit" class="btn btn-primary"><i class="icon-hand-right"></i>
-                                        &nbsp Update
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="profile">
-                    <div class="panel-body">
-                        <form class="form-horizontal" role="form" id="tab2" method="post" action="<?php echo $this->serverUrl($this->url('update')); ?>">
-                            <input type="hidden" name="id" value="<?php echo $user->id; ?>" />
-                            <div class="form-group">
-                                <label for="password" class="col-md-2 control-label">New Password</label>
-                                <div class="col-md-5">
-                                    <input type="password" class="form-control" name="password" value="" placeholder="New Password">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-5">
-                                    <button id="btn-signup" type="submit" class="btn btn-primary"><i class="icon-hand-right"></i>
-                                        &nbsp Update
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    </form>
-                </div>
+            <div>
             </div>
         </div>
     </div>

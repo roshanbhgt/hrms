@@ -2,8 +2,7 @@
 
 namespace User\Model;
 
-
-class UserCompany
+class Company
 {
     public $id;
     public $userid;
@@ -21,6 +20,7 @@ class UserCompany
     public $fax;
     public $description;
     public $url;
+    public $logo;
         
     public function exchangeArray($data)
     {
@@ -40,5 +40,6 @@ class UserCompany
         $this->fax  = (!empty($data['fax'])) ? $data['fax'] : null;
         $this->description  = (!empty($data['description'])) ? $data['description'] : null;
         $this->url  = (!empty($data['url'])) ? $data['url'] : null;
+        $this->logo  = (!empty($data['logo'])) ? $data['logo'] : null;
     }
 }
