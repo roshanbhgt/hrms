@@ -29,6 +29,17 @@ class CompanyTable
         }
         return $row;
     }
+    
+    public function getCompanyDetails($id)
+    {
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('id' => $id));
+        $row = $rowset->current();
+        if (!$row) {
+            return FALSE;
+        }
+        return $row;
+    }
 
     public function saveCompany($company)
     {
@@ -67,5 +78,17 @@ class CompanyTable
     public function deleteCompany($id)
     {
         $this->tableGateway->delete(array('id' => $id));
+    }
+    
+    public function updateLogo($data)
+    {
+        $id = (int)$data['id'];
+        if ($id != 0 && $data['logo'] != '') {
+            if ($this->getCompanyDetails($id)) {
+                return $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('Company with id does not exist');
+            }
+        }
     }
 }

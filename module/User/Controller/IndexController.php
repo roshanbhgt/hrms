@@ -19,7 +19,6 @@ class IndexController extends AbstractActionController
     protected $storage;
     protected $authservice;
     protected $userTable;
-    // protected $usercompanyTable;
     protected $countryTable;
 
     public function getAuthService()
@@ -63,28 +62,6 @@ class IndexController extends AbstractActionController
             $this->countryTable = $sm->get('Application\Model\CountryTable');
         }
         return $this->countryTable;
-    }
-    
-    /* public function getUserCompanyTable()
-    {
-        if (!$this->usercompanyTable) {
-            $sm = $this->getServiceLocator();
-            $this->usercompanyTable = $sm->get('User\Model\UserCompanyTable');
-        }
-        return $this->usercompanyTable;
-    } */
-
-    public function indexAction()
-    {
-        if (!$this->getServiceLocator()
-            ->get('UserAuthService')->hasIdentity()){
-            return $this->redirect()->toRoute('login');
-        }
-
-        return new ViewModel(array(
-            'user' => $this->getUserTable()->getUser($this->getSession()->id),
-            'messages'  => $this->flashmessenger()->getMessages(),
-        ));
     }
 
     public function loginAction()

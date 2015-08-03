@@ -102,4 +102,20 @@ class UserTable
         }
         return $row;
     }
+    
+    public function updatePassword($data)
+    {
+        $id = (int)$data->id;
+        $password = new Password();
+        if ($id != 0 && $data->password != '') {
+            $data = array(
+                'password' => $password->create($data->password),
+            );
+            if ($this->getUser($id)) {
+                return $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('User with id does not exist');
+            }
+        }
+    }
 }

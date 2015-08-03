@@ -12,7 +12,8 @@
                     <i class="glyphicon glyphicon-time"></i> Since <?php echo $this->dateFormat(new DateTime($user->createdat), IntlDateFormatter::LONG,IntlDateFormatter::MEDIUM); ?>
                 </p>
             </div>
-            <div>
+            <div class="row">
+                <?php echo $company->description; ?>
             </div>
         </div>
     </div>

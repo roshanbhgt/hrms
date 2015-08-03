@@ -139,7 +139,7 @@ return array(
         'right' => array(
             array(
                 'label' => 'My Account',
-                'route' => 'user',
+                'route' => 'employer',
             ),
             array(
                 'label' => 'Register',

@@ -46,7 +46,6 @@ class Module
             $container->removePage($logout);
         }
         
-        // $this->_initUserSession();
     }
 
     public function getConfig()
@@ -119,6 +118,7 @@ class Module
                 // not a controller from this module
                 return;
         }
+        
         // END IF
         // Set the layout template
         $template = $e->getViewModel();

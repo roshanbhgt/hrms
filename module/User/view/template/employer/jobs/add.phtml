@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col-md-9">
+        <h1 class="page-title">Post new job</h1>
+        <div class="page-body">
+            <form id="signupform" class="form-horizontal" role="form"
+                  action="<?php echo $this->serverUrl($this->url('employer', array('action'=>'jobadd', 'id' => $id))); ?>" method="post">
+                <input type="hidden" name="userid" value="<?php echo $id; ?>" />
+                <div class="form-group">
+                    <label for="firstname" class="col-md-3 control-label">Title</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="title" placeholder="Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="col-md-3 control-label">Type</label>
+
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="type" value="parttime" >Part Time</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="type" value="fulltime" >Full Time</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="position" class="col-md-3 control-label">Position</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="position" placeholder="Position">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-md-3 control-label">Description</label>
+
+                    <div class="col-md-6">
+                        <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="roles" class="col-md-3 control-label">Roles & Responsibilities</label>
+
+                    <div class="col-md-6">
+                        <textarea name="roles" class="form-control" placeholder="Roles"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="skills" class="col-md-3 control-label">Skills Required</label>
+
+                    <div class="col-md-6">
+                        <textarea name="skills" class="form-control" placeholder="Skills"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vacancy" class="col-md-3 control-label">Vacancy</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="vacancy" placeholder="Vacancy">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="salary" class="col-md-3 control-label">Salary</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="salary" placeholder="Salary">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="col-md-3 control-label">Location</label>
+
+                    <div class="col-md-6">
+                        <select id="location" class="form-control" name="location">
+                            <option selected="" value="-1">---- Select country ----</option>
+                            <?php foreach($countrys as $val){ ?>
+                            <option value="<?php echo $val->iso; ?>"><?php echo $val->nicename; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="companytype" class="col-md-3 control-label">Status</label>
+
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="status" value="active" >Active</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="status" value="inactive" >In Active</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!-- Button -->
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

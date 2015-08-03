@@ -12,6 +12,7 @@ namespace User\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
+use Zend\File\Transfer\Adapter\Http;
 use Application\Model\Password;
 
 class EmployerController extends AbstractActionController
@@ -21,6 +22,7 @@ class EmployerController extends AbstractActionController
     protected $userTable;
     protected $companyTable;
     protected $countryTable;
+    protected $jobTable;
 
     public function getAuthService()
     {
@@ -73,6 +75,15 @@ class EmployerController extends AbstractActionController
         }
         return $this->companyTable;
     }
+    
+    public function getJobTable()
+    {
+        if (!$this->jobTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobTable = $sm->get('Job\Model\JobTable');
+        }
+        return $this->jobTable;
+    }
 
     public function indexAction()
     {
@@ -87,6 +98,7 @@ class EmployerController extends AbstractActionController
         // Store data in session
         $usersession = new Container('user');
         $usersession->id = $company->id;
+        $usersession->userid = $company->userid;
         $usersession->companytitle = $company->companyname;
         $usersession->companytype = $company->industrytype;
         $usersession->companylogo = $company->logo;
@@ -122,8 +134,112 @@ class EmployerController extends AbstractActionController
             return $this->redirect()->toRoute('login');
         }
 
+        $id = (int) $this->params()->fromRoute('id', 0);
         return new ViewModel(array(
-            'user' => $this->getUserTable()->fetchAll(),
+            'company' => $this->getCompanyTable()->getCompanyDetails($id),
+            'countrys' => $this->getCountryTable()->fetchAll(),
         ));
     }
+    
+    public function changelogoAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            // Make certain to merge the files info!
+            $data = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+            
+            // Define a transport and set the destination on the server
+            $upload = new Http();
+            $upload->setDestination("D:\webserver\htdocs\hrconsultancy\data");
+
+            try {
+                // This takes care of the moving and making sure the file is there
+                if($upload->receive()){
+                    $data['logo'] = $upload->getFileName();
+                    if($data['logo'] != ''){ 
+                        if($this->getCompanyTable()->updateLogo($data)){
+                            $this->flashMessenger()->addSuccessMessage('Logo updated successfully.');
+                        }
+                    }else{
+                        $this->flashMessenger()->addErrorMessage('Please upload valid image file.');
+                    }
+                }
+            } catch (Zend_File_Transfer_Exception $e) {
+                echo $e->message();
+            }
+        }
+
+        $id = (int) $this->params()->fromRoute('id', 0);
+        return new ViewModel(array(
+            'id' => $id,
+        ));
+    }
+    
+    public function changepassAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+        if($this->getRequest()->isPost()){
+            $data = $this->getRequest()->getPost();
+            if($data['password'] == $data['confpassword']){ 
+                if($this->getUserTable()->updatePassword($data)){
+                    $this->flashMessenger()->addSuccessMessage('Password updated successfully.');
+                }
+            }else{
+                $this->flashMessenger()->addErrorMessage('Password and confirm password not matching.');
+            }
+        }
+
+        $id = (int) $this->params()->fromRoute('id', 0);
+        return new ViewModel(array(
+            'id' => $id,
+            'user' => $this->getUserTable()->getUser($id),
+        ));
+    }
+    
+    public function jobsAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        return new ViewModel(array(
+            'id' => $id,
+            'jobs' => $this->getJobTable()->getEmployerJob($id),
+        ));
+    }
+    
+    public function jobaddAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+        if($this->getRequest()->isPost()){
+            $data = $this->getRequest()->getPost();
+            if($this->getJobTable()->saveJob($data)){
+                $this->flashMessenger()->addSuccessMessage('Your job has been posted successfully.');
+            }else{
+                $this->flashMessenger()->addErrorMessage('Unable to post the job.');
+            }
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        return new ViewModel(array(
+            'id' => $id,
+            'jobs' => $this->getJobTable()->getEmployerJob($id),
+            'countrys' => $this->getCountryTable()->fetchAll(),
+        ));
+    }
+    
 }

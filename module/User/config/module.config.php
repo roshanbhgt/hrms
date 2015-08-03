@@ -212,6 +212,11 @@ return array(
             'user/index/registercompany' => __DIR__ . '/../view/template/index/companyregister.phtml',
             'user/index/forgetpass' => __DIR__ . '/../view/template/index/forgetpass.phtml',
             'user/sidebar/sidebar' => __DIR__ . '/../view/sidebar/sidebar.phtml',
+            'user/employer/changelogo' => __DIR__ . '/../view/template/employer/changelogo.phtml',
+            'user/employer/edit' => __DIR__ . '/../view/template/employer/edit.phtml',
+            'user/employer/changepass' => __DIR__ . '/../view/template/employer/changepass.phtml',
+            'user/employer/jobs' => __DIR__ . '/../view/template/employer/jobs/index.phtml',
+            'user/employer/jobadd' => __DIR__ . '/../view/template/employer/jobs/add.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
