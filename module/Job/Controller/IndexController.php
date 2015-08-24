@@ -32,10 +32,11 @@ class IndexController extends AbstractActionController
         ));
     }
     
-    public function manageAction()
+    public function viewAction()
     {
+        $id = (int) $this->params()->fromRoute('id', 0);
         return new ViewModel(array(
-            'jobs' => $this->getJobTable()->fetchAll(),
+            'job' => $this->getJobTable()->getJob($id),
         ));
     }
 }

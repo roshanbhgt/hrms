@@ -10,11 +10,18 @@ $industry = array(
     <div class="panel-body">
         <form id="signupform" class="form-horizontal" role="form"
               action="<?php echo $this->serverUrl($this->url('employer', array('action'=>'update'))); ?>" method="post">
-            <input type="hidden" name="type" value="employer" />            
+            <input type="hidden" name="id" value="<?php echo $company->id; ?>" />            
+            <input type="hidden" name="userid" value="<?php echo $company->userid; ?>" />            
             <div class="form-group">
                 <label for="conf-password" class="col-md-3 control-label">Company Name</label>
                 <div class="col-md-6">
                     <input type="text" class="form-control" name="companyname" placeholder="Company Name" value="<?php echo $company->companyname; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="conf-password" class="col-md-3 control-label">Description</label>
+                <div class="col-md-6">
+                    <textarea name="description" class="form-control" placeholder="Description"><?php echo $company->description; ?></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -45,7 +52,7 @@ $industry = array(
                             $i = 1; 
                             foreach($industry as $val) { 
                         ?>
-                        <option value="<?php echo $i; ?>" <?php if($company->industrytype == $val){ ?> selected="selected" <?php } ?>><?php echo $val; ?></option>
+                        <option value="<?php echo $i; ?>" <?php if($company->industrytype == $i){ ?> selected="selected" <?php } ?>><?php echo $val; ?></option>
                         <?php
                                 $i++;
                             } 
@@ -80,7 +87,7 @@ $industry = array(
                     <select id="country" class="form-control" onchange="getregion(this) " name="country">
                         <option selected="" value="-1">---- Select country ----</option>
                         <?php foreach($countrys as $val){ ?>
-                        <option value="<?php echo $val->iso; ?>" <?php if($company->country == $val->nicename){ ?> selected="selected" <?php } ?> ><?php echo $val->nicename; ?></option>
+                        <option value="<?php echo $val->iso; ?>" <?php if($company->country == $val->iso){ ?> selected="selected" <?php } ?> ><?php echo $val->nicename; ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -91,7 +98,8 @@ $industry = array(
                     <select id="statedrop" class="form-control" name="state">
                         <option value="">---- Select state ----</option>
                     </select>
-                    <input id="statetext" type="text" class="form-control" name="state" placeholder="State" style="display:none">
+                    <input id="statetext" type="text" class="form-control" name="statetext" placeholder="State" value=""
+                           style="display:none;" />
                 </div>
             </div>
             <div class="form-group">
@@ -156,8 +164,7 @@ $industry = array(
                         // Perform any operation on error
                         $('#statetext').css("display","block");
                         $('#statedrop').css("display","none");
-                        $('#statetext').val("");
-                        
+                        $('#statetext').val('<?php echo $company->state ?>');
                     }else{
                         $('#statetext').css("display","none");
                         $('#statedrop').css("display","block");
@@ -170,7 +177,7 @@ $industry = array(
                             }));
                         }
                         $("#statedrop").children().filter(function() {
-                            return $(this).text() == '<?php echo $company->state ?>';
+                            return $(this).val() == '<?php echo $company->state ?>';
                           }).prop('selected', true);
                     }
 		},

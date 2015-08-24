@@ -8,6 +8,7 @@ class Job
     public $userid;
     public $companyid;
     public $title;
+    public $position;
     public $type;
     public $description;
     public $roles;
@@ -17,7 +18,7 @@ class Job
     public $location;
     public $status;
     public $postedat;
-    public $lastdate;
+    public $updatedat;
         
     public function exchangeArray($data)
     {
@@ -25,6 +26,7 @@ class Job
         $this->userid     = (!empty($data['userid'])) ? $data['userid'] : null;
         $this->companyid     = (!empty($data['companyid'])) ? $data['companyid'] : null;
         $this->title = (!empty($data['title'])) ? $data['title'] : null;
+        $this->position = (!empty($data['position'])) ? $data['position'] : null;
         $this->type  = (!empty($data['type'])) ? $data['type'] : null;
         $this->description = (!empty($data['description'])) ? $data['description'] : null;
         $this->roles  = (!empty($data['roles'])) ? $data['roles'] : null;
@@ -34,6 +36,6 @@ class Job
         $this->location  = (!empty($data['location'])) ? $data['location'] : null;
         $this->status = (!empty($data['status'])) ? $data['status'] : null;
         $this->postedat = (!empty($data['postedat'])) ? $data['postedat'] : null;
-        $this->lastdate  = (!empty($data['lastdate'])) ? $data['lastdate'] : null;
+        $this->updatedat  = (!empty($data['updatedat'])) ? $data['updatedat'] : null;
     }
 }

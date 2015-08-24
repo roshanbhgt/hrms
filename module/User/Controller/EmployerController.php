@@ -119,12 +119,12 @@ class EmployerController extends AbstractActionController
         $request = $this->getRequest();
 
         if ($request->isPost()){
-            if($this->getUserTable()->updateUser($request->getPost())){
+            if($this->getCompanyTable()->updateCompany($request->getPost())){
                 $this->flashmessenger()->addMessage('Your account has been updated successfully.');
             }
         }
 
-        return $this->redirect()->toRoute('user');
+        return $this->redirect()->toRoute('employer');
 
     }
 
@@ -147,6 +147,8 @@ class EmployerController extends AbstractActionController
             return $this->redirect()->toRoute('login');
         }
 
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
         $request = $this->getRequest();
         if ($request->isPost()) {
             // Make certain to merge the files info!
@@ -157,12 +159,13 @@ class EmployerController extends AbstractActionController
             
             // Define a transport and set the destination on the server
             $upload = new Http();
-            $upload->setDestination("D:\webserver\htdocs\hrconsultancy\data");
+            $upload->setDestination("D:\webserver\htdocs\hrconsultancy\public\media\company");
 
             try {
                 // This takes care of the moving and making sure the file is there
                 if($upload->receive()){
-                    $data['logo'] = $upload->getFileName();
+                    $data['logo'] = str_replace("D:\webserver\htdocs\hrconsultancy\public", '',$upload->getFileName());
+                    $data['logo'] = str_replace('\\', '/', $data['logo']);
                     if($data['logo'] != ''){ 
                         if($this->getCompanyTable()->updateLogo($data)){
                             $this->flashMessenger()->addSuccessMessage('Logo updated successfully.');
@@ -171,12 +174,13 @@ class EmployerController extends AbstractActionController
                         $this->flashMessenger()->addErrorMessage('Please upload valid image file.');
                     }
                 }
+                $id = $data['id'];
             } catch (Zend_File_Transfer_Exception $e) {
                 echo $e->message();
             }
         }
 
-        $id = (int) $this->params()->fromRoute('id', 0);
+        
         return new ViewModel(array(
             'id' => $id,
         ));
@@ -187,7 +191,7 @@ class EmployerController extends AbstractActionController
         if (! $this->getAuthService()->hasIdentity()){
             return $this->redirect()->toRoute('login');
         }
-        
+        $id = (int) $this->params()->fromRoute('id', 0);
         if($this->getRequest()->isPost()){
             $data = $this->getRequest()->getPost();
             if($data['password'] == $data['confpassword']){ 
@@ -197,9 +201,9 @@ class EmployerController extends AbstractActionController
             }else{
                 $this->flashMessenger()->addErrorMessage('Password and confirm password not matching.');
             }
+            $id = $data['id'];
         }
-
-        $id = (int) $this->params()->fromRoute('id', 0);
+        
         return new ViewModel(array(
             'id' => $id,
             'user' => $this->getUserTable()->getUser($id),
@@ -242,4 +246,128 @@ class EmployerController extends AbstractActionController
         ));
     }
     
+    public function jobinfoAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        if($this->getRequest()->isPost()){
+            $data = $this->getRequest()->getPost();
+            if($this->getJobTable()->saveJob($data)){
+                $this->flashMessenger()->addSuccessMessage('Your job has been updated successfully.');
+            }else{
+                $this->flashMessenger()->addErrorMessage('Unable to update the job details.');
+            }
+            $id = $data['id'];
+        }
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'job' => $this->getJobTable()->getJob($id),
+            'countrys' => $this->getCountryTable()->fetchAll(),
+        ));
+    }
+    
+    public function jobeditAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        if($this->getRequest()->isPost()){
+            $data = $this->getRequest()->getPost();
+            if($this->getJobTable()->saveJob($data)){
+                $this->flashMessenger()->addSuccessMessage('Your job has been updated successfully.');
+            }else{
+                $this->flashMessenger()->addErrorMessage('Unable to update the job details.');
+            }
+            $id = $data['id'];
+        }
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'job' => $this->getJobTable()->getJob($id),
+            'countrys' => $this->getCountryTable()->fetchAll(),
+        ));
+    }
+    
+    public function deletejobAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        if($id){
+            if($this->getJobTable()->deleteJob($id)){
+                $this->flashMessenger()->addSuccessMessage('Your job has been deleted successfully.');
+            }else{
+                $this->flashMessenger()->addErrorMessage('Unable to delete the job.');
+            }
+        }
+        
+        return $this->redirect()->toRoute('employer');
+    }
+    
+    public function ajaxupdatedescAction()
+    {
+        $data = $this->getRequest()->getPost();
+        $company = $this->getCompanyTable()->getCompanyDetails($data['id']);
+        
+        if($data['isAjax']){
+            if (count($company)>0) {
+                $data['status'] = 'success';
+                $html = '<form method="post" name="updatedetail" class="form-horizontal">';
+                $html .= '<input type="hidden" name="id" value='.$data['id'].' />';
+                $html .= '<div class="form-group">
+                            <label for="conf-password" class="col-md-3 control-label">Description</label>
+                            <div class="col-lg-9">
+                                <textarea id="description" name="description" class="form-control" placeholder="Description">'.$company->description.'</textarea>
+                            </div>
+                        </div>';
+                $html .= '<div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn-signup" type="button" class="btn btn-info" onclick="updatedesc();">
+                                <i class="icon-hand-right"></i>
+                                    Update
+                                </button>
+                            </div>
+                        </div>';
+                $html .= '</form>';
+                $data['description'] = $html;
+            } else {
+                $data['status'] = 'error';
+                $data['description'] = $company->description;
+            }
+        }
+        
+        $response = $this->getResponse();
+        $response->getHeaders()->addHeaderLine( 'Content-Type', 'application/json' );
+        $response->setContent(json_encode($data));
+        return $response;
+    }
+    
+    public function updatedescAction()
+    {
+        $data = $this->getRequest()->getPost()->toArray();
+        
+        if($data['description'] != ''){
+            if($this->getCompanyTable()->updateDesc($data)){
+                $company = $this->getCompanyTable()->getCompanyDetails($data['id']);
+                $data['status'] = 'success';
+                $data['description'] = $company->description;
+            }
+        }
+        
+        $response = $this->getResponse();
+        $response->getHeaders()->addHeaderLine( 'Content-Type', 'application/json' );
+        $response->setContent(json_encode($data));
+        return $response;
+    }
 }

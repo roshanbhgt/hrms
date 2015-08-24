@@ -215,8 +215,10 @@ return array(
             'user/employer/changelogo' => __DIR__ . '/../view/template/employer/changelogo.phtml',
             'user/employer/edit' => __DIR__ . '/../view/template/employer/edit.phtml',
             'user/employer/changepass' => __DIR__ . '/../view/template/employer/changepass.phtml',
-            'user/employer/jobs' => __DIR__ . '/../view/template/employer/jobs/index.phtml',
-            'user/employer/jobadd' => __DIR__ . '/../view/template/employer/jobs/add.phtml',
+            'user/employer/jobs' => __DIR__ . '/../view/template/jobs/index.phtml',
+            'user/employer/jobadd' => __DIR__ . '/../view/template/jobs/add.phtml',
+            'user/employer/jobedit' => __DIR__ . '/../view/template/jobs/edit.phtml',
+            'user/employer/jobinfo' => __DIR__ . '/../view/template/jobs/info.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

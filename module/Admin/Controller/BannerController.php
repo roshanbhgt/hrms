@@ -10,6 +10,7 @@ namespace Admin\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\File\Transfer\Adapter\Http;
 
 class BannerController extends AbstractActionController {
     protected $storage;
@@ -95,7 +96,24 @@ class BannerController extends AbstractActionController {
         $request = $this->getRequest();
         
         if($request->getPost()){
-            if($this->getBannerTable()->saveBanner($request->getPost())){
+            // Make certain to merge the files info!
+            $data = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+            try {
+                // Define a transport and set the destination on the server
+                $upload = new Http();
+                $upload->setDestination("D:\webserver\htdocs\hrconsultancy\public\media\banner");
+                // This takes care of the moving and making sure the file is there
+                if($upload->receive()){
+                    $data['banner'] = str_replace('D:\webserver\htdocs\hrconsultancy\public', '',$upload->getFileName());
+                    $data['banner'] = str_replace('\\', '/', $data['banner']);
+                }
+            } catch (Zend_File_Transfer_Exception $e) {
+                echo $e->message();
+            }
+            if($this->getBannerTable()->saveBanner($data)){
                 $this->flashmessenger()->addMessage('New banner has been updated successfully.');
             }
         }

@@ -131,6 +131,17 @@ return array(
                     ),
                 ),
             ),
+            'admin-contact' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/contact',
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Contact',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
 			'admin-region' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -140,7 +151,7 @@ return array(
                         'action'     => 'index',
                         'layout'     => 'layout/admin',
                     ),
-                ),
+                ),          
             ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
@@ -290,7 +301,7 @@ return array(
                     ),
                 ),
             ),
-			'admin-region' => array(
+            'admin-region' => array(
                 'type'    => 'Segment',
                 'options' => array(
                     'route'    => '/admin/region[/:action][/:id]',
@@ -301,6 +312,22 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'Admin\Controller\Region',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
+            'admin-contact' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/contact[/:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Contact',
                         'action'     => 'index',
                         'layout'     => 'layout/admin',
                     ),
@@ -339,6 +366,7 @@ return array(
 			'Admin\Controller\Menu' => 'Admin\Controller\MenuController',
 			'Admin\Controller\Country' => 'Admin\Controller\CountryController',
 			'Admin\Controller\Region' => 'Admin\Controller\RegionController',
+            'Admin\Controller\Contact' => 'Admin\Controller\ContactController',
         ),
     ),
     'view_manager' => array(
@@ -380,6 +408,7 @@ return array(
             'admin/region/index' => __DIR__ . '/../view/template/region/index.phtml',
             'admin/region/add' => __DIR__ . '/../view/template/region/add.phtml',
             'admin/region/edit' => __DIR__ . '/../view/template/region/edit.phtml',
+            'admin/contact/index' => __DIR__ . '/../view/template/contact/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -400,6 +429,11 @@ return array(
                 array(
                     'label' => 'Pages',
                     'route' => 'admin-page',
+                    'icon' => ''
+                ),
+                array(
+                    'label' => 'Contact Us',
+                    'route' => 'admin-contact',
                     'icon' => ''
                 ),
                 array(

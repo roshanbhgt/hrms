@@ -15,6 +15,7 @@ $this->headTitle($title);
             <th>Title</th>
             <th>Role</th>
             <th>Type</th>
+            <th>Position</th>
             <th>Description</th>
             <th>Location</th>
             <th>Status</th>
@@ -27,15 +28,18 @@ $this->headTitle($title);
                 <td><?php echo $this->escapeHtml($val->title);?></td>
                 <td><?php echo $this->escapeHtml($val->roles);?></td>
                 <td><?php echo $this->escapeHtml($val->type);?></td>
+                <td><?php echo $this->escapeHtml($val->position);?></td>
                 <td><?php echo $this->escapeHtml($val->description);?></td>
                 <td><?php echo $this->escapeHtml($val->location);?></td>
                 <td><?php echo $this->escapeHtml($val->status);?></td>
                 <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->postedat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
                 <td>
                     <a href="<?php echo $this->serverUrl($this->url('employer',
-                        array('action'=>'edit', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-edit"></i></a> &nbsp;
+                        array('action'=>'jobinfo', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-info-sign"></i></a> &nbsp;
                     <a href="<?php echo $this->serverUrl($this->url('employer',
-                        array('action'=>'delete', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-trash"></i></a>
+                        array('action'=>'jobedit', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-edit"></i></a> &nbsp;
+                    <a href="<?php echo $this->serverUrl($this->url('employer',
+                        array('action'=>'deletejob', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-trash"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -91,4 +91,50 @@ class CompanyTable
             }
         }
     }
+    
+    public function updateCompany($company)
+    {        
+        $data = array(
+            'userid'     => $company->userid,
+            'companyname' => $company->companyname,
+            'companytype'  => $company->companytype,
+            'industrytype' => $company->industrytype,
+            'address1'  => $company->address1,
+            'address2'  => $company->address2,
+            'address3'  => $company->address3,
+            'state' => $company->state,
+            'country' => $company->country,
+            'city' => $company->city,
+            'postcode' => $company->postcode,
+            'contactnumber' => $company->contactnumber,
+            'fax' => $company->fax,
+            'description' => $company->description,
+            'url' => $company->url,
+        );
+        
+        $userid = (int)$company->userid;
+        $id = (int)$company->id;
+        if (!$this->getCompany($userid)) {
+            $this->tableGateway->insert($data);
+        } else {
+            if ($this->getCompany($userid))
+            {
+                $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('User with id does not exist');
+            }
+        }
+    }
+    
+    public function updateDesc($data)
+    {
+        $id = (int)$data['id'];
+        if ($id != 0 && $data['description'] != '') {
+            if ($this->getCompanyDetails($id)) {
+                return $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('Company with id does not exist');
+            }
+        }
+    }
 }

@@ -21,7 +21,7 @@ class JobTable
     public function getJob($id)
     {
         $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('userid' => $id));
+        $rowset = $this->tableGateway->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row) {
             return FALSE;
@@ -43,6 +43,7 @@ class JobTable
             'userid'     => $job->userid,
             'title' => $job->title,
             'type'  => $job->type,
+            'position'  => $job->position,
             'description' => $job->description,
             'roles'  => $job->roles,
             'skills'  => $job->skills,
@@ -50,17 +51,19 @@ class JobTable
             'salary' => $job->salary,
             'location' => $job->location,
             'status' => $job->status,
-            'postedat' => $job->postedat,
-            'lastdate' => $job->lastdate,
         );
         
-        $id = (int)$job->userid;
+        $userid = (int)$job->userid;
+        $id = (int)$job->id;
+        
         if (!$this->getJob($id)) {
+            $data['postedat'] = date('y-m-d h:i:s');
             $this->tableGateway->insert($data);
         } else {
             if ($this->getJob($id))
             {
-                $this->tableGateway->update($data, array('userid' => $id));
+                $data['updatedat'] = date('y-m-d h:i:s');
+                $this->tableGateway->update($data, array('id' => $id));
             } else {
                 throw new \Exception('User with id does not exist');
             }

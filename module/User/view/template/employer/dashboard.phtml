@@ -1,3 +1,74 @@
+<script type="text/javascript">
+    function getupdatedetailform(){
+	jQuery.ajax({
+            url: '<?php echo $this->serverUrl($this->url('employer',
+                    array('action'=>'ajaxupdatedesc'))); ?>',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                'id': <?php echo $company->id; ?>,
+                'isAjax': true
+            },
+            success: function(data, status){
+                $('#statedrop').find('option').remove().end().append('<option value="">---- Select state ----</option>').val(' ');
+                if(data.status == 'error'){
+                    // Perform any operation on error
+                    $('#editdesc').show();
+                    $('#descriptionshow').html(data.description);
+                }else{
+                    $('#editdesc').hide();
+                    $('#descriptionshow').html(data.description);
+                }
+            },
+            error : function(xhr, textStatus, errorThrown) {
+                if (xhr.status === 0 || xhr.status == 404 || xhr.status == 500
+                    || errorThrown === 'parsererror' || errorThrown === 'timeout' 
+                    || errorThrown === 'abort' ) {
+                    console.log('Not connect.\n Verify Network.');
+                } else {
+                    console.log('There was some error. Try again.');
+                }
+            },
+            complete: function(){
+                // Perform any operation need on success/error
+            }
+	});
+    }
+    
+    function updatedesc(){
+	jQuery.ajax({
+            url: '<?php echo $this->serverUrl($this->url('employer',
+                    array('action'=>'updatedesc'))); ?>',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                'id': <?php echo $company->id; ?>,
+                'description': document.getElementById('description').value 
+            },
+            success: function(data, status){
+                if(data.status == 'success'){
+                    // Perform any operation on error
+                    $('#editdesc').show();
+                    $('#descriptionshow').html(data.description);
+                }
+            },
+            error : function(xhr, textStatus, errorThrown) {
+                if (xhr.status === 0 || xhr.status == 404 || xhr.status == 500
+                    || errorThrown === 'parsererror' || errorThrown === 'timeout' 
+                    || errorThrown === 'abort' ) {
+                    console.log('Not connect.\n Verify Network.');
+                } else {
+                    console.log('There was some error. Try again.');
+                }
+            },
+            complete: function(){
+                // Perform any operation need on success/error
+            }
+	});
+    }
+    
+    
+</script>
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-9">
@@ -13,8 +84,9 @@
                 </p>
             </div>
             <div class="row">
-                <?php echo $company->description; ?>
+                <a id="editdesc" href="#" onclick="getupdatedetailform();"><i class="glyphicon glyphicon-edit"></i></a>
+                <div id="descriptionshow"><?php echo $company->description; ?></div>
             </div>
         </div>
     </div>
-</div>
+</div> 

@@ -107,10 +107,15 @@ class UserTable
     {
         $id = (int)$data->id;
         $password = new Password();
+        
         if ($id != 0 && $data->password != '') {
             $data = array(
+                'firstname' => $data->firstname,
+                'lastname'  => $data->lastname,
+                'email' => $data->email,
                 'password' => $password->create($data->password),
             );
+            
             if ($this->getUser($id)) {
                 return $this->tableGateway->update($data, array('id' => $id));
             } else {

@@ -32,18 +32,14 @@ class BannerTable
     public function saveBanner($banner)
     {
         $data = array(
-            'title' => $banner->title,
-            'banner'  => $banner->banner,
-            'urlpath'  => $banner->urlpath,
-            'sortorder'  => $banner->sortorder,
-            'status'  => $banner->status,
+            'title' => $banner['title'],
+            'banner'  => $banner['banner'],
+            'urlpath'  => $banner['urlpath'],
+            'sortorder'  => $banner['sortorder'],
+            'status'  => $banner['status'],
         );
         
-        if(isset($_FILES['banner'])){
-            $data['banner'] = $_FILES['banner']['name'];
-        }
-
-        $id = (int)$banner->id;
+        $id = (int)$banner['id'];
         if ($id == 0) {
             $data['createdat'] = date('y-m-d h:i:s');
             $this->tableGateway->insert($data);

@@ -8,6 +8,7 @@ return array(
         'Page',
         'User',
         'Job',
+        'Contact',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
