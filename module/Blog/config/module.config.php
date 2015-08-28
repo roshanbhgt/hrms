@@ -39,7 +39,7 @@ return array(
             'blog' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/blog/index[/:action][/:id]',
+                    'route'    => '/blog[/:action][/:id]',
                     'constraints' => array(
                         'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',

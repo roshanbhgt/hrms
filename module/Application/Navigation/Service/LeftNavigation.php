@@ -32,10 +32,22 @@ class LeftNavigation extends DefaultNavigationFactory
             
             foreach($fetchMenu as $key=>$row)
             {
-                $configuration['navigation'][$this->getName()][$row->title] = array(
-                    'label' => $row->label,
-                    'route' => $row->route,
-                );
+                $route = explode('/', $row->route);
+                if(isset($route[1])){
+                    $configuration['navigation'][$this->getName()][$row->title] = array(
+                        'label' => $row->label,
+                        'route' => $route[0],
+                        'params' => array(
+                            'action' => 'index',
+                            'url' => $route[1],
+                        ),
+                    );
+                }else{
+                    $configuration['navigation'][$this->getName()][$row->title] = array(
+                        'label' => $row->label,
+                        'route' => $row->route
+                    );
+                }
             }
              
             if (!isset($configuration['navigation'])) {
@@ -52,7 +64,6 @@ class LeftNavigation extends DefaultNavigationFactory
             $routeMatch  = $application->getMvcEvent()->getRouteMatch();
             $router      = $application->getMvcEvent()->getRouter();
             $pages       = $this->getPagesFromConfig($configuration['navigation'][$this->getName()]);
- 
             $this->pages = $this->injectComponents($pages, $routeMatch, $router);
         }
         return $this->pages;

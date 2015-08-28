@@ -15,7 +15,7 @@ use Zend\View\Model\ViewModel;
 class IndexController extends AbstractActionController
 {
     protected $pageTable;
-
+    
     public function getPageTable()
     {
         if (!$this->pageTable) {
@@ -27,8 +27,10 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
+        $url = $this->params()->fromRoute('url', 0);
+                
         return new ViewModel(array(
-            'pages' => $this->getPageTable()->fetchAll(),
+            'page' => $this->getPageTable()->getPageByIdentifier($url),
         ));
     }
 }

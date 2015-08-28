@@ -19,34 +19,38 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' =>array(
+                    'page' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/page[/:url]',
+                            'defaults' => array(
+                                'controller' => 'Page\Controller\Index',
+                                'action'     => 'index',
+                                'url'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                        ),
+                    ),
+                ),
             ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
             'page' => array(
-                'type'    => 'Literal',
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/page',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Page\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
+                    'route'    => '/page[/:url]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'url'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
+                    'defaults' => array(
+                        'controller' => 'Page\Controller\Index',
+                        'action'     => 'index',
+                        'layout'     => 'layout/one-column',
                     ),
                 ),
             ),

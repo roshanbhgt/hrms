@@ -142,10 +142,6 @@ return array(
                 'route' => 'employer',
             ),
             array(
-                'label' => 'Register',
-                'route' => 'register',
-            ),
-            array(
                 'label' => 'Login',
                 'route' => 'login',
             ),

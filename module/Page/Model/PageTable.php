@@ -28,6 +28,16 @@ class PageTable
         }
         return $row;
     }
+    
+    public function getPageByIdentifier($url)
+    {
+        $rowset = $this->tableGateway->select(array('identifier' => $url));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $url");
+        }
+        return $row;
+    }
 
     public function savePage(Page $page)
     {

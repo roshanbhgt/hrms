@@ -10,7 +10,7 @@
 return array(
     'router' => array(
         'routes' => array(
-            'page' => array(
+            'contact' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/contact',
