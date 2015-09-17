@@ -24,7 +24,7 @@ return array(
             'admin-login' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/admin/index/login',
+                    'route'    => '/admin/login',
                     'defaults' => array(
                         'controller' => 'Admin\Controller\Index',
                         'action'     => 'login',
@@ -35,7 +35,7 @@ return array(
             'admin-forgetpass' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/admin/index/forgetpass',
+                    'route'    => '/admin/forgetpass',
                     'defaults' => array(
                         'controller' => 'Admin\Controller\Index',
                         'action'     => 'forgetpass',
@@ -160,7 +160,7 @@ return array(
             'admin' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/admin/index[/:action][/:id]',
+                    'route'    => '/admin[/:action][/:id]',
                     'constraints' => array(
                         'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',

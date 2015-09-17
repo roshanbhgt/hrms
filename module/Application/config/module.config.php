@@ -17,6 +17,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
+                        'layout'     => 'layout/one-column',
                     ),
                 ),
             ),
@@ -42,6 +43,7 @@ return array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
+                        'layout'     => 'layout/one-column',
                     ),
                 ),
                 'may_terminate' => true,
@@ -140,6 +142,10 @@ return array(
             array(
                 'label' => 'My Account',
                 'route' => 'employer',
+            ),
+            array(
+                'label' => 'My Account',
+                'route' => 'jobseeker',
             ),
             array(
                 'label' => 'Login',

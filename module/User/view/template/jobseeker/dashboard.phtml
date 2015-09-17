@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-9">
+            <div class="span4">
+                <blockquote>
+                    <p>Welcome <?php echo $user->firstname.' '.$user->lastname; ?>!</p>
+                    <small><cite title="Source Title"><?php echo $user->state.', '.$user->country; ?>  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+                </blockquote>
+                <p>
+                    <i class="glyphicon glyphicon-envelope"></i> <?php echo $user->email; ?> <br>
+                    <i class="glyphicon glyphicon-time"></i> Since <?php echo $this->dateFormat(new DateTime($user->createdat), IntlDateFormatter::LONG,IntlDateFormatter::MEDIUM); ?>
+                </p>
+            </div>
+        </div>
+    </div>
+</div> 

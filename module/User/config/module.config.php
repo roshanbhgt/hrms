@@ -61,7 +61,7 @@ return array(
                     ),
                 ),
             ),
-			'register' => array(
+            'register' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/user/index/register',
@@ -122,6 +122,17 @@ return array(
                     ),
                 ),
             ),
+            'jobseeker' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/user/jobseeker/',
+                    'defaults' => array(
+                        'controller' => 'User\Controller\Jobseeker',
+                        'action'     => 'index',
+                        'layout'     => 'layout/two-column-left',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -168,6 +179,22 @@ return array(
                     ),
                 ),
             ),
+            'jobseeker' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/user/jobseeker[/:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'User\Controller\Jobseeker',
+                        'action'     => 'index',
+                        'layout'     => 'layout/two-column-left',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -205,16 +232,19 @@ return array(
         'layout' => 'layout/layout',
         'template_map' => array(
             'user/index/index' => __DIR__ . '/../view/template/index/index.phtml',
-            'user/employer/index' => __DIR__ . '/../view/template/employer/dashboard.phtml',
             'user/index/login' => __DIR__ . '/../view/template/index/login.phtml',
-            'user/index/register' => __DIR__ . '/../view/template/index/register.phtml',
+            'user/employer/index' => __DIR__ . '/../view/template/employer/dashboard.phtml',
+            'user/jobseeker/index' => __DIR__ . '/../view/template/jobseeker/dashboard.phtml',
             'user/index/forgetpass' => __DIR__ . '/../view/template/index/forgetpass.phtml',
             'user/index/registercompany' => __DIR__ . '/../view/template/index/companyregister.phtml',
+            'user/index/registerjobseeker' => __DIR__ . '/../view/template/index/jobseekerregister.phtml',
             'user/index/forgetpass' => __DIR__ . '/../view/template/index/forgetpass.phtml',
-            'user/sidebar/sidebar' => __DIR__ . '/../view/sidebar/sidebar.phtml',
+            'user/sidebar/employer' => __DIR__ . '/../view/sidebar/employer.phtml',
+            'user/sidebar/jobseeker' => __DIR__ . '/../view/sidebar/jobseeker.phtml',
             'user/employer/changelogo' => __DIR__ . '/../view/template/employer/changelogo.phtml',
             'user/employer/edit' => __DIR__ . '/../view/template/employer/edit.phtml',
             'user/employer/changepass' => __DIR__ . '/../view/template/employer/changepass.phtml',
+            'user/jobseeker/changepass' => __DIR__ . '/../view/template/jobseeker/changepass.phtml',
             'user/employer/jobs' => __DIR__ . '/../view/template/jobs/index.phtml',
             'user/employer/jobadd' => __DIR__ . '/../view/template/jobs/add.phtml',
             'user/employer/jobedit' => __DIR__ . '/../view/template/jobs/edit.phtml',

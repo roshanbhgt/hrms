@@ -1,28 +1,14 @@
 <div class="row">
-    <?php
-    if ($this->messages) {
-        echo '<ul>';
-        foreach ($this->messages as $message) {
-            echo '<li>' . $message . '</li>';
-        }
-        echo '</ul>';
-    }
-    ?>
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-lg-12">
         <div id="signupbox" class="mainbox col-lg-10">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <div class="panel-title">Create an Account</div>
+                    <div class="panel-title">Register as Job seeker</div>
                 </div>
                 <div class="panel-body">
-                    <form id="signupform" class="form-horizontal" role="form"
+                    <form id="signupform" class="form-horizontal" role="form" enctype="multipart/form-data"
                           action="<?php echo $this->serverUrl($this->url('create')); ?>" method="post">
-
-                        <div id="signupalert" style="display:none" class="alert alert-danger">
-                            <p>Error:</p>
-                            <span></span>
-                        </div>
-
+                        <input type="hidden" name="type" value="jobseeker" />
                         <div class="form-group">
                             <label for="firstname" class="col-md-3 control-label">First Name</label>
 
@@ -67,6 +53,29 @@
                                 <input type="text" class="form-control" name="country" placeholder="Country">
                             </div>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="country" class="col-md-3 control-label">Gender</label>
+                            <div class="col-md-6">
+                                <div style="float: left;width: 100px;">
+                                    <input type="radio" class="form-control" name="gender" value="m" style="width:28px" />
+                                    <span>Male</span>
+                                </div>
+                                <div style="float: left;width: 100px;">
+                                    <input type="radio" class="form-control" name="gender" value="f" style="width:28px" />
+                                    <span>Female</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="country" class="col-md-3 control-label">Upload your resume</label>
+
+                            <div class="col-md-6">
+                                <input type="file" name="resume" value="" />
+                            </div>
+                        </div>
+
 
                         <?php // echo $captcha->getService()->getHtml();?>
 
@@ -74,11 +83,7 @@
                             <!-- Button -->
                             <div class="col-md-offset-3 col-md-9">
                                 <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>
-                                    Sign Up
-                                </button>
-                                <span style="margin:0 8px;">or</span>
-                                <button id="btn-fbsignup" type="button" class="btn btn-primary"><i
-                                        class="icon-facebook"></i>Sign Up with Facebook
+                                    Submit 
                                 </button>
                             </div>
                         </div>

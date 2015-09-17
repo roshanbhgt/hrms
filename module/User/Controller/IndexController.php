@@ -145,33 +145,16 @@ class IndexController extends AbstractActionController
         $view = new ViewModel(array( 'messages'  => $this->flashmessenger()->getMessages()));
         return $view;
     }
+   
+    public function registerjobseekerAction()
+    {
+        //if already login, redirect to success page
+        if ($this->getAuthService()->hasIdentity()){ 
+            return $this->redirect()->toRoute('user');
+        }
 
-    public function registerAction()
-    {
-		/* 
-			//if already login, redirect to success page
-			if ($this->getAuthService()->hasIdentity()){
-				return $this->redirect()->toRoute('user');
-			}
-			
-			$view = new ViewModel(array( 'messages'  => $this->flashmessenger()->getMessages()));
-			return $view;
-		*/
-		return $this->redirect()->toRoute('login');
-    }
-	
-	public function registerjobseekerAction()
-    {
-		/* 
-			//if already login, redirect to success page
-			if ($this->getAuthService()->hasIdentity()){
-				return $this->redirect()->toRoute('user');
-			}
-			
-			$view = new ViewModel(array( 'messages'  => $this->flashmessenger()->getMessages()));
-			return $view;
-		*/
-		return $this->redirect()->toRoute('login');
+        $view = new ViewModel();
+        return $view;
     }
 	
     public function registercompanyAction()
@@ -220,12 +203,7 @@ class IndexController extends AbstractActionController
         }
 
         if ($request->isPost()){
-            $userid = $this->getUserTable()->saveUser($request->getPost());
-            if($userid){
-                $this->flashmessenger()->addMessage('You account have been created successfully.');
-            }
             $data = $request->getPost();
-            $data['userid'] = $userid;
             if ($request->getPost('type') == 'employer') {
                 if($this->getUserCompanyTable()->saveCompany($data)){
                     $this->flashmessenger()->addMessage('Your company information saved successfully.');
@@ -235,7 +213,6 @@ class IndexController extends AbstractActionController
                     $this->flashmessenger()->addMessage('You personal information saved successfully.');
                 }
             }
-            
         }
         
         return $this->redirect()->toRoute('login');

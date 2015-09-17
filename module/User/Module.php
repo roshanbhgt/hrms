@@ -41,9 +41,21 @@ class Module
             $container->removePage($login);
             $create = $container->findBy('route' , 'register');
             $container->removePage($create);
+            $authstorage = (object)$auth->getStorage()->read();
+            if($authstorage->type == 'employer'){
+                $jobseeker = $container->findBy('route' , 'jobseeker');
+                $container->removePage($jobseeker);
+            }elseif($authstorage->type == 'jobseeker'){
+                $employer = $container->findBy('route' , 'employer');
+                $container->removePage($employer);
+            }
         } else {
             $logout = $container->findBy('route' , 'logout');
+            $employer = $container->findBy('route' , 'employer');
+            $jobseeker = $container->findBy('route' , 'jobseeker');
             $container->removePage($logout);
+            $container->removePage($employer);
+            $container->removePage($jobseeker);
         }
         
     }
@@ -119,11 +131,15 @@ class Module
                 return;
         }
         
-        // END IF
         // Set the layout template
         $template = $e->getViewModel();
         $sidebar = new ViewModel();
-        $sidebar->setTemplate('user/sidebar/sidebar');
+        if($controller == 'User\Controller\Jobseeker'){
+            $sidebar->setTemplate('user/sidebar/jobseeker');
+        }else{
+            $sidebar->setTemplate('user/sidebar/employer');
+        }
+        
         $template->addChild($sidebar, 'sidebar');
     }
     

@@ -10,7 +10,7 @@
 namespace User\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Zend\View\Model\ViewModel; 
 use Zend\Session\Container;
 use Zend\File\Transfer\Adapter\Http;
 use Application\Model\Password;

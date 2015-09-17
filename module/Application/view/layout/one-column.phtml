@@ -7,7 +7,7 @@
     <body>
         <?php echo $this->render('partial/header.phtml'); ?>
         <div class="container">
-            <p><?php echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0); // <-- Add this!! ?></p>
+            <?php // echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0); // <-- Add this!! ?>
             <?php echo $this->content;?>
         </div> <!-- /container -->
 	<?php echo $this->render('partial/footer.phtml'); ?>	
