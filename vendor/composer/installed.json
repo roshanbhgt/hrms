@@ -1,27 +1,72 @@
 [
     {
-        "name": "zendframework/zendxml",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
+        "name": "zendframework/zendservice-recaptcha",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/zendframework/ZendXml.git",
-            "reference": "559b34f426d33a11c3db118e00ce14bb8dc64e5f"
+            "url": "https://github.com/zendframework/ZendService_ReCaptcha.git",
+            "reference": "4324cca8502d9f47b3b43a18acdd3fdbeb965536"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/ZendXml/zipball/559b34f426d33a11c3db118e00ce14bb8dc64e5f",
-            "reference": "559b34f426d33a11c3db118e00ce14bb8dc64e5f",
+            "url": "https://api.github.com/repos/zendframework/ZendService_ReCaptcha/zipball/4324cca8502d9f47b3b43a18acdd3fdbeb965536",
+            "reference": "4324cca8502d9f47b3b43a18acdd3fdbeb965536",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "zendframework/zend-http": ">=2.0.0",
+            "zendframework/zend-uri": ">=2.0.0",
+            "zendframework/zend-version": ">=2.0.0"
+        },
+        "time": "2012-09-24 15:18:29",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "ZendService": "library/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "OOP wrapper for the ReCaptcha web service",
+        "homepage": "http://packages.zendframework.com/",
+        "keywords": [
+            "recaptcha",
+            "zf2"
+        ]
+    },
+    {
+        "name": "zendframework/zendxml",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/ZendXml.git",
+            "reference": "54edb3875aba5b45f02824f65f311c9fb2743a38"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/ZendXml/zipball/54edb3875aba5b45f02824f65f311c9fb2743a38",
+            "reference": "54edb3875aba5b45f02824f65f311c9fb2743a38",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.3"
         },
         "require-dev": {
-            "fabpot/php-cs-fixer": "*@dev",
-            "phpunit/phpunit": "~3.7"
+            "phpunit/phpunit": "~3.7",
+            "squizlabs/php_codesniffer": "~1.5"
         },
-        "time": "2014-03-05 22:25:44",
+        "time": "2015-08-03 14:50:10",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -31,7 +76,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-0": {
-                "ZendXml": "library/"
+                "ZendXml\\": "library/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -48,17 +93,17 @@
     },
     {
         "name": "zendframework/zendframework",
-        "version": "2.3.3",
-        "version_normalized": "2.3.3.0",
+        "version": "2.3.9",
+        "version_normalized": "2.3.9.0",
         "source": {
             "type": "git",
             "url": "https://github.com/zendframework/zf2.git",
-            "reference": "88c9b6f566fc1097f64ead155625db9bdfee531e"
+            "reference": "32858f883fffb5eef9f610b538ed026f6033b6de"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zf2/zipball/88c9b6f566fc1097f64ead155625db9bdfee531e",
-            "reference": "88c9b6f566fc1097f64ead155625db9bdfee531e",
+            "url": "https://api.github.com/repos/zendframework/zf2/zipball/32858f883fffb5eef9f610b538ed026f6033b6de",
+            "reference": "32858f883fffb5eef9f610b538ed026f6033b6de",
             "shasum": ""
         },
         "require": {
@@ -120,7 +165,7 @@
         },
         "require-dev": {
             "doctrine/annotations": ">=1.0",
-            "fabpot/php-cs-fixer": "dev-master#fcbb09b5204",
+            "fabpot/php-cs-fixer": "1.*",
             "ircmaxell/random-lib": "dev-master",
             "ircmaxell/security-lib": "dev-master",
             "mikey179/vfsstream": "1.2.*",
@@ -136,7 +181,7 @@
             "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
             "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
         },
-        "time": "2014-09-16 22:58:11",
+        "time": "2015-05-11 16:03:51",
         "bin": [
             "bin/classmap_generator.php",
             "bin/pluginmap_generator.php",
@@ -163,51 +208,6 @@
         "homepage": "http://framework.zend.com/",
         "keywords": [
             "framework",
-            "zf2"
-        ]
-    },
-    {
-        "name": "zendframework/zendservice-recaptcha",
-        "version": "2.0.1",
-        "version_normalized": "2.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/ZendService_ReCaptcha.git",
-            "reference": "4324cca8502d9f47b3b43a18acdd3fdbeb965536"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/ZendService_ReCaptcha/zipball/4324cca8502d9f47b3b43a18acdd3fdbeb965536",
-            "reference": "4324cca8502d9f47b3b43a18acdd3fdbeb965536",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "zendframework/zend-http": ">=2.0.0",
-            "zendframework/zend-uri": ">=2.0.0",
-            "zendframework/zend-version": ">=2.0.0"
-        },
-        "time": "2012-09-24 15:18:29",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "ZendService": "library/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": "OOP wrapper for the ReCaptcha web service",
-        "homepage": "http://packages.zendframework.com/",
-        "keywords": [
-            "recaptcha",
             "zf2"
         ]
     }

@@ -1,0 +1,220 @@
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#dob").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+</script>
+<div class="row">
+    <div class="panel-heading">
+        <div class="panel-title">Editing <b><?php echo $user->firstname.' '.$user->lastname ; ?></b></div>
+    </div>
+    <div class="panel-body">
+        <form id="signupform" class="form-horizontal" role="form"
+              action="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'update'))); ?>" method="post">
+            <input type="hidden" name="id" value="<?php echo $jobseeker->id; ?>" />            
+            <input type="hidden" name="userid" value="<?php echo $jobseeker->userid; ?>" />            
+            <div class="form-group">
+                <label for="firstname" class="col-md-3 control-label">First Name</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="firstname" placeholder="First Name" value="<?php echo $jobseeker->firstname; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="middlename" class="col-md-3 control-label">Middle Name</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="middlename" placeholder="Middle Name" value="<?php echo $jobseeker->middlename; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastname" class="col-md-3 control-label">Last Name</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="lastname" placeholder="Last Name" value="<?php echo $jobseeker->lastname; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gender" class="col-md-3 control-label">Gender</label>
+
+                <div class="col-md-6">
+                    <div class="radio">
+                        <label><input type="radio" name="gender" value="male" <?php if(strtolower($jobseeker->gender) == 'male'){ ?> checked="true" <?php } ?> >Male</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="gender" value="female" <?php if(strtolower($jobseeker->gender) == 'female'){ ?> checked="true" <?php } ?> >Female</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="url" class="col-md-3 control-label">Date of Birth</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="dob" name="dob" placeholder="Date of Birth" value="<?php echo $jobseeker->dob; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="conf-password" class="col-md-3 control-label">About you</label>
+                <div class="col-md-6">
+                    <textarea name="description" class="form-control" placeholder="Description"><?php echo $jobseeker->description; ?></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="url" class="col-md-3 control-label">Website</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="url" placeholder="Url" value="<?php echo $jobseeker->url; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address1" class="col-md-3 control-label">Address Line 1</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="address1" placeholder="Address Line 1" value="<?php echo $jobseeker->address1 ; ?>" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address2" class="col-md-3 control-label">Address Line 2</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="address2" placeholder="Address Line 2" value="<?php echo $jobseeker->address2 ; ?>">
+                </div>
+            </div><div class="form-group">
+                <label for="address3" class="col-md-3 control-label">Address Line 3</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="address3" placeholder="Address Line 3" value="<?php echo $jobseeker->address3 ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="country" class="col-md-3 control-label">Country</label>
+
+                <div class="col-md-6">
+                    <select id="country" class="form-control" onchange="getregion(this) " name="country">
+                        <option selected="" value="-1">---- Select country ----</option>
+                        <?php foreach($countrys as $val){ ?>
+                        <option value="<?php echo $val->iso; ?>" <?php if($jobseeker->country == $val->iso){ ?> selected="selected" <?php } ?> ><?php echo $val->nicename; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="state" class="col-md-3 control-label">State</label>
+                <div class="col-md-6">
+                    <select id="statedrop" class="form-control" name="state">
+                        <option value="">---- Select state ----</option>
+                    </select>
+                    <input id="statetext" type="text" class="form-control" name="statetext" placeholder="State" value=""
+                           style="display:none;" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="city" class="col-md-3 control-label">City</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="city" placeholder="City" value="<?php echo $jobseeker->city ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="postcode" class="col-md-3 control-label">Postcode</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="postcode" placeholder="Postcode" value="<?php echo $jobseeker->postcode ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="col-md-3 control-label">Telephone</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="phone" placeholder="Telephone" value="<?php echo $jobseeker->phone ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="mobile" class="col-md-3 control-label">Mobile</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="mobile" placeholder="Mobile" value="<?php echo $jobseeker->mobile ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fax" class="col-md-3 control-label">Fax</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="fax" placeholder="Fax" value="<?php echo $jobseeker->fax ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">&nbsp;</label>
+                <div class="col-md-6 checkbox">
+                    <input id="login-remember" type="checkbox" name="remember" value="1"> I agree to <a href="javascript:void(0);" target="_blank">Terms & Conditions</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <!-- Button -->
+                <div class="col-md-offset-3 col-md-9">
+                    <button id="btn-signup" type="submit" class="btn btn-primary"><i class="icon-hand-right"></i>
+                        Update
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function() {
+        var obj = document.getElementById('country');
+        getregion(obj);
+    };
+    function getregion(obj){
+	jQuery.ajax({
+		url: '/ajax/region',
+		type: 'POST',
+		dataType: 'JSON',
+		data: {'country': jQuery('#country').val()},
+		success: function(data, status){
+                    $('#statedrop').find('option').remove().end().append('<option value="">---- Select state ----</option>').val(' ');
+                    if(data.status == 'error'){
+                        // Perform any operation on error
+                        $('#statetext').css("display","block");
+                        $('#statedrop').css("display","none");
+                        $('#statetext').val('<?php echo $jobseeker->state ?>');
+                    }else{
+                        $('#statetext').css("display","none");
+                        $('#statedrop').css("display","block");
+                        // Perform any operation on success);
+                        var region = JSON.parse(JSON.stringify(data.region));
+                        for(i = 0; i < data.region.length; i++){
+                            $('#statedrop').append($('<option>', { 
+                                value: region[i].code,
+                                text : region[i].title
+                            }));
+                        }
+                        $("#statedrop").children().filter(function() {
+                            return $(this).val() == '<?php echo $jobseeker->state ?>';
+                          }).prop('selected', true);
+                    }
+		},
+		error : function(xhr, textStatus, errorThrown) {
+                    if (xhr.status === 0) {
+                        alert('Not connect.\n Verify Network.');
+                    } else if (xhr.status == 404) {
+                        alert('Requested page not found. [404]');
+                    } else if (xhr.status == 500) {
+                        alert('Server Error [500].');
+                    } else if (errorThrown === 'parsererror') {
+                        alert('Requested JSON parse failed.');
+                    } else if (errorThrown === 'timeout') {
+                        alert('Time out error.');
+                    } else if (errorThrown === 'abort') {
+                        alert('Ajax request aborted.');
+                    } else {
+                        alert('There was some error. Try again.');
+                    }
+		},
+		complete: function(){
+                    // Perform any operation need on success/error
+		}
+	});
+    }
+</script>

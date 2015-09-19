@@ -22,6 +22,14 @@ use User\Model\User;
 use User\Model\UserTable;
 use User\Model\Company;
 use User\Model\CompanyTable;
+use User\Model\Jobseeker;
+use User\Model\JobseekerTable;
+use User\Model\Resume;
+use User\Model\ResumeTable;
+use User\Model\Skills;
+use User\Model\SkillsTable;
+use User\Model\Jobapplication;
+use User\Model\JobapplicationTable;
 
 class Module
 {
@@ -116,6 +124,50 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Company());
                     return new TableGateway('user_company', $dbAdapter, null, $resultSetPrototype);
+                },
+                'User\Model\JobseekerTable' =>  function($sm) {
+                    $tableGateway = $sm->get('JobseekerTableGateway');
+                    $table = new JobseekerTable($tableGateway);
+                    return $table;
+                },
+                'JobseekerTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Jobseeker());
+                    return new TableGateway('user_jobseeker', $dbAdapter, null, $resultSetPrototype);
+                },
+                'User\Model\ResumeTable' =>  function($sm) {
+                    $tableGateway = $sm->get('ResumeTableGateway');
+                    $table = new ResumeTable($tableGateway);
+                    return $table;
+                },
+                'ResumeTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Resume());
+                    return new TableGateway('user_jobseeker_resume', $dbAdapter, null, $resultSetPrototype);
+                },
+                'User\Model\SkillsTable' =>  function($sm) {
+                    $tableGateway = $sm->get('SkillsTableGateway');
+                    $table = new SkillsTable($tableGateway);
+                    return $table;
+                },
+                'SkillsTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Skills());
+                    return new TableGateway('user_jobseeker_skill', $dbAdapter, null, $resultSetPrototype);
+                },
+                'User\Model\JobapplicationTable' =>  function($sm) {
+                    $tableGateway = $sm->get('JobapplicationTableGateway');
+                    $table = new JobapplicationTable($tableGateway);
+                    return $table;
+                },
+                'JobapplicationTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Jobapplication());
+                    return new TableGateway('user_jobseeker_jobapplication', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

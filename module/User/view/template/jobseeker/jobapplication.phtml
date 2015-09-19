@@ -1,0 +1,22 @@
+
+<?php
+$title = 'Job Applications';
+$this->headTitle($title);
+?>
+<div class="row">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <table class="table">
+        <tr style="background-color:#2a6496;color: #ffffff">
+            <td>&nbsp;</td>
+            <th>Job Title</th>
+            <th>Apply Date</th>
+        </tr>
+        <?php foreach ($japplication as $val) : ?>
+            <tr style="background-color: <?php echo $this->cycle(array('#FFF', '#F0F0F0'))->next(); ?>">
+                <td>&nbsp;</td>
+                <td><?php echo $this->escapeHtml(ucwords($val->title));?></td>
+                <td><?php echo $this->escapeHtml($val->applydate);?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

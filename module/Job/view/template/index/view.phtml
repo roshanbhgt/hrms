@@ -12,5 +12,20 @@
             <p><strong>Job Location</strong>:- <?php echo $job->location; ?></p>
             <p><strong>Salary</strong>:- <?php echo $job->salary; ?></p>
         </div>
+        <div>
+            <form id="signupform" class="form-horizontal" role="form"
+              action="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'applyjob'))); ?>" method="post">
+                  <div class="form-group">
+                    <!-- Button -->
+                    <div class="col-md-9">
+                        <input type="hidden" name="title" value="<?php echo $job->title; ?>" />
+                        <input type="hidden" name="jobid" value="<?php echo $job->id; ?>" />
+                        <button id="btn-signup" type="submit" class="btn btn-primary"><i class="icon-hand-right"></i>
+                            Apply Job
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

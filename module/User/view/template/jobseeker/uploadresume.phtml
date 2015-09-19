@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-md-9">
+        <h1 class="page-title">Update your resume</h1>
+        <div class="page-body">
+            <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'uploadresume'))); ?>">
+                <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                <div class="form-group">
+                    <label for="password" class="col-md-3 control-label">Upload Resume</label>
+                    <div class="col-md-5">
+                        <input type="file"  name="resume" value="" placeholder="Upload Resume" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-5">
+                        <button id="btn-signup" type="submit" class="btn btn-primary"><i class="icon-hand-right"></i>
+                            Upload
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -63,6 +63,8 @@ class UserTable
     public function updateUser($user)
     {
         $id = (int)$user->id;
+        $password = new Password();
+        
         if ($id != 0 && $user->password == '') {
             $data = array(
                 'firstname' => $user->firstname,
@@ -78,7 +80,7 @@ class UserTable
             }
         } elseif ($id != 0 && $user->password != '') {
             $data = array(
-                'password' => $user->password,
+                'password' => $password->create($user->password),
             );
             if ($this->getUser($id)) {
                 return $this->tableGateway->update($data, array('id' => $id));

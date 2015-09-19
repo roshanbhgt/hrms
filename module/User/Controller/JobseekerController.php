@@ -13,13 +13,16 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Password;
 use Zend\Session\Container;
+use Zend\File\Transfer\Adapter\Http;
 
 class JobseekerController extends AbstractActionController
 {
     protected $storage;
     protected $authservice;
     protected $userTable;
-    protected $usercompanyTable;
+    protected $jobseekerTable;
+    protected $resumeTable;
+    protected $skillsTable;
     protected $countryTable;
 
     public function getAuthService()
@@ -65,13 +68,31 @@ class JobseekerController extends AbstractActionController
         return $this->countryTable;
     }
     
-    public function getUserCompanyTable()
+    public function getJobseekerTable()
     {
-        if (!$this->usercompanyTable) {
+        if (!$this->jobseekerTable) {
             $sm = $this->getServiceLocator();
-            $this->usercompanyTable = $sm->get('User\Model\UserCompanyTable');
+            $this->jobseekerTable = $sm->get('User\Model\JobseekerTable');
         }
-        return $this->usercompanyTable;
+        return $this->jobseekerTable;
+    }
+    
+    public function getResumeTable()
+    {
+        if (!$this->resumeTable) {
+            $sm = $this->getServiceLocator();
+            $this->resumeTable = $sm->get('User\Model\ResumeTable');
+        }
+        return $this->resumeTable;
+    }
+    
+    public function getSkillsTable()
+    {
+        if (!$this->skillsTable) {
+            $sm = $this->getServiceLocator();
+            $this->skillsTable = $sm->get('User\Model\SkillsTable');
+        }
+        return $this->skillsTable;
     }
 
     public function indexAction()
@@ -83,6 +104,7 @@ class JobseekerController extends AbstractActionController
         
         $id = $this->getSession()->id;
         $jobseeker = $this->getUserTable()->getUser($id);
+        $jobseekerdet = $this->getJobseekerTable()->getJobseeker($id);
         
         // Store data in session
         $usersession = new Container('user');
@@ -90,11 +112,44 @@ class JobseekerController extends AbstractActionController
         $usersession->username = $jobseeker->firstname .' '.$jobseeker->lastname;
         $usersession->location = $jobseeker->state .', '.$jobseeker->country;
         $usersession->type = $jobseeker->type;
+        // $usersession->picture = $jobseekerdet->picture;
 
         return new ViewModel(array(
             'user' => $jobseeker,
             'messages'  => $this->flashmessenger()->getMessages(),
         ));
+    }
+    
+    public function editAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+
+        $id = (int) $this->params()->fromRoute('id', 0);
+        return new ViewModel(array(
+            'user' => $this->getUserTable()->getUser($id),
+            'jobseeker' => $this->getJobseekerTable()->getJobseeker($id),
+            'countrys' => $this->getCountryTable()->fetchAll(),
+        ));
+    }
+    
+    public function updateAction()
+    {
+        if (!$this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+
+        $request = $this->getRequest();
+
+        if ($request->isPost()){
+            if($this->getJobseekerTable()->saveJobseeker($request->getPost())){
+                $this->flashmessenger()->addMessage('Your account has been updated successfully.');
+            }
+        }
+
+        return $this->redirect()->toRoute('jobseeker');
+
     }
 
     public function changepassAction()
@@ -106,7 +161,7 @@ class JobseekerController extends AbstractActionController
         if($this->getRequest()->isPost()){
             $data = $this->getRequest()->getPost();
             if($data['password'] == $data['confpassword']){ 
-                if($this->getUserTable()->updatePassword($data)){
+                if($this->getUserTable()->updateUser($data)){
                     $this->flashMessenger()->addSuccessMessage('Password updated successfully.');
                 }
             }else{
@@ -120,4 +175,128 @@ class JobseekerController extends AbstractActionController
             'user' => $this->getUserTable()->getUser($id),
         ));
     }
+    
+    
+    public function changepicAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            // Make certain to merge the files info!
+            $data = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+            
+            // Define a transport and set the destination on the server
+            $upload = new Http();
+            $upload->setDestination("D:\webserver\htdocs\hrconsultancy\public\media\jobseeker");
+
+            try {
+                // This takes care of the moving and making sure the file is there
+                if($upload->receive()){
+                    $data['picture'] = str_replace("D:\webserver\htdocs\hrconsultancy\public", '',$upload->getFileName());
+                    $data['picture'] = str_replace('\\', '/', $data['picture']);
+                    if($data['picture'] != ''){ 
+                        if($this->getJobseekerTable()->updatePicture($data)){
+                            $this->flashMessenger()->addSuccessMessage('Picture updated successfully.');
+                        }
+                    }else{
+                        $this->flashMessenger()->addErrorMessage('Please upload valid image file.');
+                    }
+                }
+                $id = $data['id'];
+            } catch (Zend_File_Transfer_Exception $e) {
+                echo $e->message();
+            }
+        }
+        return new ViewModel(array(
+            'id' => $id,
+        ));
+    }
+     
+    public function uploadresumeAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            // Make certain to merge the files info!
+            $data = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+            
+            // Define a transport and set the destination on the server
+            $upload = new Http();
+            $upload->setDestination("D:\webserver\htdocs\hrconsultancy\public\media\cv");
+
+            try {
+                // This takes care of the moving and making sure the file is there
+                if($upload->receive()){
+                    $data['resume'] = str_replace("D:\webserver\htdocs\hrconsultancy\public", '',$upload->getFileName());
+                    $data['resume'] = str_replace('\\', '/', $data['resume']);
+                    if($data['resume'] != ''){ 
+                        if($this->getResumeTable()->saveResume($data)){
+                            $this->flashMessenger()->addSuccessMessage('Picture updated successfully.');
+                        }
+                    }else{
+                        $this->flashMessenger()->addErrorMessage('Please upload valid doc file.');
+                    }
+                }
+                $id = $data['id'];
+            } catch (Zend_File_Transfer_Exception $e) {
+                echo $e->message();
+            }
+        }
+        return new ViewModel(array(
+            'id' => $id,
+        ));
+    }
+
+    public function skillsAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $data = $request->getPost();
+            foreach($data['skills'] as $key=>$val){
+                $skill['userid'] = $data['userid'];
+                $skill['title'] = $val['title'];
+                $skill['exp_in_year'] = $val['exp_in_year'];
+                $skill['exp_in_month'] = $val['exp_in_month'];
+                if($this->getSkillsTable()->saveSkills($skill)){
+                    $this->flashMessenger()->addErrorMessage('Skills added successfully.');
+                }
+            }
+            $id = $data['userid'];
+        }
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'skills' => $this->getSkillsTable()->fetchAll($id)
+        ));
+    }
+    
+    public function jobapplicationAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+    }
+                
+    
 }
