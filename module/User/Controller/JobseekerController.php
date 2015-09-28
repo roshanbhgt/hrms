@@ -23,6 +23,8 @@ class JobseekerController extends AbstractActionController
     protected $jobseekerTable;
     protected $resumeTable;
     protected $skillsTable;
+    protected $educationTable;
+    protected $workhistoryTable;
     protected $countryTable;
 
     public function getAuthService()
@@ -94,6 +96,24 @@ class JobseekerController extends AbstractActionController
         }
         return $this->skillsTable;
     }
+    
+    public function getEducationTable()
+    {
+        if (!$this->educationTable) {
+            $sm = $this->getServiceLocator();
+            $this->educationTable = $sm->get('User\Model\EducationTable');
+        }
+        return $this->educationTable;
+    }
+    
+    public function getWorkhistoryTable()
+    {
+        if (!$this->workhistoryTable) {
+            $sm = $this->getServiceLocator();
+            $this->workhistoryTable = $sm->get('User\Model\WorkhistoryTable');
+        }
+        return $this->workhistoryTable;
+    }
 
     public function indexAction()
     {
@@ -112,7 +132,7 @@ class JobseekerController extends AbstractActionController
         $usersession->username = $jobseeker->firstname .' '.$jobseeker->lastname;
         $usersession->location = $jobseeker->state .', '.$jobseeker->country;
         $usersession->type = $jobseeker->type;
-        // $usersession->picture = $jobseekerdet->picture;
+        $usersession->picture = $jobseekerdet->picture;
 
         return new ViewModel(array(
             'user' => $jobseeker,
@@ -260,6 +280,7 @@ class JobseekerController extends AbstractActionController
         }
         return new ViewModel(array(
             'id' => $id,
+            'resumes' => $this->getResumeTable()->fetchAll($id)
         ));
     }
 
@@ -279,7 +300,7 @@ class JobseekerController extends AbstractActionController
                 $skill['exp_in_year'] = $val['exp_in_year'];
                 $skill['exp_in_month'] = $val['exp_in_month'];
                 if($this->getSkillsTable()->saveSkills($skill)){
-                    $this->flashMessenger()->addErrorMessage('Skills added successfully.');
+                    $this->flashMessenger()->addSuccessMessage('Skills added successfully.');
                 }
             }
             $id = $data['userid'];
@@ -291,12 +312,69 @@ class JobseekerController extends AbstractActionController
         ));
     }
     
+    public function educationAction(){
+        
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $data = $request->getPost();
+            foreach($data['education'] as $key=>$val){
+                $education['userid'] = $data['userid'];
+                $education['education'] = $val['education'];
+                $education['duration_in_year'] = $val['duration_in_year'];
+                $education['year_of_passing'] = $val['year_of_passing'];
+                if($this->getEducationTable()->saveEducation($education)){
+                    $this->flashMessenger()->addSuccessMessage('Education details added successfully.');
+                }
+            }
+            $id = $data['userid'];
+        }
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'educations' => $this->getEducationTable()->fetchAll($id)
+        ));
+    }
+    
+    public function workhistoryAction(){
+        
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $data = $request->getPost();
+            foreach($data['workhistory'] as $key=>$val){
+                $workhistory['userid'] = $data['userid'];
+                $workhistory['title'] = $val['title'];
+                $workhistory['jobrole'] = $val['jobrole'];
+                $workhistory['jobdescription'] = $val['jobdescription'];
+                $workhistory['start_date'] = $val['start_date'];
+                $workhistory['end_date'] = $val['end_date'];
+                if($this->getWorkhistoryTable()->saveWorkhistory($workhistory)){
+                    $this->flashMessenger()->addSuccessMessage('Experience details added successfully.');
+                }
+            }
+            $id = $data['userid'];
+        }
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'workhistory' => $this->getWorkhistoryTable()->fetchAll($id)
+        ));
+    }
+    
+                
     public function jobapplicationAction()
     {
         if (! $this->getAuthService()->hasIdentity()){
             return $this->redirect()->toRoute('login');
         }
     }
-                
-    
 }

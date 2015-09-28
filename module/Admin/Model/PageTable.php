@@ -40,7 +40,7 @@ class PageTable
 
         $id = (int)$page->id;
         if ($id == 0) {
-            $identifier = 'page/'.$url->formatUrlKey($page->title);
+            $identifier = $url->formatUrlKey($page->title);
             $data['identifier'] = $identifier;
             $data['createdat'] = date('y-m-d h:i:s');
             $this->tableGateway->insert($data);

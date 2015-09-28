@@ -7,7 +7,18 @@ body {
     line-height: 22px;
     margin: 0;
 }
-.btn-primary {
+
+a {
+    color: #c52d2f;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #c52d2f;
+    text-decoration: underline;
+}
+
+.btn-primary, .btn-info {
     background: #c52d2f none repeat scroll 0 0;
     border: medium none;
     border-radius: 4px;
@@ -15,7 +26,7 @@ body {
     margin-top: 10px;
     padding: 8px 20px;
 }
-.btn-primary:hover, .btn-primary:focus {
+.btn-info:hover, .btn-info:focus,.btn-primary:hover, .btn-primary:focus {
     background: #c52d2f none repeat scroll 0 0;
     box-shadow: none;
     outline: medium none;
@@ -299,4 +310,59 @@ ul.social-share li a:hover {
     color: #999;
     font-size: 13px;
     margin-bottom: 15px;
+}
+
+#footer ul {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+
+#footer ul > li {
+    display: inline-block;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+#footer a {
+    color: #fff;
+}
+
+#footer a:hover {
+    color: #c52d2f;
+    text-decoration: none;
+}
+
+.gmap {
+    border: 10px solid #f6f5f0;
+    // border-radius: 50%;
+    box-shadow: 0 0 3px 3px #e7e4dc;
+    height: 470px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 620px;
+}
+
+.contact-us .center {
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.contact-us .contact-wrap {
+    margin-top: 20px;
+}
+
+.carousel {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    position: relative;
+}
+
+.navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0;
 }

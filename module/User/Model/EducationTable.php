@@ -3,7 +3,7 @@
 namespace User\Model;
 use Zend\Db\TableGateway\TableGateway;
 
-class ResumeTable
+class EducationTable
 {
 
     protected $tableGateway;
@@ -19,7 +19,7 @@ class ResumeTable
         return $resultSet;
     }
 
-    public function getResume($id)
+    public function getEducation($id)
     {
         $id  = (int) $id;
         $rowset = $this->tableGateway->select(array('userid' => $id));
@@ -30,27 +30,36 @@ class ResumeTable
         return $row;
     }
 
-    public function saveResume($resume)
+    public function saveEducation($education)
     {       
         $data = array(
-            'userid' => $resume['id'],
-            'title' => $resume['title'],
-            'resume' => $resume['resume'],
+            'userid' => $education['userid'],
+            'education' => strtolower($education['education']),
+            'duration_in_year' => $education['duration_in_year'],
+            'year_of_passing' => $education['year_of_passing'],
         );
-       
-        $id = (int) $resume['id'];
-        if ($this->getResume($id)) {
+        $title = $education['education'];
+        $id = $education['userid'];
+        if ($this->getCheckDuplicate($title)) {
             $this->tableGateway->update($data, array('userid' => $id));
         } else {
             $this->tableGateway->insert($data);
-        }
-        
+        }        
         return $id;
     }
     
-    public function deleteResume($id)
+    public function deleteEducation($id)
     {
         $this->tableGateway->delete(array('id' => $id));
+    }
+    
+    public function getCheckDuplicate($title){
+        $rowset = $this->tableGateway->select(array('education' => strtolower($title)));
+        $row = $rowset->current();
+        if (!$row) {
+            return FALSE;
+        }
+        return $row;
     }
     
 }

@@ -1,0 +1,158 @@
+
+<?php
+$title = 'Manage Work History';
+$this->headTitle($title);
+?>
+<div class="row">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <div id="linkaddwork">
+        <a href="javascript:void(0)" onclick="displayaddeducation();">Add your work</a>
+    </div>
+    <div class="col-md-9" id="addwork" style="display: none;">
+        <form id="skillsform" class="form-horizontal" role="form"
+                  action="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'workhistory'))); ?>" method="post">
+            <input type="hidden" name="id" value="<?php echo $id; ?>" />            
+            <input type="hidden" name="userid" value="<?php echo $id; ?>" />            
+            <fieldset><legend>Add your work</legend>
+                <table id="work-add">
+                    <tr>
+                        <td>Company Name</td>
+                        <td>Job Role</td>
+                        <td>Job Description</td>
+                        <td>Start Date</td>
+                        <td>End Date</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="workhistory[1][title]" placeholder="Company Name" value="" style="width:150px">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="workhistory[1][jobrole]" placeholder="Job Role" value="" style="width:150px">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="workhistory[1][jobdescription]" placeholder="Job Description" value="" style="width:150px">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="workhistory[1][start_date]" placeholder="Start Date" value="" style="width:150px">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="workhistory[1][end_date]" placeholder="End Date" value="" style="width:150px">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <a href="javascript:void(0);" onclick="addmore()">+&nbsp;Add more work details</a>
+                <input type="hidden" id="workcnt" value="2" name="workcnt" />
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <button id="btn-signup" type="submit" class="btn btn-primary"><i class="icon-hand-right"></i>
+                            Submit
+                        </button> or 
+                        <button id="btn-signup" type="button" class="btn btn-primary" onclick="hideaddeducation()"><i class="icon-hand-right"></i>
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <table class="table">
+        <tr style="background-color:#2a6496;color: #ffffff">
+            <td>&nbsp;</td>
+            <th>Company</th>
+            <th>Job Role</th>
+            <th>Job Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th width="75">&nbsp;</th>
+        </tr>
+        <?php foreach ($workhistory as $val) : ?>
+            <tr style="background-color: <?php echo $this->cycle(array('#FFF', '#F0F0F0'))->next(); ?>">
+                <td>&nbsp;</td>
+                <td><?php echo $this->escapeHtml(ucwords($val->title));?></td>
+                <td><?php echo $this->escapeHtml(ucwords($val->jobrole));?></td>
+                <td><?php echo $this->escapeHtml(ucwords($val->jobdescription));?></td>
+                <td><?php echo $this->escapeHtml($val->start_date);?></td>
+                <td><?php echo $this->escapeHtml($val->end_date);?></td>
+                <td>
+                    <a href="<?php echo $this->serverUrl($this->url('admin-region',
+                        array('action'=>'delete', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
+
+<script type="text/javascript">
+    function displayaddeducation(){
+        document.getElementById('addwork').style.display = 'block';
+        document.getElementById('linkaddwork').style.display = 'none';
+    }
+    function hideaddeducation(){
+        document.getElementById('addwork').style.display = 'none';
+        document.getElementById('linkaddwork').style.display = 'block';
+    }
+    function addmore(){
+        var i = $('#workcnt').val();
+        var html = "<tr>";
+            html += '            <td>';
+            html += '                <div class="form-group">';
+            html += '                    <div class="col-md-3">';
+            html += '                        <input type="text" class="form-control" name="workhistory['+i+'][title]" placeholder="Company Name" value="" style="width:150px">';
+            html += '                    </div>';
+            html += '                </div>';
+            html += '            </td>';
+            html += '            <td>';
+            html += '                <div class="form-group">';
+            html += '                    <div class="col-md-3">';
+            html += '                        <input type="text" class="form-control" name="workhistory['+i+'][jobrole]" placeholder="Job Role" value="" style="width:150px">';
+            html += '                    </div>';
+            html += '                </div>';
+            html += '            </td>';
+            html += '            <td>';
+            html += '                <div class="form-group">';
+            html += '                    <div class="col-md-3">';
+            html += '                        <input type="text" class="form-control" name="workhistory['+i+'][jobdescription]" placeholder="Job Description" value="" style="width:150px">';
+            html += '                    </div>';
+            html += '                </div>';
+            html += '            </td>';
+            html += '            <td>';
+            html += '                <div class="form-group">';
+            html += '                    <div class="col-md-3">';
+            html += '                        <input type="text" class="form-control" name="workhistory['+i+'][start_date]" placeholder="Start Date" value="" style="width:150px">';
+            html += '                    </div>';
+            html += '                </div>';
+            html += '            </td>';
+            html += '            <td>';
+            html += '                <div class="form-group">';
+            html += '                    <div class="col-md-3">';
+            html += '                        <input type="text" class="form-control" name="workhistory['+i+'][end_date]" placeholder="End Date" value="" style="width:150px">';
+            html += '                    </div>';
+            html += '                </div>';
+            html += '</td>';
+            html += "</tr>";
+        $('#work-add').append(html);
+        i++;
+        $('#workcnt').val(i);
+    }
+    
+</script>

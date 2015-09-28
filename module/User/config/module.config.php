@@ -254,6 +254,8 @@ return array(
             'user/jobseeker/uploadresume' => __DIR__ . '/../view/template/jobseeker/uploadresume.phtml',
             'user/jobseeker/skills' => __DIR__ . '/../view/template/jobseeker/skills.phtml',
             'user/jobseeker/jobapplication' => __DIR__ . '/../view/template/jobseeker/jobapplication.phtml',
+            'user/jobseeker/education' => __DIR__ . '/../view/template/jobseeker/education.phtml',
+            'user/jobseeker/workhistory' => __DIR__ . '/../view/template/jobseeker/workhistory.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

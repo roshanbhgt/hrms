@@ -123,21 +123,32 @@ return array(
     ),
     'navigation' => array(
         'default' => array(),
-        /* 'left' => array(
+        'footer' => array(
             array(
                 'label' => 'Home',
                 'route' => 'home',
             ),
             array(
-                'label' => 'Page',
+                'label' => 'Terms of Service',
                 'route' => 'page',
+                'params' => array(
+                            'action' => 'index',
+                            'url' => 'terms-and-conditions',
+                        ),
             ),
             array(
-                'label' => 'Blog',
-                'route' => 'blog',
-                'action'=> 'index',
+                'label' => 'Privacy Policy',
+                'route' => 'page',
+                'params' => array(
+                            'action' => 'index',
+                            'url' => 'privacy-policy',
+                        ),
             ),
-        ), */
+            array(
+                'label' => 'Contact Us',
+                'route' => 'contact',
+            ),
+        ),
         'right' => array(
             array(
                 'label' => 'My Account',
