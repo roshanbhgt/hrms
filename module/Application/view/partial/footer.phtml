@@ -1,7 +1,22 @@
 <footer id="footer" class="midnight-blue">
     <div class="container">
-        <p class="navbar-text pull-left">
-                &copy; 2005 - <?php echo date('Y') ?> by Goyal HR Consultant. <?php echo $this->translate('All rights reserved.') ?>
-        </p>
+        <div class="row">
+            <div class="col-sm-6">
+                <p class="navbar-text pull-left">
+                    &copy; 2005 - <?php echo date('Y') ?> by Goyal HR Consultant. <?php echo $this->translate('All rights reserved.') ?>
+                </p>
+            </div>
+            <div class="col-sm-6">
+                <?php // <-- Update this !!
+                    echo $this->navigation('footer')
+                        ->menu()
+                        ->setMinDepth(0)
+                        ->setMaxDepth(0)
+                        ->setUlClass('pull-right');
+                ?>
+            </div>
+        </div>
     </div>
 </footer>
+
+

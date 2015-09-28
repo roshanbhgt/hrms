@@ -14,9 +14,28 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 { 
+    
+    protected $bannerTable;
+    
+    public function getBannerTable()
+    {
+        if (!$this->bannerTable) {
+            $sm = $this->getServiceLocator();
+            $this->bannerTable = $sm->get('Admin\Model\BannerTable');
+        }
+        return $this->bannerTable;
+    }
+    
     public function indexAction()
     {
-        $view = new ViewModel();
+        $banners = array();
+        
+        $view = new ViewModel(
+                    array(
+                        'banners' => $this->getBannerTable()->fetchAll(),
+                        'bannersmenu' => $this->getBannerTable()->fetchAll(),
+                    )
+                );
         return $view;
     }
 }

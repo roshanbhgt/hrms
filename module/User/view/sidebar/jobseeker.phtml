@@ -44,9 +44,19 @@
             Contact Information</a>
         </li>
         <li>
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'education', 'id' => $user->id))); ?>">
+            <i class="glyphicon glyphicon-list"></i>
+            Manage Education</a>
+        </li>
+        <li>
             <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'skills', 'id' => $user->id))); ?>">
             <i class="glyphicon glyphicon-list"></i>
             Manage Skills</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'workhistory', 'id' => $user->id))); ?>">
+            <i class="glyphicon glyphicon-list"></i>
+            Manage Work History</a>
         </li>
         <li>
             <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'uploadresume', 'id' => $user->id))); ?>">

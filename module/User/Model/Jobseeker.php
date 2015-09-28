@@ -46,6 +46,6 @@ class Jobseeker
         $this->fax  = (!empty($data['fax'])) ? $data['fax'] : null;
         $this->description  = (!empty($data['description'])) ? $data['description'] : null;
         $this->url  = (!empty($data['url'])) ? $data['url'] : null;
-        $this->picture  = (!empty($data['logo'])) ? $data['picture'] : null;
+        $this->picture  = (!empty($data['picture'])) ? $data['picture'] : null;
     }
 }

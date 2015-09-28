@@ -61,6 +61,7 @@ class Module
                 'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
                 'right' => 'Application\Navigation\Service\RightNavigation',
                 'left' => 'Application\Navigation\Service\LeftNavigation',
+                'footer' => 'Application\Navigation\Service\FooterNavigation',
                 'Application\Model\MenuTable' => function ($sm) {
                     $tableGateway = $sm->get('MenuTableGateway');
                     $table = new MenuTable($tableGateway);

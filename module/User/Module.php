@@ -28,6 +28,10 @@ use User\Model\Resume;
 use User\Model\ResumeTable;
 use User\Model\Skills;
 use User\Model\SkillsTable;
+use User\Model\Education;
+use User\Model\EducationTable;
+use User\Model\Workhistory;
+use User\Model\WorkhistoryTable;
 use User\Model\Jobapplication;
 use User\Model\JobapplicationTable;
 
@@ -157,6 +161,28 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Skills());
                     return new TableGateway('user_jobseeker_skill', $dbAdapter, null, $resultSetPrototype);
+                },
+                'User\Model\EducationTable' =>  function($sm) {
+                    $tableGateway = $sm->get('EducationTableGateway');
+                    $table = new EducationTable($tableGateway);
+                    return $table;
+                },
+                'EducationTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Education());
+                    return new TableGateway('user_jobseeker_education', $dbAdapter, null, $resultSetPrototype);
+                },
+                'User\Model\WorkhistoryTable' =>  function($sm) {
+                    $tableGateway = $sm->get('WorkhistoryTableGateway');
+                    $table = new WorkhistoryTable($tableGateway);
+                    return $table;
+                },
+                'WorkhistoryTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Workhistory());
+                    return new TableGateway('user_jobseeker_workhistory', $dbAdapter, null, $resultSetPrototype);
                 },
                 'User\Model\JobapplicationTable' =>  function($sm) {
                     $tableGateway = $sm->get('JobapplicationTableGateway');
