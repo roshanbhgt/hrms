@@ -26,6 +26,7 @@ class JobseekerController extends AbstractActionController
     protected $educationTable;
     protected $workhistoryTable;
     protected $countryTable;
+    protected $jobapplicationTable;
 
     public function getAuthService()
     {
@@ -113,6 +114,15 @@ class JobseekerController extends AbstractActionController
             $this->workhistoryTable = $sm->get('User\Model\WorkhistoryTable');
         }
         return $this->workhistoryTable;
+    }
+    
+    public function getJobApplicationTable()
+    {
+        if (!$this->jobapplicationTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobapplicationTable = $sm->get('Job\Model\JobApplicationTable');
+        }
+        return $this->jobapplicationTable;
     }
 
     public function indexAction()
@@ -376,5 +386,26 @@ class JobseekerController extends AbstractActionController
         if (! $this->getAuthService()->hasIdentity()){
             return $this->redirect()->toRoute('login');
         }
+        
+         $id = (int) $this->params()->fromRoute('id', 0);
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'jobapplication' => $this->getJobApplicationTable()->fetchAllByUser($id)
+        ));
+    }
+    
+    public function deleteapplicationAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+         $id = (int) $this->params()->fromRoute('id', 0);
+        
+        $this->getJobApplicationTable()->deleteJobApplication($id);
+            
+        return $this->redirect()->toRoute('jobseeker', array('action'=>'jobapplication'));
+        
     }
 }

@@ -15,6 +15,7 @@ use Zend\View\Model\ViewModel;
 class IndexController extends AbstractActionController
 {
     protected $jobTable;
+    protected $jobapplicationTable;
 
     public function getJobTable()
     {
@@ -24,11 +25,27 @@ class IndexController extends AbstractActionController
         }
         return $this->jobTable;
     }
+    
+    public function getJobApplicationTable()
+    {
+        if (!$this->jobapplicationTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobapplicationTable = $sm->get('Job\Model\JobApplicationTable');
+        }
+        return $this->jobapplicationTable;
+    }
 
     public function indexAction()
-    {
+    { 
+        // grab the paginator from the AlbumTable
+        $paginator = $this->getJobTable()->fetchAll(true);
+        // set the current page to what has been passed in query string, or to 1 if none set
+        $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+        // set the number of items per page to 10
+        $paginator->setItemCountPerPage(10);
+
         return new ViewModel(array(
-            'jobs' => $this->getJobTable()->fetchAll(),
+            'paginator' => $paginator
         ));
     }
     
@@ -38,5 +55,18 @@ class IndexController extends AbstractActionController
         return new ViewModel(array(
             'job' => $this->getJobTable()->getJob($id),
         ));
+    }
+    
+    public function applyAction()
+    {
+        $request = $this->getRequest();
+
+        if($request->getPost()){
+            if($this->getJobApplicationTable()->saveJobApplication($request->getPost())){
+                $this->flashmessenger()->addMessage('You have successfully applied for this job.');
+            }
+        }
+        
+        return $this->redirect()->toRoute('job');
     }
 }

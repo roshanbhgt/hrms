@@ -371,3 +371,40 @@ em {
     color: #c52d2f;
     font-weight: 400;
 }
+
+.panel-default > .panel-heading, .panel-info > .panel-heading {
+    background: #F5F5F5;
+    border-color: #F5F5F5;
+    color: #c52d2f;
+    transition: color 300ms ease 0s, background-color 300ms ease 0s;
+}
+
+.panel-title {
+    color: #c52d2f;
+    transition: color 300ms ease 0s, background-color 300ms ease 0s;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+ul.pagination > li > a, ul.pagination > li.disabled > a  {
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 5px;
+    padding: 5px 14px;
+    
+}
+
+.pagination-lg > li > a, .pagination-lg > li > span {
+    font-size: 18px;
+    padding: 10px 16px;
+}
+
+ul.pagination > li.active > a, ul.pagination > li:hover > a, 
+ul.pagination > li.disabled:hover > a {
+    background-color: #c52d2f !important;
+    border-color: #c52d2f !important;
+    color: #fff;
+}

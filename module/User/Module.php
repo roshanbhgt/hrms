@@ -32,8 +32,6 @@ use User\Model\Education;
 use User\Model\EducationTable;
 use User\Model\Workhistory;
 use User\Model\WorkhistoryTable;
-use User\Model\Jobapplication;
-use User\Model\JobapplicationTable;
 
 class Module
 {
@@ -184,17 +182,7 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new Workhistory());
                     return new TableGateway('user_jobseeker_workhistory', $dbAdapter, null, $resultSetPrototype);
                 },
-                'User\Model\JobapplicationTable' =>  function($sm) {
-                    $tableGateway = $sm->get('JobapplicationTableGateway');
-                    $table = new JobapplicationTable($tableGateway);
-                    return $table;
-                },
-                'JobapplicationTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Jobapplication());
-                    return new TableGateway('user_jobseeker_jobapplication', $dbAdapter, null, $resultSetPrototype);
-                },
+                
             ),
         );
     }

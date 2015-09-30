@@ -1,12 +1,36 @@
 <div class="row">
     <div class="col-md-12">
         <div class="page-header"><h1>Recent Jobs</h1></div>
-        <?php foreach ($jobs as $val) : ?>
-        <div class="page-title"><h2><?php echo $val->title; ?></h2></div>
-            <div class="page-body">
-                <?php echo $val->description; ?> ...<a class="btn-more" href="<?php echo $this->serverUrl($this->url('job', array('action'=>'view', 'id'=>$val->id))); ?>"> Read more </a>
+        <?php foreach ($this->paginator as $val) : ?>
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><?php echo $val->title; ?></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p><strong>Position</strong> : <?php echo ucwords($val->position); ?></p>
+                        <p><strong>Type</strong> : <?php echo ucwords($val->type); ?></p>
+                        <p><strong>Salary</strong> : <?php echo $val->salary; ?></p>
+                        <p><strong>Skills</strong> : <?php echo $val->skills; ?></p>
+                        <p><strong>Description</strong> : <?php echo substr($val->description, 0, 300); ?></p> ... <a class="btn-more pull-right" href="<?php echo $this->serverUrl($this->url('job', array('action'=>'view', 'id'=>$val->id))); ?>"> Read more <i class="fa fa-angle-right"></i> </a>
+                    </div>
+                </div>
             </div>
         <?php endforeach; ?>
     </div>
 </div>
-<p>&nbsp;</p>
+<?php
+    // add at the end of the file after the table
+    echo $this->paginationControl(
+        // the paginator object
+        $this->paginator,
+        // the scrolling style
+        'sliding',
+        // the partial to use to render the control
+        'partial/paginator.phtml',
+        // the route to link to when a user clicks a control link
+        array(
+            'route' => 'job'
+        )
+    );
+ ?>
