@@ -32,6 +32,8 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'selectLayoutBasedOnRoute'));
+        
         $this->bootstrapSession($e);
     }
 
@@ -181,5 +183,29 @@ class Module
         }
     }
     
+    /**
+     * Select the admin layout based on route name
+     *
+     * @param  MvcEvent $e
+     * @return void
+     */
+    public function selectLayoutBasedOnRoute(MvcEvent $e)
+    {
+        $config = $e->getApplication()->getServiceManager()->get('config');
+        $route = $e->getRouteMatch();
+        $controller = $e->getTarget();
+        $action = strtolower($route->getParam('action'));
+        
+        if( $route->getParam('controller') == 'User\Controller\Employer' 
+                && $route->getParam('action') == 'view' ){
+            return ;
+        }
+        
+        // Use the layout assigned to the action
+        if($route->getParam('action') != '')
+        {
+            $controller->layout($route->getParam('layout'));
+        }
+    }
     
 }

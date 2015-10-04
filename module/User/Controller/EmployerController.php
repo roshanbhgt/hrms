@@ -110,6 +110,22 @@ class EmployerController extends AbstractActionController
         ));
     }
     
+    public function viewAction()
+    {
+        // Get the layout view model and set an alternate template
+        $layout = $this->layout();
+        $layout->setTemplate('layout/one-column');
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $company = $this->getCompanyTable()->getCompanyDetails($id);
+        
+        $view = new ViewModel(array(
+            'company' => $company,
+        ));
+        
+        return $view; 
+    }
+    
     public function updateAction()
     {
         if (!$this->getAuthService()->hasIdentity()){

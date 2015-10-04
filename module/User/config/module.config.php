@@ -234,6 +234,7 @@ return array(
             'user/index/index' => __DIR__ . '/../view/template/index/index.phtml',
             'user/index/login' => __DIR__ . '/../view/template/index/login.phtml',
             'user/employer/index' => __DIR__ . '/../view/template/employer/dashboard.phtml',
+            'user/employer/view' => __DIR__ . '/../view/template/employer/view.phtml',
             'user/jobseeker/index' => __DIR__ . '/../view/template/jobseeker/dashboard.phtml',
             'user/index/forgetpass' => __DIR__ . '/../view/template/index/forgetpass.phtml',
             'user/index/registercompany' => __DIR__ . '/../view/template/index/companyregister.phtml',

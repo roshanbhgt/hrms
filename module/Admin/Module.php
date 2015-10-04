@@ -43,6 +43,16 @@ Feature\ConfigProviderInterface,
 Feature\ServiceProviderInterface,
 Feature\BootstrapListenerInterface
 {
+    
+    /**
+     * @{inheritdoc}
+     */
+    public function onBootstrap(EventInterface $e)
+    {
+        $app = $e->getParam('application');
+        $em  = $app->getEventManager();
+    }
+    
     /**
      * @{inheritdoc}
      */
@@ -163,35 +173,6 @@ Feature\BootstrapListenerInterface
             ),
         );
     }
-    /**
-     * @{inheritdoc}
-     */
-    public function onBootstrap(EventInterface $e)
-    {
-        $app = $e->getParam('application');
-        $em  = $app->getEventManager();
-        $em->attach(MvcEvent::EVENT_DISPATCH, array($this, 'selectLayoutBasedOnRoute'));
-    }
-    /**
-     * Select the admin layout based on route name
-     *
-     * @param  MvcEvent $e
-     * @return void
-     */
-    public function selectLayoutBasedOnRoute(MvcEvent $e)
-    {
-        $config = $e->getApplication()->getServiceManager()->get('config');
-        $route = $e->getRouteMatch();
-        $controller = $e->getTarget();
-        $action = strtolower($route->getParam('action'));
-
-        // Use the layout assigned to the action
-        if($route->getParam('action') != '')
-        {
-            $controller->layout($route->getParam('layout'));
-        }
-    }
-    
     
 }
 

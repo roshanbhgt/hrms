@@ -379,7 +379,6 @@ class JobseekerController extends AbstractActionController
             'workhistory' => $this->getWorkhistoryTable()->fetchAll($id)
         ));
     }
-    
                 
     public function jobapplicationAction()
     {
@@ -387,7 +386,7 @@ class JobseekerController extends AbstractActionController
             return $this->redirect()->toRoute('login');
         }
         
-         $id = (int) $this->params()->fromRoute('id', 0);
+        $id = (int) $this->params()->fromRoute('id', 0);
         
         return new ViewModel(array(
             'id' => $id,
@@ -401,11 +400,10 @@ class JobseekerController extends AbstractActionController
             return $this->redirect()->toRoute('login');
         }
         
-         $id = (int) $this->params()->fromRoute('id', 0);
+        $id = (int) $this->params()->fromRoute('id', 0);
         
         $this->getJobApplicationTable()->deleteJobApplication($id);
             
         return $this->redirect()->toRoute('jobseeker', array('action'=>'jobapplication'));
-        
     }
 }

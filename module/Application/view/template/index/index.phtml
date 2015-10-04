@@ -18,9 +18,10 @@
 </style>
 <script type="text/javascript">
     $(document).ready( function() {
+        // Image slider  
         $('#myCarousel').carousel({
             interval:   3000
-
+        });
         var clickEvent = false;
         $('#myCarousel').on('click', '.nav a', function() {
             clickEvent = true;
@@ -39,6 +40,26 @@
             clickEvent = false;
         });
     });
+    
+    // Brand slider
+    $(document).ready(function() {
+        $('#carousel-brand').carousel('cycle')
+    });
+    
+    // Job listing slider
+    $(document).ready(function () {
+        $('#job-list').carousel('cycle');
+        
+        $('.btn-vertical-slider').on('click', function () {
+            if ($(this).attr('data-slide') == 'next') {
+                $('#job-list').carousel('next');
+            }
+            if ($(this).attr('data-slide') == 'prev') {
+                $('#job-list').carousel('prev')
+            }
+        });
+    });
+    
 </script>
 <!-- Start Carousel -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -70,37 +91,170 @@
 </div>
 <!-- End Carousel -->
 <div class="row">
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Recruitment Solutions') ?></h3>
+    <div class="col-md-8">
+        <h2>Goyal HR</h2>
+        <h4>OFFERING A FULL RANGE OF EMPLOYMENT &amp; HR BUSINESS CONSULTING SERVICES</h4>
+        <blockquote>
+            At Goyal HR, we offer a broad and specialized range of human resources solutions to help organizations of all types and sizes <i>attract</i>, <i>engage</i> and <i>develop</i> top talent to not only meet their challenges but to transcend them. 
+        </blockquote>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?php echo $this->translate('Employer Solutions') ?></h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        We offer our clients customized solutions for their human resources needs. 
+                    </p>
+                    <p>
+                        Our main client service areas are <span style="color:#c52d2f;">Talent Acquisition</span> (e.g., recruitment and selection, project-based recruitment, mass recruitment, temporary staffing, etc.), and <span style="color:#c52d2f;">HR Outsourcing Matters</span> (e.g. Payroll Processing, Compliance Management etc). 
+                    </p>
+                    <p>
+                        Additionally, Goyal HR’s staffing and HR management solutions are tailored specifically to our clients' needs, providing them with increased workforce flexibility, productivity and profitability. 
+                    </p>
+                </div>
             </div>
-            <div class="panel-body">
-                <p><?php echo $this->translate('Site is under active development. If you are interested in following the development, there is a special portal on the official website which provides links, and much more. This is a great resource for staying up to date with the latest developments!') ?></p>
-                <p><a class="btn btn-success pull-right" href="#" target="_blank"><?php echo $this->translate('Development Portal') ?> &raquo;</a></p>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?php echo $this->translate('Jobseeker Solutions') ?></h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        When selecting an HR partner during your career search, choose Goyal HR. 
+                    </p>
+                    <p>
+                        Goyal HR offers a unique combination of experience, methodology, and professional commitment that makes us the easy choice as your HR partner in meeting your career goals. 
+                    </p>
+                    <p>
+                        Learn more about our services by and there's never a fee to job seekers for our employment services.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Staffing Solutions') ?></h3>
+                <h3 class="panel-title">Recent Job Post</h3>
             </div>
             <div class="panel-body">
-                <p><?php echo $this->translate('The community is working on developing a community site to serve as a repository and gallery for modules. The site is currently live and currently contains a list of some of the modules already available.') ?></p>
-                <p><a class="btn btn-success pull-right" href="#" target="_blank"><?php echo $this->translate('Explore Modules') ?> &raquo;</a></p>
+                <div id="job-list" class="vertical-slider carousel vertical slide col-md-12" data-ride="carousel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div data-slide="next" class="btn-vertical-slider"
+                                style="font-size: 30px; text-align: center"> 
+                                <i class="fa fa-arrow-circle-up"></i>
+                            </div>  
+                        </div>
+                        <div class="col-md-12"> 
+                        </div>
+                    </div>
+                    <br />
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a href="http://dotstrap.com/"> <img src="http://placehold.it/75x75" class="thumbnail"
+                                        alt="Image" /></a>
+                                </div>
+                                <div class="col-xs-7 col-sm-7 col-md-7">
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                                    euismod tincidunt ut laoreet..
+                                </div>
+                            </div>
+                            <!--/row-fluid-->
+                        </div>
+                        <!--/item-->
+                        <div class="item ">
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a href="http://dotstrap.com/"> <img src="http://placehold.it/75x75" class="thumbnail"
+                                        alt="Image" /></a>
+                                </div>
+                                <div class="col-xs-7 col-sm-7 col-md-7">
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                                    euismod tincidunt ut laoreet..
+                                </div>
+                            </div>
+                            <!--/row-fluid-->
+                        </div>
+                        <!--/item-->
+                        <div class="item ">
+                            <div class="row">
+                              <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a href="http://dotstrap.com/"> <img src="http://placehold.it/75x75" class="thumbnail"
+                                        alt="Image" /></a>
+                                </div>
+                                <div class="col-xs-7 col-sm-7 col-md-7">
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                                    euismod tincidunt ut laoreet..
+                                </div>
+                            </div>
+                            <!--/row-fluid-->
+                        </div>
+                        <!--/item-->
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div data-slide="prev" class="btn-vertical-slider" style="color: Black; font-size: 30px; text-align: center">
+                                <i class="fa fa-arrow-circle-down"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Outsourcing Solution') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('If you need any help or support while developing with, you may reach us via mail roshanbhgt@gmail.com. We\'d love to hear any questions or feedback you may have regarding the beta releases. Alternatively, you may subscribe and post questions to the mail id roshanbhgt@gmail.com.')) ?></p>
-                <p><a class="btn btn-success pull-right" href="#" target="_blank"><?php echo $this->translate('Mail Me') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="carousel-brand" class="carousel slide carousel-brand">
+                 
+                    <ol class="carousel-indicators">
+                        <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#Carousel" data-slide-to="1"></li>
+                    </ol>
+
+                    <!-- Carousel items -->
+                <div class="carousel-inner">
+
+                    <div class="item active">
+                            <div class="row">
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                            </div><!--.row-->
+                    </div><!--.item-->
+                    <div class="item">
+                            <div class="row">
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                                <div class="col-md-2"><a href="#" class="thumbnail"><img src="http://placehold.it/140x140" alt="Image" style="max-width:100%;"></a></div>
+                            </div><!--.row-->
+                    </div><!--.item-->
+
+                    </div><!--.carousel-inner-->
+                        <a data-slide="prev" href="#carousel-brand" class="left carousel-control">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                        <a data-slide="next" href="#carousel-brand" class="right carousel-control">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                    </div><!--.Carousel-->
+                 
+		</div>
+	</div>
+    </div><!--.container-->
 </div>

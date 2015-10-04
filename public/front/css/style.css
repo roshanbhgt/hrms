@@ -257,42 +257,6 @@ ul.social-share li a:hover {
     border-top: 5px solid #c52d2f;
 }
 
-.navbar-inverse .navbar-brand {
-    color: #fff;
-    font-size: 36px;
-    line-height: 50px;
-}
-
-.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-top: 0 none;
-    padding-bottom: 0;
-}
-
-.navbar-nav {
-    margin-top: 4px;
-}
-
-.navbar-nav > li {
-    margin-left: 15px;
-    padding-bottom: 10px;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-     border-radius: 3px;
-    color: #fff;
-    display: inline-block;
-    line-height: 24px;
-    margin: 10px 0;
-    padding: 5px 12px;
-}
-
-.navbar-inverse .navbar-nav > .active > a {
-    background-image: linear-gradient(to bottom, #c52d2f 0px, #c52d2f 100%);
-    background-repeat: repeat-x;
-    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.25) inset;
-    color: #fff;
-}
-
 .btn-more, .btn-more:hover {
     background: #c52d2f none repeat scroll 0 0;
     border-radius: 4px;
@@ -360,13 +324,6 @@ ul.social-share li a:hover {
     position: relative;
 }
 
-.navbar-collapse.collapse {
-    display: block !important;
-    height: auto !important;
-    overflow: visible !important;
-    padding: 0;
-}
-
 em {
     color: #c52d2f;
     font-weight: 400;
@@ -407,4 +364,124 @@ ul.pagination > li.disabled:hover > a {
     background-color: #c52d2f !important;
     border-color: #c52d2f !important;
     color: #fff;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    font-size: 36px;
+    line-height: 50px;
+}
+
+.navbar-nav {
+    margin-top: 4px;
+}
+
+.navbar-nav > li {
+    margin-left: 15px;
+    padding-bottom: 10px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    line-height: 24px;
+    margin: 10px 0;
+    padding: 5px 12px;
+}
+
+.navbar-inverse .navbar-nav > .active > a {
+    background-image: linear-gradient(to bottom, #c52d2f 0px, #c52d2f 100%);
+    background-repeat: repeat-x;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.25) inset;
+    color: #fff;
+}
+
+/* Brand listing horizontal slide bar */
+.carousel-brand {
+    margin-bottom: 0;
+    padding: 0 40px 30px 40px;
+}
+/* The controlsy */
+.carousel-control {
+    left: -12px;
+    height: 40px;
+    width: 40px;
+    background: none repeat scroll 0 0 #222222;
+    border: 4px solid #FFFFFF;
+    border-radius: 23px 23px 23px 23px;
+    margin-top: 60px;
+    padding: 5px;
+}
+.carousel-control.right {
+	right: -12px;
+}
+/* The indicators */
+.carousel-indicators {
+	right: 50%;
+	top: auto;
+	bottom: -10px;
+	margin-right: -19px;
+}
+/* The colour of the indicators */
+.carousel-indicators li {
+	background: #cecece;
+}
+.carousel-indicators .active {
+background: #428bca;
+}
+
+/* Job listing vertical slide bar */
+.btn-vertical-slider{ 
+    margin-left:35px; 
+    cursor:pointer; 
+    text-align: center; 
+}
+.carousel.vertical .carousel-inner .item {
+  -webkit-transition: 0.6s ease-in-out top;
+     -moz-transition: 0.6s ease-in-out top;
+      -ms-transition: 0.6s ease-in-out top;
+       -o-transition: 0.6s ease-in-out top;
+          transition: 0.6s ease-in-out top;
+}
+
+ .carousel.vertical .active {
+  top: 0;
+}
+
+ .carousel.vertical .next {
+  top: 100%;
+}
+
+ .carousel.vertical .prev {
+  top: -100%;
+}
+
+ .carousel.vertical .next.left,
+.carousel.vertical .prev.right {
+  top: 0;
+}
+
+ .carousel.vertical .active.left {
+  top: -100%;
+}
+
+ .carousel.vertical .active.right {
+  top: 100%;
+}
+
+.contact-info i {
+    background: #000 none repeat scroll 0 0;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 40px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    width: 60px;
+}
+
+.contact-info h2 {
+    color: #000;
+    margin-top: 0;
 }

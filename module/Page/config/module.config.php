@@ -28,7 +28,7 @@ return array(
                             'defaults' => array(
                                 'controller' => 'Page\Controller\Index',
                                 'action'     => 'index',
-                                'url'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'url'        => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                         ),
                     ),
