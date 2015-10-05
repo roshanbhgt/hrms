@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-9">
+        <h1 class="page-title">Edit account information</h1>
+        <div class="page-body">
+            <form class="form-horizontal" role="form" method="post" action="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'changepass'))); ?>">
+                <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                <div class="form-group">
+                    <label for="firstname" class="col-md-4 control-label">First Name</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="firstname" placeholder="First Name" value="<?php echo $user->firstname ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="col-md-4 control-label">Last Name</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="lastname" placeholder="Last Name" value="<?php echo $user->lastname ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-md-4 control-label">Email</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="email" placeholder="Email Address" value="<?php echo $user->email ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="state" class="col-md-4 control-label">Current State</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="state" placeholder="State" value="<?php echo $user->state ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="col-md-4 control-label">Current Country</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="country" placeholder="Country" value="<?php echo $user->country ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-md-4 control-label">New Password</label>
+                    <div class="col-md-6">
+                        <input type="password" class="form-control" name="password" value="" placeholder="New Password" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confpassword" class="col-md-4 control-label">Confirm Password</label>
+                    <div class="col-md-6">
+                        <input type="password" class="form-control" name="confpassword" value="" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-6">
+                        <button id="btn-signup" type="submit" class="btn btn-primary">
+                            <i class="icon-hand-right"></i>Update
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

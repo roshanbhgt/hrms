@@ -1,0 +1,206 @@
+<?php 
+$industry = array(
+    "Accessories/Apparel/Fashion Design", "Accounting/Consulting/Taxation", "Advertising/Event Management/PR", "Agriculture/Dairy Technology", "Airlines/Hotel/Hospitality/Travel/Tourism/Restaurants", "Animation / Gaming", "Architectural Services/ Interior Designing", "Auto Ancillary/Automobiles/Components", "Banking/Financial Services/Stockbroking/Securities", "Banking/FinancialServices/Broking", "Biotechnology/Pharmaceutical/Clinical Research", "Brewery/Distillery", "Cement/Construction/Engineering/Metals/Steel/Iron", "Ceramics/Sanitaryware", "Chemicals/Petro Chemicals/Plastics", "Computer Hardware/Networking", "Consumer FMCG/Foods/Beverages", "Consumer Goods - Durables", "Courier/Freight/Transportation/Warehousing", "CRM/ IT Enabled Services/BPO", "Education/Training/Teaching", "Electricals/Switchgears", "Employment Firms/Recruitment Services Firms", "Entertainment/Media/Publishing/Dotcom", "Export Houses/Textiles/Merchandise", "Facility Management", "Fertilizers/Pesticides", "FoodProcessing", "Gems and Jewellery", "Glass", "Government/Defence", "Healthcare/Medicine", "HeatVentilation/AirConditioning", "Insurance", "KPO/Research/Analytics", "Law/Legal Firms", "Machinery/Equipment Manufacturing/Industrial Products", "Mining", "NGO/Social Services", "Office Automation", "Others/Engg. Services/Service Providers", "Petroleum/Oil and Gas/Projects/Infrastructure/Power/Non-conventional Energy", "Printing/Packaging", "Publishing", "Real Estate", "Retailing", "Security/Law Enforcement", "Shipping/Marine", "Software Services", "Steel", "Strategy/Management Consulting Firms", "Telecom Equipment/Electronics/Electronic Devices/RF/Mobile Network/Semi-conductor", "Telecom/ISP", "Tyres", "Water Treatment/Waste Management", "Wellness/Fitness/Sports"
+        );
+?>
+<div class="row">
+    <div class="panel-heading">
+        <div class="panel-title">Editing <b><?php echo $company->companyname; ?></b></div>
+    </div>
+    <div class="panel-body">
+        <form id="signupform" class="form-horizontal" role="form"
+              action="<?php echo $this->serverUrl($this->url('employer', array('action'=>'update'))); ?>" method="post">
+            <input type="hidden" name="id" value="<?php echo $company->id; ?>" />            
+            <input type="hidden" name="userid" value="<?php echo $company->userid; ?>" />            
+            <div class="form-group">
+                <label for="conf-password" class="col-md-3 control-label">Company Name</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="companyname" placeholder="Company Name" value="<?php echo $company->companyname; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="conf-password" class="col-md-3 control-label">Description</label>
+                <div class="col-md-6">
+                    <textarea name="description" class="form-control" placeholder="Description"><?php echo $company->description; ?></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="url" class="col-md-3 control-label">Company Web Site</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="url" placeholder="Url" value="<?php echo $company->url; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="companytype" class="col-md-3 control-label">Company Type</label>
+
+                <div class="col-md-6">
+                    <div class="radio">
+                        <label><input type="radio" name="companytype" value="company" <?php if(strtolower($company->companytype) == 'company'){ ?> checked="true" <?php } ?> >Company</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="companytype" value="consultant" <?php if(strtolower($company->companytype) == 'consultant'){ ?> checked="true" <?php } ?> >Consultant</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="industrytpe" class="col-md-3 control-label">Industry Type</label>
+                
+                <div class="col-md-6">
+                    <select name="industrytype" class="form-control">
+                        <option value="-1" selected="selected">- Select an Industry -</option>
+                        <?php 
+                            $i = 1; 
+                            foreach($industry as $val) { 
+                        ?>
+                        <option value="<?php echo $i; ?>" <?php if($company->industrytype == $i){ ?> selected="selected" <?php } ?>><?php echo $val; ?></option>
+                        <?php
+                                $i++;
+                            } 
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address1" class="col-md-3 control-label">Address Line 1</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="address1" placeholder="Address Line 1" value="<?php echo $company->address1 ; ?>" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address2" class="col-md-3 control-label">Address Line 2</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="address2" placeholder="Address Line 2" value="<?php echo $company->address2 ; ?>">
+                </div>
+            </div><div class="form-group">
+                <label for="address3" class="col-md-3 control-label">Address Line 3</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="address3" placeholder="Address Line 3" value="<?php echo $company->address3 ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="country" class="col-md-3 control-label">Country</label>
+
+                <div class="col-md-6">
+                    <select id="country" class="form-control" onchange="getregion(this) " name="country">
+                        <option selected="" value="-1">---- Select country ----</option>
+                        <?php foreach($countrys as $val){ ?>
+                        <option value="<?php echo $val->iso; ?>" <?php if($company->country == $val->iso){ ?> selected="selected" <?php } ?> ><?php echo $val->nicename; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="state" class="col-md-3 control-label">State</label>
+                <div class="col-md-6">
+                    <select id="statedrop" class="form-control" name="state">
+                        <option value="">---- Select state ----</option>
+                    </select>
+                    <input id="statetext" type="text" class="form-control" name="statetext" placeholder="State" value=""
+                           style="display:none;" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="city" class="col-md-3 control-label">City</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="city" placeholder="City" value="<?php echo $company->city ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="postcode" class="col-md-3 control-label">Postcode</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="postcode" placeholder="Postcode" value="<?php echo $company->postcode ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="telephone" class="col-md-3 control-label">Contact Number</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="contactnumber" placeholder="Telephone" value="<?php echo $company->contactnumber ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fax" class="col-md-3 control-label">Fax</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="fax" placeholder="Fax" value="<?php echo $company->fax ; ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">&nbsp;</label>
+                <div class="col-md-6 checkbox">
+                    <input id="login-remember" type="checkbox" name="remember" value="1"> I agree to <a href="javascript:void(0);" target="_blank">Terms & Conditions</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <!-- Button -->
+                <div class="col-md-offset-3 col-md-9">
+                    <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>
+                        Update
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function() {
+        var obj = document.getElementById('country');
+        getregion(obj);
+    };
+    function getregion(obj){
+	jQuery.ajax({
+		url: '/ajax/region',
+		type: 'POST',
+		dataType: 'JSON',
+		data: {'country': jQuery('#country').val()},
+		success: function(data, status){
+                    $('#statedrop').find('option').remove().end().append('<option value="">---- Select state ----</option>').val(' ');
+                    if(data.status == 'error'){
+                        // Perform any operation on error
+                        $('#statetext').css("display","block");
+                        $('#statedrop').css("display","none");
+                        $('#statetext').val('<?php echo $company->state ?>');
+                    }else{
+                        $('#statetext').css("display","none");
+                        $('#statedrop').css("display","block");
+                        // Perform any operation on success);
+                        var region = JSON.parse(JSON.stringify(data.region));
+                        for(i = 0; i < data.region.length; i++){
+                            $('#statedrop').append($('<option>', { 
+                                value: region[i].code,
+                                text : region[i].title
+                            }));
+                        }
+                        $("#statedrop").children().filter(function() {
+                            return $(this).val() == '<?php echo $company->state ?>';
+                          }).prop('selected', true);
+                    }
+		},
+		error : function(xhr, textStatus, errorThrown) {
+                    if (xhr.status === 0) {
+                        alert('Not connect.\n Verify Network.');
+                    } else if (xhr.status == 404) {
+                        alert('Requested page not found. [404]');
+                    } else if (xhr.status == 500) {
+                        alert('Server Error [500].');
+                    } else if (errorThrown === 'parsererror') {
+                        alert('Requested JSON parse failed.');
+                    } else if (errorThrown === 'timeout') {
+                        alert('Time out error.');
+                    } else if (errorThrown === 'abort') {
+                        alert('Ajax request aborted.');
+                    } else {
+                        alert('There was some error. Try again.');
+                    }
+		},
+		complete: function(){
+                    // Perform any operation need on success/error
+		}
+	});
+    }
+</script>

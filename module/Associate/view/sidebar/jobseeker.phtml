@@ -1,0 +1,79 @@
+<?php 
+    use Zend\Session\Container;
+    
+    // Store data in session
+    $user = new Container('user');
+?>
+<div class="profile-sidebar">
+<!-- SIDEBAR USERPIC -->
+<div class="profile-userpic">
+    <img src="<?php echo $this->serverUrl($user->picture); ?>" class="img-responsive" alt="" />
+</div>
+<!-- END SIDEBAR USERPIC -->
+<!-- SIDEBAR USER TITLE -->
+<div class="profile-usertitle">
+    <div class="profile-usertitle-name">
+        <?php echo $user->username; ?>
+    </div>
+    <div class="profile-usertitle-location">
+       - <i class="glyphicon glyphicon-map-marker"></i> <?php echo $user->location; ?>
+    </div>
+</div>
+<!-- END SIDEBAR USER TITLE -->
+<!-- SIDEBAR MENU -->
+<div class="profile-usermenu">
+    <ul class="nav">
+        <li class="active">
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker')); ?>">
+            <i class="glyphicon glyphicon-home"></i>
+            Overview </a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'changepic', 'id' => $user->id))); ?>">
+            <i class="glyphicon glyphicon-picture"></i>
+            Update Picture</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'changepass', 'id' => $user->id))); ?>">
+            <i class="glyphicon glyphicon-lock"></i>
+            Account Information</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'edit', 'id' => $user->id))); ?>">
+            <i class="glyphicon glyphicon-user"></i>
+            Contact Information</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'education', 'id' => $user->id))); ?>">
+            <i class="glyphicon glyphicon-list"></i>
+            Manage Education</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'skills', 'id' => $user->id))); ?>">
+            <i class="glyphicon glyphicon-list"></i>
+            Manage Skills</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'workhistory', 'id' => $user->id))); ?>">
+            <i class="glyphicon glyphicon-list"></i>
+            Manage Work History</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'uploadresume', 'id' => $user->id))); ?>">
+            <i class="glyphicon glyphicon-upload"></i>
+            Upload Resume </a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'jobapplication', 'id' => $user->id))); ?>">
+            <i class="glyphicon glyphicon-list"></i>
+            Job Application </a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('logout')); ?>" >
+            <i class="glyphicon glyphicon-log-out"></i>
+            Logout </a>
+        </li>
+    </ul>
+</div>
+        <!-- END MENU -->
+</div>

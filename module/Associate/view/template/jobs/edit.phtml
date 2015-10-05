@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-md-9">
+        <h1 class="page-title">Edit <?php echo $job->title; ?></h1>
+        <div class="page-body">
+            <form id="signupform" class="form-horizontal" role="form"
+                  action="<?php echo $this->serverUrl($this->url('employer', array('action'=>'jobedit', 'id' => $job->id))); ?>" method="post">
+                <input type="hidden" name="id" value="<?php echo $job->id; ?>" />
+                <input type="hidden" name="userid" value="<?php echo $job->userid; ?>" />
+                <div class="form-group">
+                    <label for="firstname" class="col-md-3 control-label">Title</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="title" placeholder="Title" value="<?php echo $job->title; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="col-md-3 control-label">Type</label>
+
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="type" value="parttime" <?php if($job->type == 'parttime'){ ?> checked="true" <?php } ?> >Part Time</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="type" value="fulltime" <?php if($job->type == 'fulltime'){ ?> checked="true" <?php } ?> >Full Time</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="position" class="col-md-3 control-label">Position</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="position" placeholder="Position" value="<?php echo $job->position; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-md-3 control-label">Description</label>
+
+                    <div class="col-md-6">
+                        <textarea name="description" class="form-control" placeholder="Description"><?php echo $job->description; ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="roles" class="col-md-3 control-label">Roles & Responsibilities</label>
+
+                    <div class="col-md-6">
+                        <textarea name="roles" class="form-control" placeholder="Roles"><?php echo $job->roles; ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="skills" class="col-md-3 control-label">Skills Required</label>
+
+                    <div class="col-md-6">
+                        <textarea name="skills" class="form-control" placeholder="Skills"><?php echo $job->skills; ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vacancy" class="col-md-3 control-label">Vacancy</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="vacancy" placeholder="Vacancy" value="<?php echo $job->vacancy; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="salary" class="col-md-3 control-label">Salary</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="salary" placeholder="Salary" value="<?php echo $job->salary; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="col-md-3 control-label">Location</label>
+
+                    <div class="col-md-6">
+                        <select id="location" class="form-control" name="location">
+                            <option selected="" value="-1">---- Select country ----</option>
+                            <?php foreach($countrys as $val){ ?>
+                            <option value="<?php echo $val->iso; ?>" <?php if($job->location == $val->iso ){ ?> selected="selected" <?php } ?> ><?php echo $val->nicename; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="companytype" class="col-md-3 control-label">Status</label>
+
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="status" value="active" <?php if($job->status == 'active'){ ?> checked="true" <?php } ?> >Active</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="status" value="inactive" <?php if($job->status == 'inactive'){ ?> checked="true" <?php } ?>>In Active</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!-- Button -->
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>
+                            Update
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

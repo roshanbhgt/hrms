@@ -1,0 +1,79 @@
+<div class="row">
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-lg-12">
+        <div id="signupbox" class="mainbox col-lg-10">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">Register as Job seeker</div>
+                </div>
+                <div class="panel-body">
+                    <form id="signupform" class="form-horizontal" role="form" enctype="multipart/form-data"
+                          action="<?php echo $this->serverUrl($this->url('create')); ?>" method="post">
+                        <input type="hidden" name="type" value="jobseeker" />
+                        <div class="form-group">
+                            <label for="firstname" class="col-md-3 control-label">First Name</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname" class="col-md-3 control-label">Last Name</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-md-3 control-label">Email</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="email" placeholder="Email Address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-md-3 control-label">Password</label>
+
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="state" class="col-md-3 control-label">Current State</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="state" placeholder="State">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country" class="col-md-3 control-label">Current Country</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="country" placeholder="Country">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country" class="col-md-3 control-label">Upload your resume</label>
+
+                            <div class="col-md-6">
+                                <input type="file" name="resume" value="" />
+                            </div>
+                        </div>
+
+                        <?php // echo $captcha->getService()->getHtml();?>
+
+                        <div class="form-group">
+                            <!-- Button -->
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>
+                                    Submit 
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
