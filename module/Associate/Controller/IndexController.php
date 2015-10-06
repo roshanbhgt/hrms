@@ -134,9 +134,9 @@ class IndexController extends AbstractActionController
         }
         
         if($row->type == 'employer'){
-            return $this->redirect()->toRoute('associate', array('action' => 'index'));
+            return $this->redirect()->toRoute('employer', array('action' => 'index'));
         } elseif($row->type == 'employee') {
-            return $this->redirect()->toRoute('associate', array('action' => 'index'));
+            return $this->redirect()->toRoute('employee', array('action' => 'index'));
         }
         return $this->redirect()->toRoute($redirect);
     }
@@ -170,7 +170,7 @@ class IndexController extends AbstractActionController
         $this->getAuthService()->clearIdentity();
 
         $this->flashmessenger()->addMessage("You've been logged out");
-        return $this->redirect()->toRoute('login');
+        return $this->redirect()->toRoute('assciate', array('action' => 'index'));
     }
 
     public function createAction()
