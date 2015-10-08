@@ -70,6 +70,26 @@ class AssociateTable
         
         return $id;
     }
+    
+    public function updatePass($associate)
+    {
+        if($associate->password != ''){
+            $password = new Password();
+            $data = array(
+                'id' => (int)$associate->id,
+                'password' => $password->create($associate->password),
+            );
+            $id = (int)$associate->id;
+            if ($this->getAssociate($id))
+            {
+                $data['updatedat'] = date('Y-m-d h:m:s');
+                $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('Associate with id does not exist');
+            }
+        }
+        return ;
+    }
 
     public function deleteAssociate($id)
     {

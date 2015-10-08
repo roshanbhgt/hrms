@@ -24,6 +24,10 @@ use Associate\Model\Employer;
 use Associate\Model\EmployerTable;
 use Associate\Model\Employee;
 use Associate\Model\EmployeeTable;
+use Associate\Model\EmployeeAttendance;
+use Associate\Model\EmployeeAttendanceTable;
+use Associate\Model\EmployeePayslips;
+use Associate\Model\EmployeePayslipsTable;
 
 class Module
 {
@@ -31,6 +35,7 @@ class Module
     {
         $app = $e->getParam('application');
         $em  = $app->getEventManager();
+        $em->attach('dispatch', array($this, 'setLayout'));
     }
 
     public function getConfig()
@@ -101,8 +106,53 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new Employer());
                     return new TableGateway('associate_company', $dbAdapter, null, $resultSetPrototype);
                 },
+                'Associate\Model\EmployeeAttendanceTable' =>  function($sm) {
+                    $tableGateway = $sm->get('EmployeeAttendanceTableGateway');
+                    $table = new EmployeeAttendanceTable($tableGateway);
+                    return $table;
+                },
+                'EmployeeAttendanceTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new EmployeeAttendance());
+                    return new TableGateway('associate_user_attendance', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Associate\Model\EmployeePayslipsTable' =>  function($sm) {
+                    $tableGateway = $sm->get('EmployeePayslipsTableGateway');
+                    $table = new EmployeePayslipsTable($tableGateway);
+                    return $table;
+                },
+                'EmployeePayslipsTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new EmployeePayslips());
+                    return new TableGateway('associate_user_payslips', $dbAdapter, null, $resultSetPrototype);
+                },
             ),
         );
+    }
+    
+    
+    public function setLayout($e)
+    {
+        // IF only for this module 
+        $matches    = $e->getRouteMatch();
+        $controller = $matches->getParam('controller');
+        if (false === strpos($controller, __NAMESPACE__)) {
+                // not a controller from this module
+                return;
+        }
+        
+        // Set the layout template
+        $template = $e->getViewModel();
+        $sidebar = new ViewModel();
+        if($controller == 'Associate\Controller\Employee'){
+            $sidebar->setTemplate('associate/sidebar/employee');
+        }else{
+            $sidebar->setTemplate('associate/sidebar/employer');
+        }
+        
+        $template->addChild($sidebar, 'sidebar');
     }
     
 }

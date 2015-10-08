@@ -68,32 +68,30 @@ class EmployerTable
 
     public function updateEmployer($employer)
     {
-        $id = (int)$employer->id;
-        $password = new Password();
         
-        if ($id != 0 && $user->password == '') {
-            $data = array(
-                'assoc_id' => $employer->assoc_id,
-                'firstname' => $employer->firstname,
-                'lastname'  => $employer->lastname,
-                'email' => $employer->email,
-                'company' => $employer->company
-            );
-            if ($this->getEmployer($id)) {
-                return $this->tableGateway->update($data, array('id' => $id));
-            } else {
-                throw new \Exception('User with id does not exist');
-            }
-        } elseif ($id != 0 && $employer->password != '') {
-            $data = array(
-                'password' => $password->create($employer->password),
-            );
-            if ($this->getEmployer($id)) {
-                return $this->tableGateway->update($data, array('id' => $id));
-            } else {
-                throw new \Exception('User with id does not exist');
-            }
+        $id = (int)$employer->assoc_id;
+        
+        $data = array(
+            'assoc_id' => $employer->assoc_id,
+            'firstname' => $employer->firstname,
+            'lastname'  => $employer->lastname,
+            'email' => $employer->email,
+            'company' => $employer->company,
+            'address1' => $employer->address1,
+            'address2' => $employer->address2,
+            'city' => $employer->city,
+            'state' => $employer->state,
+            'country' => $employer->country,
+            'phone' => $employer->phone,
+            'fax' => $employer->fax,
+            'postcode' => $employer->postcode,
+        );
+        if ($this->getEmployerDetail($id)) {
+            return $this->tableGateway->update($data, array('assoc_id' => $id));
+        } else {
+            throw new \Exception('User with id does not exist');
         }
+        
     }
 
     public function deleteEmployer($id)
@@ -111,24 +109,17 @@ class EmployerTable
         return $row;
     }
     
-    public function updatePassword($data)
+    public function updateLogo($associate)
     {
-        $id = (int)$data->id;
-        $password = new Password();
-        
-        if ($id != 0 && $data->password != '') {
-            $data = array(
-                'firstname' => $data->firstname,
-                'lastname'  => $data->lastname,
-                'email' => $data->email,
-                'password' => $password->create($data->password),
-            );
-            
-            if ($this->getUser($id)) {
-                return $this->tableGateway->update($data, array('id' => $id));
-            } else {
-                throw new \Exception('User with id does not exist');
-            }
+        $id = (int)$associate['id'];
+        if ($this->getEmployerDetail($id))
+        {
+            $associate['updatedat'] = date('Y-m-d h:m:s');
+            $this->tableGateway->update($associate, array('assoc_id' => $id));
+        } else {
+            throw new \Exception('Associate with id does not exist');
         }
+        
+        return ;
     }
 }

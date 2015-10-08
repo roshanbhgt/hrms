@@ -496,3 +496,14 @@ background: #428bca;
     text-align: center;
     width: 20px;
 }
+
+.scrollup {
+    width:32px;
+    height:32px;
+    position:fixed;
+    bottom:100px;
+    right:25px;
+    display:none;
+    text-indent:-9999px;
+    background: url('../img/icon_top.png') no-repeat;
+}

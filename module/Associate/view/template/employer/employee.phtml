@@ -1,0 +1,65 @@
+
+<?php
+$title = 'Manage Employees';
+$this->headTitle($title);
+?>
+<div class="row">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <p>
+        <a href="<?php echo $this->serverUrl($this->url('company', array('action'=>'addemployee', 'id' => $id)));?>">Add employee</a>
+    </p>
+
+    <table class="table">
+        <tr style="background-color:#2a6496;color: #ffffff">
+            <th>Id</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+<!--            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Postcode</th>-->
+            <th>DOJ</th>
+            <th>Status</th>
+            <th width="200">Created At</th>
+            <th width="75">&nbsp;</th>
+        </tr>
+        <?php foreach ($employees as $val) : ?>
+            <tr style="background-color: <?php echo $this->cycle(array('#FFF', '#F0F0F0'))->next(); ?>">
+                <td><?php echo $this->escapeHtml($val->employee_id);?></td>
+                <td>
+                <?php 
+                    foreach($associate as $value){ 
+                        if($val->employee_id == $value->id){
+                            echo $this->escapeHtml($value->username);
+                        }
+                    } 
+                ?>
+                </td>
+                <td><?php echo $this->escapeHtml($val->firstname);?></td>
+                <td><?php echo $this->escapeHtml($val->lastname);?></td>
+                <td><?php echo $this->escapeHtml($val->email);?></td>
+                <td><?php echo $this->escapeHtml(ucfirst($val->gender));?></td>
+<!--                <td><?php // echo $this->escapeHtml($val->address1.$val->address2);?></td>
+                <td><?php // echo $this->escapeHtml($val->city);?></td>
+                <td><?php // echo $this->escapeHtml($val->state);?></td>
+                <td><?php // echo $this->escapeHtml($val->country);?></td>
+                <td><?php // echo $this->escapeHtml($val->postcode);?></td>-->
+                <td><?php echo $this->escapeHtml($val->doj);?></td>
+                <td><?php echo $this->escapeHtml(ucfirst($val->status));?></td>
+                <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
+                <td>
+                    <a href="<?php echo $this->serverUrl($this->url('company',
+                        array('action'=>'emplinfo', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-info-sign"></i></a> &nbsp;
+                    <a href="<?php echo $this->serverUrl($this->url('company',
+                        array('action'=>'empledit', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-edit"></i></a> &nbsp;
+                    <a href="<?php echo $this->serverUrl($this->url('company',
+                        array('action'=>'emplsal', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

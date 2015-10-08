@@ -21,7 +21,7 @@ return array(
                     ),
                 ),
             ),
-            'employer' => array(
+            'company' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/associate/employer/',
@@ -63,7 +63,7 @@ return array(
                     ),
                 ),
             ),
-            'employer' => array(
+            'company' => array(
                 'type'    => 'Segment',
                 'options' => array(
                     'route'    => '/associate/employer[/:action][/:id]',
@@ -142,11 +142,14 @@ return array(
             'associate/index/registerjobseeker' => __DIR__ . '/../view/template/index/jobseekerregister.phtml',
             'associate/index/forgetpass' => __DIR__ . '/../view/template/index/forgetpass.phtml',
             'associate/sidebar/employer' => __DIR__ . '/../view/sidebar/employer.phtml',
-            'associate/sidebar/jobseeker' => __DIR__ . '/../view/sidebar/jobseeker.phtml',
+            'associate/sidebar/employee' => __DIR__ . '/../view/sidebar/employee.phtml',
             'associate/employer/edit' => __DIR__ . '/../view/template/employer/edit.phtml',
             'associate/employee/edit' => __DIR__ . '/../view/template/employee/edit.phtml',
             'associate/employer/changepass' => __DIR__ . '/../view/template/employer/changepass.phtml',
             'associate/employee/changepass' => __DIR__ . '/../view/template/employee/changepass.phtml',
+            'associate/employer/changelogo' => __DIR__ . '/../view/template/employer/changelogo.phtml',
+            'associate/employer/employee' => __DIR__ . '/../view/template/employer/employee.phtml',
+            'associate/employer/addemployee' => __DIR__ . '/../view/template/employer/employeeadd.phtml',
            
         ),
         'template_path_stack' => array(

@@ -19,10 +19,16 @@ class EmployeeTable
         return $resultSet;
     }
 
-    public function getCompany($id)
+    public function fetchEmployeeAll($id)
+    {
+        $resultSet = $this->tableGateway->select(array('employer_id' => $id));
+        return $resultSet;
+    }
+    
+    public function getEmployee($id)
     {
         $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('userid' => $id));
+        $rowset = $this->tableGateway->select(array('employee_id' => $id));
         $row = $rowset->current();
         if (!$row) {
             return FALSE;
@@ -30,7 +36,7 @@ class EmployeeTable
         return $row;
     }
     
-    public function getCompanyDetails($id)
+    public function getEmployeeDetails($id)
     {
         $id  = (int) $id;
         $rowset = $this->tableGateway->select(array('id' => $id));
@@ -41,37 +47,37 @@ class EmployeeTable
         return $row;
     }
 
-    public function saveCompany($company)
+    public function saveEmployee($employee)
     {
         $data = array(
-            'userid'     => $company->userid,
-            'companyname' => $company->companyname,
-            'companytype'  => $company->companytype,
-            'industrytype' => $company->industrytype,
-            'address1'  => $company->address1,
+            'employer_id'     => $employee->employer_id,
+            'employee_id'     => $employee->employee_id,
+            'firstname' => $employee->firstname,
+            'lastname'  => $employee->lastname,
+            'gender' => $employee->gender,
+            'email' => $employee->email,
+            'level' => $employee->level,
+            'designation' => $employee->designation,
+            'dob' => $employee->dob,
+            'doj' => $employee->doj,
+            /* 'address1'  => $company->address1,
             'address2'  => $company->address2,
-            'address3'  => $company->address3,
             'state' => $company->state,
             'country' => $company->country,
             'city' => $company->city,
             'postcode' => $company->postcode,
-            'contactnumber' => $company->contactnumber,
+            'phone' => $company->contactnumber,
             'fax' => $company->fax,
-            'description' => $company->description,
-            'url' => $company->url,
-            'logo' => $company->logo,
+            'logo' => $company->logo,*/
+            'status' => $employee->status,
+            'createdat' => date('Y-m-d h:i:s'),
         );
         
-        $id = (int)$company->userid;
-        if (!$this->getCompany($id)) {
+        $id = (int)$employee->employer_id;
+        if (!$this->getEmployee($id)) {
             $this->tableGateway->insert($data);
         } else {
-            if ($this->getCompany($id))
-            {
-                $this->tableGateway->update($data, array('userid' => $id));
-            } else {
-                throw new \Exception('User with id does not exist');
-            }
+            throw new \Exception('User with id does not exist');
         }
     }
 

@@ -1,32 +1,22 @@
 <?php 
     use Zend\Session\Container;
-
-    $industry = array(
-    "Accessories/Apparel/Fashion Design", "Accounting/Consulting/Taxation", "Advertising/Event Management/PR", "Agriculture/Dairy Technology", "Airlines/Hotel/Hospitality/Travel/Tourism/Restaurants", "Animation / Gaming", "Architectural Services/ Interior Designing", "Auto Ancillary/Automobiles/Components", "Banking/Financial Services/Stockbroking/Securities", "Banking/FinancialServices/Broking", "Biotechnology/Pharmaceutical/Clinical Research", "Brewery/Distillery", "Cement/Construction/Engineering/Metals/Steel/Iron", "Ceramics/Sanitaryware", "Chemicals/Petro Chemicals/Plastics", "Computer Hardware/Networking", "Consumer FMCG/Foods/Beverages", "Consumer Goods - Durables", "Courier/Freight/Transportation/Warehousing", "CRM/ IT Enabled Services/BPO", "Education/Training/Teaching", "Electricals/Switchgears", "Employment Firms/Recruitment Services Firms", "Entertainment/Media/Publishing/Dotcom", "Export Houses/Textiles/Merchandise", "Facility Management", "Fertilizers/Pesticides", "FoodProcessing", "Gems and Jewellery", "Glass", "Government/Defence", "Healthcare/Medicine", "HeatVentilation/AirConditioning", "Insurance", "KPO/Research/Analytics", "Law/Legal Firms", "Machinery/Equipment Manufacturing/Industrial Products", "Mining", "NGO/Social Services", "Office Automation", "Others/Engg. Services/Service Providers", "Petroleum/Oil and Gas/Projects/Infrastructure/Power/Non-conventional Energy", "Printing/Packaging", "Publishing", "Real Estate", "Retailing", "Security/Law Enforcement", "Shipping/Marine", "Software Services", "Steel", "Strategy/Management Consulting Firms", "Telecom Equipment/Electronics/Electronic Devices/RF/Mobile Network/Semi-conductor", "Telecom/ISP", "Tyres", "Water Treatment/Waste Management", "Wellness/Fitness/Sports"
-        );
     
     // Store data in session
-    $company = new Container('user');
+    $company = new Container('associate');
 ?>
 <div class="profile-sidebar">
 <!-- SIDEBAR USERPIC -->
 <div class="profile-userpic">
-    <img src="<?php echo $this->serverUrl($company->companylogo); ?>" class="img-responsive" alt="" />
+    <img src="<?php // echo $this->serverUrl($company->logo); ?>" class="img-responsive" alt="" />
 </div>
 <!-- END SIDEBAR USERPIC -->
 <!-- SIDEBAR USER TITLE -->
 <div class="profile-usertitle">
     <div class="profile-usertitle-name">
-        <?php echo $company->companytitle; ?>
+        <?php echo $company->company; ?>
     </div>
     <div class="profile-usertitle-job">
-        <?php 
-            foreach($industry as $key=>$val){
-                if($company->companytype == $key){
-                    echo $val; 
-                }
-            }
-        ?>
+        Employer Id : <?php echo $company->username; ?>
     </div>
 </div>
 <!-- END SIDEBAR USER TITLE -->
@@ -34,32 +24,32 @@
 <div class="profile-usermenu">
     <ul class="nav">
         <li class="active">
-            <a href="<?php echo $this->serverUrl($this->url('employer')); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('company')); ?>">
             <i class="glyphicon glyphicon-home"></i>
             Overview </a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('employer', array('action'=>'changelogo', 'id' => $company->id))); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('company', array('action'=>'changelogo', 'id' => $company->id))); ?>">
             <i class="glyphicon glyphicon-picture"></i>
             Change Logo</a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('employer', array('action'=>'changepass', 'id' => $company->userid))); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('company', array('action'=>'changepass', 'id' => $company->id))); ?>">
             <i class="glyphicon glyphicon-lock"></i>
-            Account Information</a>
+            Change Password</a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('employer', array('action'=>'edit', 'id' => $company->id))); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('company', array('action'=>'edit', 'id' => $company->id))); ?>">
             <i class="glyphicon glyphicon-user"></i>
             Address Information</a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('employer', array('action'=>'jobs', 'id' => $company->userid))); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('company', array('action'=>'employee', 'id' => $company->userid))); ?>">
             <i class="glyphicon glyphicon-list"></i>
-            Manage Jobs</a>
+            Manage Employee</a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('logout')); ?>" >
+            <a href="<?php echo $this->serverUrl($this->url('associate', array('action'=>'logout'))); ?>" >
             <i class="glyphicon glyphicon-log-out"></i>
             Logout </a>
         </li>

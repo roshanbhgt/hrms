@@ -107,7 +107,7 @@ class IndexController extends AbstractActionController
                 //save message temporary into flashmessenger
                 $this->flashmessenger()->addMessage("You have been login successfully.");
             }
-
+            
             if ($result->isValid()) {
                 //check if it has rememberMe :
                 if ($request->getPost('rememberme') == 1 ) {
@@ -132,12 +132,12 @@ class IndexController extends AbstractActionController
                 );
             }
         }
-        
         if($row->type == 'employer'){
-            return $this->redirect()->toRoute('employer', array('action' => 'index'));
+            return $this->redirect()->toRoute('company', array('action' => 'index'));
         } elseif($row->type == 'employee') {
             return $this->redirect()->toRoute('employee', array('action' => 'index'));
         }
+        
         return $this->redirect()->toRoute($redirect);
     }
 
@@ -170,7 +170,7 @@ class IndexController extends AbstractActionController
         $this->getAuthService()->clearIdentity();
 
         $this->flashmessenger()->addMessage("You've been logged out");
-        return $this->redirect()->toRoute('assciate', array('action' => 'index'));
+        return $this->redirect()->toRoute('associate', array('action' => 'index'));
     }
 
     public function createAction()

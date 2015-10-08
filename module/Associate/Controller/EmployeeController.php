@@ -19,14 +19,14 @@ class EmployeeController extends AbstractActionController
 {
     protected $storage;
     protected $authservice;
-    protected $userTable;
+    protected $associateTable;
     protected $employerTable;
 
     public function getAuthService()
     {
         if (!$this->authservice) {
             $this->authservice = $this->getServiceLocator()
-                ->get('UserAuthService');
+                ->get('AssociateAuthService');
         }
 
         return $this->authservice;
@@ -45,6 +45,15 @@ class EmployeeController extends AbstractActionController
     public function getSession()
     {
         return (object)$this->getAuthService()->getStorage()->read();
+    }
+    
+    public function getAssociateTable()
+    {
+        if (!$this->associateTable) {
+            $sm = $this->getServiceLocator();
+            $this->associateTable = $sm->get('Associate\Model\AssociateTable');
+        }
+        return $this->associateTable;
     }
     
     public function getEmployeeTable()
@@ -115,14 +124,14 @@ class EmployeeController extends AbstractActionController
 
     public function changepassAction()
     {
-        if (! $this->getAuthService()->hasIdentity()){
-            return $this->redirect()->toRoute('login');
+        if (!$this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('associate');
         }
         $id = (int) $this->params()->fromRoute('id', 0);
         if($this->getRequest()->isPost()){
             $data = $this->getRequest()->getPost();
             if($data['password'] == $data['confpassword']){ 
-                if($this->getUserTable()->updateUser($data)){
+                if($this->getAssociateTable()->updatePass($data)){
                     $this->flashMessenger()->addSuccessMessage('Password updated successfully.');
                 }
             }else{
@@ -133,7 +142,6 @@ class EmployeeController extends AbstractActionController
         
         return new ViewModel(array(
             'id' => $id,
-            'user' => $this->getUserTable()->getUser($id),
         ));
     }
     

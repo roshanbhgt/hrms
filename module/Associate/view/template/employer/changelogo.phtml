@@ -2,7 +2,7 @@
     <div class="col-md-9">
         <h1 class="page-title">Change logo</h1>
         <div class="page-body">
-            <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo $this->serverUrl($this->url('employer', array('action'=>'changelogo'))); ?>">
+            <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo $this->serverUrl($this->url('company', array('action'=>'changelogo'))); ?>">
                 <input type="hidden" name="id" value="<?php echo $id; ?>" />
                 <div class="form-group">
                     <label for="password" class="col-md-3 control-label">Upload Logo</label>

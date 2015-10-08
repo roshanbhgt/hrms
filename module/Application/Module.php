@@ -196,8 +196,11 @@ class Module
         $controller = $e->getTarget();
         $action = strtolower($route->getParam('action'));
         
-        if( $route->getParam('controller') == 'User\Controller\Employer' 
-                && $route->getParam('action') == 'view' ){
+        if( ($route->getParam('controller') == 'User\Controller\Employer' 
+                && $route->getParam('action') == 'view')
+            || ($route->getParam('controller') == 'Associate\Controller\Index' 
+                && $route->getParam('action') == 'login')
+            ){
             return ;
         }
         
