@@ -20,7 +20,7 @@ class EmployeeController extends AbstractActionController
     protected $storage;
     protected $authservice;
     protected $associateTable;
-    protected $employerTable;
+    protected $employeeTable;
 
     public function getAuthService()
     {
@@ -58,34 +58,33 @@ class EmployeeController extends AbstractActionController
     
     public function getEmployeeTable()
     {
-        if (!$this->jobseekerTable) {
+        if (!$this->employeeTable) {
             $sm = $this->getServiceLocator();
-            $this->jobseekerTable = $sm->get('Associate\Model\EmployeeTable');
+            $this->employeeTable = $sm->get('Associate\Model\EmployeeTable');
         }
-        return $this->jobseekerTable;
+        return $this->employeeTable;
     }
 
     public function indexAction()
     {
         if (!$this->getServiceLocator()
-            ->get('UserAuthService')->hasIdentity()){
-            return $this->redirect()->toRoute('login');
+            ->get('AssociateAuthService')->hasIdentity()){
+            return $this->redirect()->toRoute('associate');
         }
         
         $id = $this->getSession()->id;
-        $jobseeker = $this->getUserTable()->getUser($id);
-        $jobseekerdet = $this->getJobseekerTable()->getJobseeker($id);
+        $associate = $this->getAssociateTable()->getAssociate($id);
+        $employee = $this->getEmployeeTable()->getEmployee($id);
         
         // Store data in session
         $usersession = new Container('user');
-        $usersession->id = $jobseeker->id;
-        $usersession->username = $jobseeker->firstname .' '.$jobseeker->lastname;
-        $usersession->location = $jobseeker->state .', '.$jobseeker->country;
-        $usersession->type = $jobseeker->type;
-        $usersession->picture = $jobseekerdet->picture;
+        $usersession->id = $associate->id;
+        $usersession->name = $employee->firstname .' '.$employee->lastname;
+        $usersession->username = $associate->username;
+        $usersession->picture = $employee->picture;
 
         return new ViewModel(array(
-            'user' => $jobseeker,
+            'employee' => $employee,
             'messages'  => $this->flashmessenger()->getMessages(),
         ));
     }

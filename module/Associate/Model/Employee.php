@@ -27,8 +27,8 @@ class Employee
     public $city;
     public $postcode;
     public $phne;
-    public $fax;
-    public $logo; */
+    public $fax;*/
+    public $logo; 
         
     public function exchangeArray($data)
     {
@@ -47,7 +47,7 @@ class Employee
         $this->postcode = (!empty($data['postcode'])) ? $data['postcode'] : null;
         $this->phone  = (!empty($data['phone'])) ? $data['phone'] : null;
         $this->fax  = (!empty($data['fax'])) ? $data['fax'] : null;
-        $this->logo  = (!empty($data['logo'])) ? $data['logo'] : null;
+        $this->picture  = (!empty($data['picture'])) ? $data['picture'] : null;
         $this->createdat  = (!empty($data['createdat'])) ? $data['createdat'] : null;
         $this->updatedat  = (!empty($data['updatedat'])) ? $data['updatedat'] : null;
         $this->doj  = (!empty($data['doj'])) ? $data['doj'] : null;

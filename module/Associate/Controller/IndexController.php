@@ -91,7 +91,7 @@ class IndexController extends AbstractActionController
     public function authenticateAction()
     {
         $request = $this->getRequest();
-        $redirect = 'assciate';
+        $redirect = 'associate';
 
         if ($request->isPost()){
             $pass = new Password();
@@ -105,7 +105,7 @@ class IndexController extends AbstractActionController
             foreach($result->getMessages() as $message)
             {
                 //save message temporary into flashmessenger
-                $this->flashmessenger()->addMessage("You have been login successfully.");
+                $this->flashmessenger()->addMessage($message);
             }
             
             if ($result->isValid()) {
@@ -118,18 +118,16 @@ class IndexController extends AbstractActionController
                 }
 
                 $row = $this->getAuthService()->getAdapter()->getResultRowObject();
-
-                $this->getEmployerTable()->getEmployerDetail($row->id);
-                
-                $this->getAuthService()->getStorage()->write(
-                    array(
-                        'id'      => $row->id,
-                        'username'   => $request->getPost('username'),
-                        'type'   => $row->type,
-                        'ip_address' => $this->getRequest()->getServer('REMOTE_ADDR'),
-                        'user_agent'    => $request->getServer('HTTP_USER_AGENT')
-                    )
-                );
+				
+				$this->getAuthService()->getStorage()->write(
+					array(
+						'id'      => $row->id,
+						'username'   => $request->getPost('username'),
+						'type'   => $row->type,
+						'ip_address' => $this->getRequest()->getServer('REMOTE_ADDR'),
+						'user_agent'    => $request->getServer('HTTP_USER_AGENT')
+					)
+				);
             }
         }
         if($row->type == 'employer'){

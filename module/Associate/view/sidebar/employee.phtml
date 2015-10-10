@@ -2,21 +2,21 @@
     use Zend\Session\Container;
     
     // Store data in session
-    $user = new Container('associate');
+    $employee = new Container('user');
 ?>
 <div class="profile-sidebar">
 <!-- SIDEBAR USERPIC -->
 <div class="profile-userpic">
-    <img src="<?php echo $this->serverUrl($user->picture); ?>" class="img-responsive" alt="" />
+    <img src="<?php echo $this->serverUrl($employee->picture); ?>" class="img-responsive" alt="" />
 </div>
 <!-- END SIDEBAR USERPIC -->
 <!-- SIDEBAR USER TITLE -->
 <div class="profile-usertitle">
     <div class="profile-usertitle-name">
-        <?php echo $user->username; ?>
+        <?php echo $employee->name; ?>
     </div>
-    <div class="profile-usertitle-location">
-       - <i class="glyphicon glyphicon-map-marker"></i> <?php echo $user->location; ?>
+    <div class="profile-usertitle-job">
+        Employee Id : <?php echo $employee->username; ?>
     </div>
 </div>
 <!-- END SIDEBAR USER TITLE -->
@@ -24,52 +24,32 @@
 <div class="profile-usermenu">
     <ul class="nav">
         <li class="active">
-            <a href="<?php echo $this->serverUrl($this->url('jobseeker')); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('employee')); ?>">
             <i class="glyphicon glyphicon-home"></i>
             Overview </a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'changepic', 'id' => $user->id))); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'changelogo', 'id' => $employee->id))); ?>">
             <i class="glyphicon glyphicon-picture"></i>
-            Update Picture</a>
+            Change Logo</a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'changepass', 'id' => $user->id))); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'changepass', 'id' => $employee->id))); ?>">
             <i class="glyphicon glyphicon-lock"></i>
-            Account Information</a>
+            Change Password</a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'edit', 'id' => $user->id))); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'edit', 'id' => $employee->id))); ?>">
             <i class="glyphicon glyphicon-user"></i>
-            Contact Information</a>
+            Address Information</a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'education', 'id' => $user->id))); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'employee', 'id' => $employee->assoc_id))); ?>">
             <i class="glyphicon glyphicon-list"></i>
-            Manage Education</a>
+            My Payslip</a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'skills', 'id' => $user->id))); ?>">
-            <i class="glyphicon glyphicon-list"></i>
-            Manage Skills</a>
-        </li>
-        <li>
-            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'workhistory', 'id' => $user->id))); ?>">
-            <i class="glyphicon glyphicon-list"></i>
-            Manage Work History</a>
-        </li>
-        <li>
-            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'uploadresume', 'id' => $user->id))); ?>">
-            <i class="glyphicon glyphicon-upload"></i>
-            Upload Resume </a>
-        </li>
-        <li>
-            <a href="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'jobapplication', 'id' => $user->id))); ?>">
-            <i class="glyphicon glyphicon-list"></i>
-            Job Application </a>
-        </li>
-        <li>
-            <a href="<?php echo $this->serverUrl($this->url('logout')); ?>" >
+            <a href="<?php echo $this->serverUrl($this->url('associate', array('action'=>'logout'))); ?>" >
             <i class="glyphicon glyphicon-log-out"></i>
             Logout </a>
         </li>
