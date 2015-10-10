@@ -22,7 +22,14 @@ class EmployeePayslipsTable
     public function getEmployeePayslips($id)
     {
         $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('employee_id' => $id));
+        $row = $this->tableGateway->select(array('employee_id' => $id));
+        return $row;
+    }
+    
+    public function getPayslip($id)
+    {
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row) {
             return FALSE;

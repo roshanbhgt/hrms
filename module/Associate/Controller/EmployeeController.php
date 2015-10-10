@@ -21,6 +21,9 @@ class EmployeeController extends AbstractActionController
     protected $authservice;
     protected $associateTable;
     protected $employeeTable;
+    protected $employerTable;
+    protected $payslipsTable;
+    protected $countryTable;
 
     public function getAuthService()
     {
@@ -64,7 +67,34 @@ class EmployeeController extends AbstractActionController
         }
         return $this->employeeTable;
     }
-
+    
+    public function getEmployerTable()
+    {
+        if (!$this->employerTable) {
+            $sm = $this->getServiceLocator();
+            $this->employerTable = $sm->get('Associate\Model\EmployerTable');
+        }
+        return $this->employerTable;
+    }
+    
+    public function getPayslipsTable()
+    {
+        if (!$this->payslipsTable) {
+            $sm = $this->getServiceLocator();
+            $this->payslipsTable = $sm->get('Associate\Model\EmployeePayslipsTable');
+        }
+        return $this->payslipsTable;
+    }
+    
+    public function getCountryTable()
+    {
+        if (!$this->countryTable) {
+            $sm = $this->getServiceLocator();
+            $this->countryTable = $sm->get('Application\Model\CountryTable');
+        }
+        return $this->countryTable;
+    }
+    
     public function indexAction()
     {
         if (!$this->getServiceLocator()
@@ -97,8 +127,8 @@ class EmployeeController extends AbstractActionController
 
         $id = (int) $this->params()->fromRoute('id', 0);
         return new ViewModel(array(
-            'user' => $this->getUserTable()->getUser($id),
-            'jobseeker' => $this->getJobseekerTable()->getJobseeker($id),
+            'associate' => $this->getAssociateTable()->getAssociate($id),
+            'employee' => $this->getEmployeeTable()->getEmployee($id),
             'countrys' => $this->getCountryTable()->fetchAll(),
         ));
     }
@@ -106,18 +136,18 @@ class EmployeeController extends AbstractActionController
     public function updateAction()
     {
         if (!$this->getAuthService()->hasIdentity()){
-            return $this->redirect()->toRoute('login');
+            return $this->redirect()->toRoute('associate');
         }
 
         $request = $this->getRequest();
 
         if ($request->isPost()){
-            if($this->getJobseekerTable()->saveJobseeker($request->getPost())){
+            if($this->getEmployeeTable()->updateEmployee($request->getPost())){
                 $this->flashmessenger()->addMessage('Your account has been updated successfully.');
             }
         }
 
-        return $this->redirect()->toRoute('jobseeker');
+        return $this->redirect()->toRoute('employee');
 
     }
 
@@ -144,4 +174,84 @@ class EmployeeController extends AbstractActionController
         ));
     }
     
+    public function changelogoAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('associate');
+        }
+
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            // Make certain to merge the files info!
+            $data = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+            
+            // Define a transport and set the destination on the server
+            $upload = new Http();
+            $upload->setDestination("D:\webserver\htdocs\hrconsultancy\public\media\associate\company");
+
+            try {
+                // This takes care of the moving and making sure the file is there
+                if($upload->receive()){
+                    $data['picture'] = str_replace("D:\webserver\htdocs\hrconsultancy\public", '',$upload->getFileName());
+                    $data['picture'] = str_replace('\\', '/', $data['picture']);
+                    if($data['picture'] != ''){ 
+                        if($this->getEmployeeTable()->updateLogo($data)){
+                            $this->flashMessenger()->addSuccessMessage('Profile picture updated successfully.');
+                        }
+                    }else{
+                        $this->flashMessenger()->addErrorMessage('Please upload valid image file.');
+                    }
+                }
+                $id = $data['id'];
+            } catch (Zend_File_Transfer_Exception $e) {
+                echo $e->message();
+            }
+        }
+        
+        return new ViewModel(array(
+            'id' => $id,
+        ));
+    }
+    
+    public function payslipsAction(){
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('associate');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        $payslips =$this->getPayslipsTable()->getEmployeePayslips($id);
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'associate' => $this->getAssociateTable()->fetchAll(),
+            'payslips' => $payslips
+        ));
+        
+    }
+    
+    public function payslipsdownloadAction(){
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('associate');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        $payslip =$this->getPayslipsTable()->getPayslip($id);
+        $employee = $this->getEmployeeTable()->getEmployee($payslip->employee_id);
+        $employer = $this->getEmployerTable()->getEmployerDetail($employee->employer_id);
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'associate' => $this->getAssociateTable()->fetchAll(),
+            'employee' => $employee,
+            'employer' => $employer,
+            'payslip' => $payslip
+        ));
+    }
 }

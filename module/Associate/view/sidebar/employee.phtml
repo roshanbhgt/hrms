@@ -31,7 +31,7 @@
         <li>
             <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'changelogo', 'id' => $employee->id))); ?>">
             <i class="glyphicon glyphicon-picture"></i>
-            Change Logo</a>
+            Change Picture</a>
         </li>
         <li>
             <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'changepass', 'id' => $employee->id))); ?>">
@@ -44,7 +44,7 @@
             Address Information</a>
         </li>
         <li>
-            <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'employee', 'id' => $employee->assoc_id))); ?>">
+            <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'payslips', 'id' => $employee->id))); ?>">
             <i class="glyphicon glyphicon-list"></i>
             My Payslip</a>
         </li>

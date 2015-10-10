@@ -12,29 +12,22 @@
 </script>
 <div class="row">
     <div class="panel-heading">
-        <div class="panel-title">Editing <b><?php echo $user->firstname.' '.$user->lastname ; ?></b></div>
+        <div class="panel-title">Editing <b><?php echo $employee->firstname.' '.$employee->lastname ; ?></b></div>
     </div>
     <div class="panel-body">
         <form id="signupform" class="form-horizontal" role="form"
-              action="<?php echo $this->serverUrl($this->url('jobseeker', array('action'=>'update'))); ?>" method="post">
-            <input type="hidden" name="id" value="<?php echo $jobseeker->id; ?>" />            
-            <input type="hidden" name="userid" value="<?php echo $jobseeker->userid; ?>" />            
+              action="<?php echo $this->serverUrl($this->url('employee', array('action'=>'update'))); ?>" method="post">
+            <input type="hidden" name="employee_id" value="<?php echo $employee->employee_id; ?>" />            
             <div class="form-group">
                 <label for="firstname" class="col-md-3 control-label">First Name</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="firstname" placeholder="First Name" value="<?php echo $jobseeker->firstname; ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="middlename" class="col-md-3 control-label">Middle Name</label>
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="middlename" placeholder="Middle Name" value="<?php echo $jobseeker->middlename; ?>">
+                    <input type="text" class="form-control" name="firstname" placeholder="First Name" value="<?php echo $employee->firstname; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label for="lastname" class="col-md-3 control-label">Last Name</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="lastname" placeholder="Last Name" value="<?php echo $jobseeker->lastname; ?>">
+                    <input type="text" class="form-control" name="lastname" placeholder="Last Name" value="<?php echo $employee->lastname; ?>">
                 </div>
             </div>
             <div class="form-group">
@@ -42,49 +35,31 @@
 
                 <div class="col-md-6">
                     <div class="radio">
-                        <label><input type="radio" name="gender" value="male" <?php if(strtolower($jobseeker->gender) == 'male'){ ?> checked="true" <?php } ?> >Male</label>
+                        <label><input type="radio" name="gender" value="male" <?php if(strtolower($employee->gender) == 'male'){ ?> checked="true" <?php } ?> >Male</label>
                     </div>
                     <div class="radio">
-                        <label><input type="radio" name="gender" value="female" <?php if(strtolower($jobseeker->gender) == 'female'){ ?> checked="true" <?php } ?> >Female</label>
+                        <label><input type="radio" name="gender" value="female" <?php if(strtolower($employee->gender) == 'female'){ ?> checked="true" <?php } ?> >Female</label>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="url" class="col-md-3 control-label">Date of Birth</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="dob" name="dob" placeholder="Date of Birth" value="<?php echo $jobseeker->dob; ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="conf-password" class="col-md-3 control-label">About you</label>
-                <div class="col-md-6">
-                    <textarea name="description" class="form-control" placeholder="Description"><?php echo $jobseeker->description; ?></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="url" class="col-md-3 control-label">Website</label>
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="url" placeholder="Url" value="<?php echo $jobseeker->url; ?>">
+                    <input type="text" class="form-control" id="dob" name="dob" placeholder="Date of Birth" value="<?php echo $employee->dob; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label for="address1" class="col-md-3 control-label">Address Line 1</label>
 
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="address1" placeholder="Address Line 1" value="<?php echo $jobseeker->address1 ; ?>" />
+                    <input type="text" class="form-control" name="address1" placeholder="Address Line 1" value="<?php echo $employee->address1 ; ?>" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="address2" class="col-md-3 control-label">Address Line 2</label>
 
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="address2" placeholder="Address Line 2" value="<?php echo $jobseeker->address2 ; ?>">
-                </div>
-            </div><div class="form-group">
-                <label for="address3" class="col-md-3 control-label">Address Line 3</label>
-
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="address3" placeholder="Address Line 3" value="<?php echo $jobseeker->address3 ; ?>">
+                    <input type="text" class="form-control" name="address2" placeholder="Address Line 2" value="<?php echo $employee->address2 ; ?>">
                 </div>
             </div>
             <div class="form-group">
@@ -94,7 +69,7 @@
                     <select id="country" class="form-control" onchange="getregion(this) " name="country">
                         <option selected="" value="-1">---- Select country ----</option>
                         <?php foreach($countrys as $val){ ?>
-                        <option value="<?php echo $val->iso; ?>" <?php if($jobseeker->country == $val->iso){ ?> selected="selected" <?php } ?> ><?php echo $val->nicename; ?></option>
+                        <option value="<?php echo $val->iso; ?>" <?php if($employee->country == $val->iso){ ?> selected="selected" <?php } ?> ><?php echo $val->nicename; ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -112,35 +87,28 @@
             <div class="form-group">
                 <label for="city" class="col-md-3 control-label">City</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="city" placeholder="City" value="<?php echo $jobseeker->city ; ?>">
+                    <input type="text" class="form-control" name="city" placeholder="City" value="<?php echo $employee->city ; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label for="postcode" class="col-md-3 control-label">Postcode</label>
 
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="postcode" placeholder="Postcode" value="<?php echo $jobseeker->postcode ; ?>">
+                    <input type="text" class="form-control" name="postcode" placeholder="Postcode" value="<?php echo $employee->postcode ; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label for="phone" class="col-md-3 control-label">Telephone</label>
 
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="phone" placeholder="Telephone" value="<?php echo $jobseeker->phone ; ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="mobile" class="col-md-3 control-label">Mobile</label>
-
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="mobile" placeholder="Mobile" value="<?php echo $jobseeker->mobile ; ?>">
+                    <input type="text" class="form-control" name="phone" placeholder="Telephone" value="<?php echo $employee->phone ; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label for="fax" class="col-md-3 control-label">Fax</label>
 
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="fax" placeholder="Fax" value="<?php echo $jobseeker->fax ; ?>">
+                    <input type="text" class="form-control" name="fax" placeholder="Fax" value="<?php echo $employee->fax ; ?>">
                 </div>
             </div>
             <div class="form-group">
@@ -178,7 +146,7 @@
                         // Perform any operation on error
                         $('#statetext').css("display","block");
                         $('#statedrop').css("display","none");
-                        $('#statetext').val('<?php echo $jobseeker->state ?>');
+                        $('#statetext').val('<?php echo $employee->state ?>');
                     }else{
                         $('#statetext').css("display","none");
                         $('#statedrop').css("display","block");
@@ -191,7 +159,7 @@
                             }));
                         }
                         $("#statedrop").children().filter(function() {
-                            return $(this).val() == '<?php echo $jobseeker->state ?>';
+                            return $(this).val() == '<?php echo $employee->state ?>';
                           }).prop('selected', true);
                     }
 		},

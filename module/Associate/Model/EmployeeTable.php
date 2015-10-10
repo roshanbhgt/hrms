@@ -77,70 +77,54 @@ class EmployeeTable
         if (!$this->getEmployee($id)) {
             $this->tableGateway->insert($data);
         } else {
-            throw new \Exception('User with id does not exist');
+            throw new \Exception('Employee with id does not exist');
         }
     }
 
-    public function deleteCompany($id)
+    
+    public function updateEmployee($employee)
+    {
+        $data = array(
+            'firstname' => $employee->firstname,
+            'lastname'  => $employee->lastname,
+            'gender' => $employee->gender,
+            'dob' => $employee->dob,
+            'address1'  => $employee->address1,
+            'address2'  => $employee->address2,
+            'state' => $employee->state,
+            'country' => $employee->country,
+            'city' => $employee->city,
+            'postcode' => $employee->postcode,
+            'phone' => $employee->phone,
+            'fax' => $employee->fax,
+            'status' => $employee->status,
+            'updatedat' => date('Y-m-d h:i:s'),
+        );
+        
+        echo $id = (int)$employee->employee_id;
+        if ($this->getEmployee($id)) {
+            $this->tableGateway->update($data, array('employee_id' => $id));
+        } else {
+            throw new \Exception('Employee with id does not exist');
+        }
+    }
+    
+    public function deleteEmployee($id)
     {
         $this->tableGateway->delete(array('id' => $id));
     }
     
-    public function updateLogo($data)
+    public function updateLogo($associate)
     {
-        $id = (int)$data['id'];
-        if ($id != 0 && $data['logo'] != '') {
-            if ($this->getCompanyDetails($id)) {
-                return $this->tableGateway->update($data, array('id' => $id));
-            } else {
-                throw new \Exception('Company with id does not exist');
-            }
-        }
-    }
-    
-    public function updateCompany($company)
-    {        
-        $data = array(
-            'userid'     => $company->userid,
-            'companyname' => $company->companyname,
-            'companytype'  => $company->companytype,
-            'industrytype' => $company->industrytype,
-            'address1'  => $company->address1,
-            'address2'  => $company->address2,
-            'address3'  => $company->address3,
-            'state' => $company->state,
-            'country' => $company->country,
-            'city' => $company->city,
-            'postcode' => $company->postcode,
-            'contactnumber' => $company->contactnumber,
-            'fax' => $company->fax,
-            'description' => $company->description,
-            'url' => $company->url,
-        );
-        
-        $userid = (int)$company->userid;
-        $id = (int)$company->id;
-        if (!$this->getCompany($userid)) {
-            $this->tableGateway->insert($data);
+        $id = (int)$associate['id'];
+        if ($this->getEmployee($id))
+        {
+            $associate['updatedat'] = date('Y-m-d h:m:s');
+            $this->tableGateway->update($associate, array('employee_id' => $id));
         } else {
-            if ($this->getCompany($userid))
-            {
-                $this->tableGateway->update($data, array('id' => $id));
-            } else {
-                throw new \Exception('User with id does not exist');
-            }
+            throw new \Exception('Associate employee with id does not exist');
         }
-    }
-    
-    public function updateDesc($data)
-    {
-        $id = (int)$data['id'];
-        if ($id != 0 && $data['description'] != '') {
-            if ($this->getCompanyDetails($id)) {
-                return $this->tableGateway->update($data, array('id' => $id));
-            } else {
-                throw new \Exception('Company with id does not exist');
-            }
-        }
+        
+        return ;
     }
 }

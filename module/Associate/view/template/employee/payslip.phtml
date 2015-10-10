@@ -1,212 +1,37 @@
-<form method="post" id="payslip" name="payslip">
-<table class="table table-bordered table-info table-condensed">
-<tbody>
-    <tr>
-	<td class="heading">Employee No</td>
-			<td class="data">
-											18755
-			</td>
-			<td class="heading">Name
-			</td>
-			<td class="data">
-						Roshan Bhagat
-			</td>
-	</tr>
 
-	<tr>
-			<td class="heading">Bank</td>
-			<td class="data">
-						HDFC Bank
-			</td>
-			<td class="heading">
-					Bank Account No
-			</td>
-			<td class="data">
-						10091140026041
-			</td>
-	</tr>
-
-	<tr>
-			<td class="heading">
-					Joining Date
-			</td>
-			<td class="data">
-						09 Apr 2012
-			</td>
-			<td class="heading">
-					PF No
-			</td>
-			<td class="data">
-						NG/NAG/1084820/101
-			</td>
-	</tr> 
-
-						</tbody>
-						</table>
-					
-<table class="table table-bordered table-striped table-info" id="tblPayslipData"> 
-		    <tbody><tr class="header">
-		<th class="td-33">Earnings</th>
-		<th class="right td-17">Rs.</th>
-		<th class="td-33">Deductions</th>
-		<th class="right td-17">Rs.</th>
-    </tr>   
-<tr><td>BASIC</td><td class="right">16000.00</td><td>PF</td><td class="right">1800.00</td></tr><tr><td>HRA</td><td class="right">8000.00</td><td>INCOME TAX</td><td class="right">1502.00</td></tr><tr><td>CONVEYANCE</td><td class="right">2000.00</td><td>PROF TAX</td><td class="right">200.00</td></tr><tr><td>MEDICAL ALLOWANCE</td><td class="right">4000.00</td><td>GROUP MEDICAL INSURANCE</td><td class="right">250.00</td></tr><tr><td>CHILDREN AND SELF EDUCATION</td><td class="right">4000.00</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>LTA</td><td class="right">6000.00</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><b>Total Earnings</b></td><td class="right"><b>40000.00</b></td><td><b>Total Deductions</b></td><td class="right"><b>3752.00</b></td></tr></tbody></table>
-<br>
-<script type="text/javascript">
-	var table = document.getElementById('tblPayslipData');
-
-	var row;
-	var cell1;
-	var cell2;
-	
-	var i = 1;
-		
-		row = table.insertRow(i);
-		cell1 = row.insertCell(0);
-		cell1.innerHTML="BASIC";
-		cell2 = row.insertCell(1);
-		cell2.className = "right";
-		cell2.innerHTML="16000.00";
-		
-		i = i + 1;
-		
-		row = table.insertRow(i);
-		cell1 = row.insertCell(0);
-		cell1.innerHTML="HRA";
-		cell2 = row.insertCell(1);
-		cell2.className = "right";
-		cell2.innerHTML="8000.00";
-		
-		i = i + 1;
-		
-		row = table.insertRow(i);
-		cell1 = row.insertCell(0);
-		cell1.innerHTML="CONVEYANCE";
-		cell2 = row.insertCell(1);
-		cell2.className = "right";
-		cell2.innerHTML="2000.00";
-		
-		i = i + 1;
-		
-		row = table.insertRow(i);
-		cell1 = row.insertCell(0);
-		cell1.innerHTML="MEDICAL ALLOWANCE";
-		cell2 = row.insertCell(1);
-		cell2.className = "right";
-		cell2.innerHTML="4000.00";
-		
-		i = i + 1;
-		
-		row = table.insertRow(i);
-		cell1 = row.insertCell(0);
-		cell1.innerHTML="CHILDREN AND SELF EDUCATION";
-		cell2 = row.insertCell(1);
-		cell2.className = "right";
-		cell2.innerHTML="4000.00";
-		
-		i = i + 1;
-		
-		row = table.insertRow(i);
-		cell1 = row.insertCell(0);
-		cell1.innerHTML="LTA";
-		cell2 = row.insertCell(1);
-		cell2.className = "right";
-		cell2.innerHTML="6000.00";
-		
-		i = i + 1;
-	for(; i &lt;= 6; i++){
-		row = table.insertRow(i);
-		cell1 = row.insertCell(0);
-		cell1.innerHTML="&amp;#160;";
-		cell2 = row.insertCell(1);
-		cell2.innerHTML="&amp;#160;";
-	}
-	row = table.insertRow(i);
-	cell1 = row.insertCell(0);
-	cell1.innerHTML="&lt;b&gt;Total Earnings&lt;/b&gt;";
-	cell2 = row.insertCell(1);
-	cell2.className = "right";
-	cell2.innerHTML="&lt;b&gt;40000.00&lt;/b&gt;";
-
-	var j = 1;
-		
-		row = table.rows[j];
-		if(row == undefined) {
-			row = table.insertRow(j);
-		}
-		cell1 = row.insertCell(2);
-		cell1.innerHTML="PF";
-		cell2 = row.insertCell(3);
-		cell2.className = "right";
-		cell2.innerHTML="1800.00";
-		
-		j = j + 1;
-		
-		row = table.rows[j];
-		if(row == undefined) {
-			row = table.insertRow(j);
-		}
-		cell1 = row.insertCell(2);
-		cell1.innerHTML="INCOME TAX";
-		cell2 = row.insertCell(3);
-		cell2.className = "right";
-		cell2.innerHTML="1502.00";
-		
-		j = j + 1;
-		
-		row = table.rows[j];
-		if(row == undefined) {
-			row = table.insertRow(j);
-		}
-		cell1 = row.insertCell(2);
-		cell1.innerHTML="PROF TAX";
-		cell2 = row.insertCell(3);
-		cell2.className = "right";
-		cell2.innerHTML="200.00";
-		
-		j = j + 1;
-		
-		row = table.rows[j];
-		if(row == undefined) {
-			row = table.insertRow(j);
-		}
-		cell1 = row.insertCell(2);
-		cell1.innerHTML="GROUP MEDICAL INSURANCE";
-		cell2 = row.insertCell(3);
-		cell2.className = "right";
-		cell2.innerHTML="250.00";
-		
-		j = j + 1;
-	for(; j &lt;= 6; j++){
-		row = table.rows[j];
-		if(row == undefined) {
-			row = table.insertRow(j);
-		}
-		cell1 = row.insertCell(2);
-		cell1.innerHTML="&amp;#160;";
-		cell2 = row.insertCell(3);
-		cell2.innerHTML="&amp;#160;";
-	}
-	row = table.rows[j];
-	if(row == undefined) {
-		row = table.insertRow(j);
-	}
-	cell1 = row.insertCell(2);
-	cell1.innerHTML="&lt;b&gt;Total Deductions&lt;/b&gt;";
-	cell2 = row.insertCell(3);
-	cell2.className = "right";
-	cell2.innerHTML="&lt;b&gt;3752.00&lt;/b&gt;";
-</script>
-<div class="row-fluid">
-	<div class="span4 inner-col">
-		<span class="label label-info">Net Pay</span>
-		<h3>Rs. <span id="netAmount">36248.00</span></h3>
-		<span name="wordNetAmount" id="wordNetAmount" class="small sub">Rupees Thirty Six Thousand Two Hundred Forty Eight</span>
-	</div>
-</div>	
-<input type="hidden" name="iNetPay" value="36248.00">   
-<input type="hidden" name="iNetPayWords" value="Rupees Thirty Six Thousand Two Hundred Forty Eight"> 
-
-			<input type="hidden" id="viewtype" name="viewtype">
-			</form>
+<?php
+$title = 'My Payslips';
+$this->headTitle($title);
+?>
+<div class="row">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <table class="table">
+        <tr style="background-color:#2a6496;color: #ffffff">
+            <th>Id</th>
+            <th>Employee Code</th>
+            <th>Month-Year</th>
+            <th width="200">Created At</th>
+            <th width="75">&nbsp;</th>
+        </tr>
+        <?php foreach ($payslips as $val) : ?>
+            <tr style="background-color: <?php echo $this->cycle(array('#FFF', '#F0F0F0'))->next(); ?>">
+                <td><?php echo $this->escapeHtml($val->employee_id);?></td>
+                <td>
+                <?php 
+                    /* foreach($associate as $value){ 
+                        if($val->employee_id == $value->id){
+                            echo $this->escapeHtml($value->username);
+                        }
+                    } */
+                ?>
+                </td>
+                <td>Payslips for <?php echo date("M-Y",  strtotime($val->createdat));?></td>
+                <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
+                <td>
+                    <a href="<?php echo $this->serverUrl($this->url('employee',
+                        array('action'=>'payslipsdownload', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-download-alt"></i></a> &nbsp;
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

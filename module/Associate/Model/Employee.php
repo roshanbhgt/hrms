@@ -20,15 +20,15 @@ class Employee
     public $updatedat;
     public $status;
     public $grosspay;
-    /* public $address1;
+    public $address1;
     public $address2;
     public $state;
     public $country;
     public $city;
     public $postcode;
-    public $phne;
-    public $fax;*/
-    public $logo; 
+    public $phone;
+    public $fax;
+    public $picture; 
         
     public function exchangeArray($data)
     {
