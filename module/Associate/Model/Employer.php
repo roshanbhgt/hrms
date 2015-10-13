@@ -6,7 +6,7 @@ namespace Associate\Model;
 class Employer
 {
     public $id;
-    public $employee_id;
+    public $assoc_id;
     public $employer_id;
     public $firstname;
     public $lastname;
@@ -34,8 +34,8 @@ class Employer
     public function exchangeArray($data)
     {
         $this->id     = (!empty($data['id'])) ? $data['id'] : null;
-        $this->employer_id     = (!empty($data['employer_id'])) ? $data['employer_id'] : null;
-        $this->employee_id     = (!empty($data['employee_id'])) ? $data['employee_id'] : null;
+        $this->assoc_id     = (!empty($data['assoc_id'])) ? $data['assoc_id'] : null;
+        $this->company     = (!empty($data['company'])) ? $data['company'] : null;
         $this->firstname = (!empty($data['firstname'])) ? $data['firstname'] : null;
         $this->lastname  = (!empty($data['lastname'])) ? $data['lastname'] : null;
         $this->email = (!empty($data['email'])) ? $data['email'] : null;

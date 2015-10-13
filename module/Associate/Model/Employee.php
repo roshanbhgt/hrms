@@ -20,6 +20,7 @@ class Employee
     public $updatedat;
     public $status;
     public $grosspay;
+    public $leaves;
     public $address1;
     public $address2;
     public $state;
@@ -29,6 +30,9 @@ class Employee
     public $phone;
     public $fax;
     public $picture; 
+    public $bank_name;
+    public $bank_account;
+    public $pf_no; 
         
     public function exchangeArray($data)
     {
@@ -38,6 +42,8 @@ class Employee
         $this->firstname = (!empty($data['firstname'])) ? $data['firstname'] : null;
         $this->lastname  = (!empty($data['lastname'])) ? $data['lastname'] : null;
         $this->email  = (!empty($data['email'])) ? $data['email'] : null;
+        $this->level  = (!empty($data['level'])) ? $data['level'] : null;
+        $this->designation  = (!empty($data['designation'])) ? $data['designation'] : null;
         $this->gender = (!empty($data['gender'])) ? $data['gender'] : null;
         $this->address1  = (!empty($data['address1'])) ? $data['address1'] : null;
         $this->address2  = (!empty($data['address2'])) ? $data['address2'] : null;
@@ -55,5 +61,9 @@ class Employee
         $this->dob  = (!empty($data['dob'])) ? $data['dob'] : null;
         $this->status  = (!empty($data['status'])) ? $data['status'] : null;
         $this->grosspay  = (!empty($data['grosspay'])) ? $data['grosspay'] : null;
+        $this->leaves  = (!empty($data['leaves'])) ? $data['leaves'] : null;
+        $this->bank_name  = (!empty($data['bank_name'])) ? $data['bank_name'] : null;
+        $this->bank_account  = (!empty($data['bank_account'])) ? $data['bank_account'] : null;
+        $this->pf_no  = (!empty($data['pf_no'])) ? $data['pf_no'] : null;
     }
 }

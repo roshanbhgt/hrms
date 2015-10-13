@@ -151,6 +151,7 @@ return array(
             'associate/employee/changelogo' => __DIR__ . '/../view/template/employee/changepic.phtml',
             'associate/employer/employee' => __DIR__ . '/../view/template/employer/employee.phtml',
             'associate/employer/addemployee' => __DIR__ . '/../view/template/employer/employeeadd.phtml',
+            'associate/employer/editemployee' => __DIR__ . '/../view/template/employer/employeedit.phtml',
             'associate/employee/payslips' => __DIR__ . '/../view/template/employee/payslip.phtml',
             'associate/employee/payslipsdownload' => __DIR__ . '/../view/template/employee/payslipdownloads.phtml',
         ),

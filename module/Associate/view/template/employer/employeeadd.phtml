@@ -13,12 +13,19 @@
             changeYear: true,
             dateFormat: 'yy-mm-dd'
         });
+        $("#dot").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'yy-mm-dd'
+        });
     });
     
 </script>
 <div class="row">
     <div class="col-md-9">
-        <h1 class="page-title">Add Employee</h1>
+        <div class="page-header">
+            <h1 >Add Employee</h1>
+        </div>
         <div class="page-body">
             <form id="signupform" class="form-horizontal" role="form"
                   action="<?php echo $this->serverUrl($this->url('company', array('action'=>'addemployee', 'id' => $id))); ?>" method="post">
@@ -75,14 +82,56 @@
                     <label for="dob" class="col-md-3 control-label">Date of Birth</label>
 
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="dob" placeholder="Date of Birth" value="">
+                        <input type="text" id="dob" class="form-control" name="dob" placeholder="Date of Birth" value="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="doj" class="col-md-3 control-label">Date of Joining</label>
 
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="doj" placeholder="Date of Joining" value="">
+                        <input type="text" id="doj" class="form-control" name="doj" placeholder="Date of Joining" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bank_name" class="col-md-3 control-label">Bank Name</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="bank_name" placeholder="Bank Name" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bank_account" class="col-md-3 control-label">Bank Account</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="bank_account" placeholder="Bank Account" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pf_no" class="col-md-3 control-label">PF No.</label>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="pf_no" placeholder="Provident Fund No" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="leaves" class="col-md-4 control-label">No of Leaves</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="leaves" placeholder="No of Leaves" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="grosspay" class="col-md-4 control-label">Gross Pay</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="grosspay" placeholder="Gross Pay" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dot" class="col-md-3 control-label">Date of Termination</label>
+
+                    <div class="col-md-6">
+                        <input type="text" id="dot" class="form-control" name="dot" placeholder="Date of Termination" value="">
                     </div>
                 </div>
                 <div class="form-group">

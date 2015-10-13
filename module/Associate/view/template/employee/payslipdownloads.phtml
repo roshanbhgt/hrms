@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-1g-12">
-        <div class="page-header"><h1>Pay Slips</h1></div>
+        <div class="page-header"><h1>Pay Slips <span style="color:#B13A2F"><?php echo date("M-Y",  strtotime($payslip->createdat));?></span></h1></div>
         <div class="page-body">
 <form method="post" id="payslip" name="payslip">
 <table class="table table-bordered table-info table-condensed">
@@ -8,25 +8,31 @@
     <tr>
 	<td class="heading">Employee No</td>
 			<td class="data">
-											18755
+                <?php 
+                    foreach($associate as $value){ 
+                        if($employee->employee_id == $value->id){
+                            echo $this->escapeHtml($value->username);
+                        }
+                    }
+                ?>
 			</td>
 			<td class="heading">Name
 			</td>
 			<td class="data">
-						Roshan Bhagat
+                            <?php echo $employee->firstname; ?>&nbsp;<?php echo $employee->lastname; ?>
 			</td>
 	</tr>
 
 	<tr>
 			<td class="heading">Bank</td>
 			<td class="data">
-						HDFC Bank
+						<?php echo $employee->bank_name ; ?>
 			</td>
 			<td class="heading">
 					Bank Account No
 			</td>
 			<td class="data">
-						10091140026041
+						<?php echo $employee->bank_account ; ?>
 			</td>
 	</tr>
 
@@ -35,13 +41,13 @@
 					Joining Date
 			</td>
 			<td class="data">
-						09 Apr 2012
+                            <?php echo $this->escapeHtml($this->dateFormat(new DateTime($employee->doj), IntlDateFormatter::SHORT,IntlDateFormatter::SHORT));?>
 			</td>
 			<td class="heading">
 					PF No
 			</td>
 			<td class="data">
-						NG/NAG/1084820/101
+						<?php echo $employee->pf_no ; ?>
 			</td>
 	</tr> 
 
@@ -55,7 +61,58 @@
 		<th class="td-33">Deductions</th>
 		<th class="right td-17">Rs.</th>
     </tr>   
-<tr><td>BASIC</td><td class="right">16000.00</td><td>PF</td><td class="right">1800.00</td></tr><tr><td>HRA</td><td class="right">8000.00</td><td>INCOME TAX</td><td class="right">1502.00</td></tr><tr><td>CONVEYANCE</td><td class="right">2000.00</td><td>PROF TAX</td><td class="right">200.00</td></tr><tr><td>MEDICAL ALLOWANCE</td><td class="right">4000.00</td><td>GROUP MEDICAL INSURANCE</td><td class="right">250.00</td></tr><tr><td>CHILDREN AND SELF EDUCATION</td><td class="right">4000.00</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>LTA</td><td class="right">6000.00</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><b>Total Earnings</b></td><td class="right"><b>40000.00</b></td><td><b>Total Deductions</b></td><td class="right"><b>3752.00</b></td></tr></tbody></table>
+<tr>
+    <td>BASIC</td>
+    <td class="right"><?php echo $payslip->basic; ?></td>
+    <td>PF</td>
+    <td class="right"><?php echo $payslip->pf; ?></td>
+</tr>
+<tr>
+    <td>HRA</td>
+    <td class="right"><?php echo $payslip->hra; ?></td>
+    <td>INCOME TAX</td>
+    <td class="right"><?php echo $payslip->income_tax; ?></td>
+</tr>
+<tr>
+    <td>CONVEYANCE</td>
+    <td class="right"><?php echo $payslip->conveyance; ?></td>
+    <td>PROF TAX</td>
+    <td class="right"><?php echo $payslip->prof_tax; ?></td>
+</tr>
+<tr>
+    <td>MEDICAL ALLOWANCE</td>
+    <td class="right"><?php echo $payslip->medical_allowance; ?></td>
+    <td>GROUP MEDICAL INSURANCE</td>
+    <td class="right">0.0</td>
+</tr>
+<tr>
+    <td>CHILDREN AND SELF EDUCATION</td>
+    <td class="right"><?php echo $payslip->children_selfdeduction; ?></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td>LTA</td>
+    <td class="right"><?php echo $payslip->lta; ?></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td>
+        <b>Total Earnings</b>
+    </td>
+    <td class="right">
+        <b>40000.00</b>
+    </td>
+    <td>
+        <b>Total Deductions</b>
+    </td>
+    <td class="right">
+        <b>3752.00</b>
+    </td>
+</tr>
+                    </tbody>
+</table>
 <br>
 <script type="text/javascript">
 	var table = document.getElementById('tblPayslipData');

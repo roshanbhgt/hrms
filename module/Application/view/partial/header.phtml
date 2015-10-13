@@ -39,10 +39,13 @@
                 <?php // <-- Update this !!
                     echo $this->navigation('left')
                         ->menu()
+                        ->setPartial('partial/menu.phtml')
                         ->setMinDepth(0)
-                        ->setMaxDepth(0)
-                        ->setUlClass('nav navbar-nav');
+                        ->setMaxDepth(1)
+                        ->setUlClass('nav navbar-nav')
+                        ->render();
                 ?>
+                
                 <?php // <-- Update this !!
                     echo $this->navigation('right')
                         ->menu()

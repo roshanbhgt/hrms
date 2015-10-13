@@ -1,33 +1,42 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="page-header"><h1>Blog Posts</h1></div>
-        <?php foreach ($blogs as $val) : ?>
-            <div class="page-title"><h2 class="media-heading"><?php echo $val->title; ?></h2></div>
-            <div class="page-body">
-                <p><?php echo $val->description; ?>... <a href="<?php echo $this->serverUrl($this->url('blog',
-                        array('action'=>'view', 'id' => $val->id)));?>">Read more</a></p>
-                <ul class="list-inline list-unstyled">
-                    <li><span><i class="glyphicon glyphicon-user"></i> by <a href="#"><?php echo $val->author; ?></a></span></li>
-                    <li>|</li>
-                    <li><span><i class="glyphicon glyphicon-calendar"></i> <?php echo $this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::LONG); ?> </span></li>
-                    <li>|</li>
-                    <span><i class="glyphicon glyphicon-comment"></i> 2 comments</span>
-                    <li>|</li>
-                    <li>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </li>
-                    <li>|</li>
-                    <li>
-                        <span><i class="fa fa-facebook"></i></span>
-                        <span><i class="fa fa-twitter"></i></span>
-                        <span><i class="fa fa-google-plus"></i></span>
-                    </li>
-                </ul>
-            </div>
-        <?php endforeach; ?>
+        <div class="page-header"><h1>Blogs</h1></div>
+            <div class="page-body blog"> 
+                <?php foreach ($blogs as $val) { ?>
+                <div class="blog-item">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2 text-center">
+                            <div class="entry-meta">
+                                <span id="publish_date"><?php echo $this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::LONG); ?></span>
+                                <span><i class="fa fa-user"></i> <a href="#"><?php echo $val->author; ?></a></span>
+                                <span><i class="fa fa-comment"></i> <a href="blog-item.html#comments">2 Comments</a></span>
+                                <span><i class="fa fa-heart"></i><a href="#"> 56 Likes</a></span>
+                                <span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                </span>
+                                <span>
+                                    <span><i class="fa fa-facebook"></i></span>
+                                    <span><i class="fa fa-twitter"></i></span>
+                                    <span><i class="fa fa-google-plus"></i></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-10 blog-content">
+                            <h2><a href="<?php echo $this->serverUrl($this->url('blog',
+                    array('action'=>'view', 'id' => $val->id)));?>"><?php echo $val->title; ?></a></h2>
+                            <?php echo $val->description; ?>
+                            <a href="<?php echo $this->serverUrl($this->url('blog',
+                    array('action'=>'view', 'id' => $val->id)));?>" class="btn btn-primary readmore">Read More <i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>    
+                </div>
+            <?php } ?>
+        </div>
     </div>
+</div>
 </div>

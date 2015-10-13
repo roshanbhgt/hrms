@@ -1,0 +1,160 @@
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(function() {
+         $("#dob").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'yy-mm-dd'
+        });
+        $("#doj").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'yy-mm-dd'
+        });
+        $("#dot").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+    
+</script>
+<div class="row">
+    <div class="col-md-9">
+        <div class="page-header">
+            <h1>Edit <?php echo $employee->firstname.' '.$employee->lastname; ?></h1>
+        </div>
+        <div class="page-body">
+            <form id="signupform" class="form-horizontal" role="form"
+                  action="<?php echo $this->serverUrl($this->url('company', array('action'=>'editemployee', 'id' => $id))); ?>" method="post">
+                <input type="hidden" name="id" value="<?php echo $employee->id; ?>" />
+                <input type="hidden" name="employer_id" value="<?php echo $employee->employer_id; ?>" />
+                <input type="hidden" name="employee_id" value="<?php echo $employee->employee_id; ?>" />
+                <div class="form-group">
+                    <label for="firstname" class="col-md-4 control-label">First Name</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="firstname" placeholder="First Name" value="<?php echo $employee->firstname; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="col-md-4 control-label">Last Name</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="lastname" placeholder="Last Name" value="<?php echo $employee->lastname; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="gender" class="col-md-4 control-label">Gender</label>
+                    <div class="col-md-5">
+                        <div class="radio">
+                            <label><input type="radio" name="gender" <?php if($employee->gender == 'male'){ echo 'checked=true'; } ?> value="male">Male</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="gender" <?php if($employee->gender == 'female'){ echo 'checked=true'; } ?> value="female">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-md-4 control-label">Email</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo $employee->email; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="level" class="col-md-4 control-label">Level</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="level" placeholder="Level" value="<?php echo $employee->level; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="designation" class="col-md-4 control-label">Designation</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="designation" placeholder="Designation" value="<?php echo $employee->designation; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dob" class="col-md-4 control-label">Date of Birth</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" id="dob" name="dob" placeholder="Date of Birth" value="<?php echo $employee->dob; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="doj" class="col-md-4 control-label">Date of Joining</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" id="doj" name="doj" placeholder="Date of Joining" value="<?php echo $employee->doj; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bank_name" class="col-md-4 control-label">Bank Name</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="bank_name" placeholder="Bank Name" value="<?php echo $employee->bank_name; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bank_account" class="col-md-4 control-label">Bank Account</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="bank_account" placeholder="Bank Account" value="<?php echo $employee->bank_account; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pf_no" class="col-md-4 control-label">PF No.</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="pf_no" placeholder="Provident Fund No" value="<?php echo $employee->pf_no; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="leaves" class="col-md-4 control-label">No of Leaves</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="leaves" placeholder="No of Leaves" value="<?php echo $employee->leaves; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="grosspay" class="col-md-4 control-label">Gross Pay</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="grosspay" placeholder="Gross Pay" value="<?php echo $employee->grosspay; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dot" class="col-md-4 control-label">Date of Termination</label>
+
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" id="dot" name="dot" placeholder="Date of Termination" value="<?php echo $employee->dot; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="companytype" class="col-md-4 control-label">Status</label>
+                    <div class="col-md-5">
+                        <div class="radio">
+                            <label><input type="radio" name="status" <?php if($employee->status == 'active'){ echo 'checked=true';} ?> value="active">Active</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="status" <?php if($employee->status == 'inactive'){ echo 'checked=true';} ?> value="inactive">In Active</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!-- Button -->
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>
+                            Update
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

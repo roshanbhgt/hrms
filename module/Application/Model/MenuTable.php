@@ -17,6 +17,12 @@ class MenuTable
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
+    
+    public function fetchAllSubmenu($id)
+    {
+       $resultSet = $this->tableGateway->select(array('parent_id' => $id));
+        return $resultSet;
+    }
 
     public function getMenu($id)
     {
@@ -35,6 +41,9 @@ class MenuTable
             'title' => $menu->title,
             'label'  => $menu->label,
             'route'  => $menu->route,
+            'parent_id' => $menu->parent_id,
+            'sort_order' => $menu->sort_order,
+            'status' => $menu->status,
         );
 
         $id = (int)$menu->id;

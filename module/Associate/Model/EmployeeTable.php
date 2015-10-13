@@ -60,6 +60,9 @@ class EmployeeTable
             'designation' => $employee->designation,
             'dob' => $employee->dob,
             'doj' => $employee->doj,
+            'bank_name' => $employee->bank_name,
+            'bank_account' => $employee->bank_account,
+            'pf_no' => $employee->pf_no,
             /* 'address1'  => $company->address1,
             'address2'  => $company->address2,
             'state' => $company->state,
@@ -85,25 +88,28 @@ class EmployeeTable
     public function updateEmployee($employee)
     {
         $data = array(
+            'employer_id'     => $employee->employer_id,
+            'employee_id'     => $employee->employee_id,
             'firstname' => $employee->firstname,
             'lastname'  => $employee->lastname,
             'gender' => $employee->gender,
+            'email' => $employee->email,
+            'level' => $employee->level,
+            'designation' => $employee->designation,
             'dob' => $employee->dob,
-            'address1'  => $employee->address1,
-            'address2'  => $employee->address2,
-            'state' => $employee->state,
-            'country' => $employee->country,
-            'city' => $employee->city,
-            'postcode' => $employee->postcode,
-            'phone' => $employee->phone,
-            'fax' => $employee->fax,
+            'doj' => $employee->doj,
+            'bank_name' => $employee->bank_name,
+            'bank_account' => $employee->bank_account,
+            'pf_no' => $employee->pf_no,
+            'dot' => $employee->dot,
+            'leaves' => $employee->leaves,
+            'grosspay' => $employee->grosspay,
             'status' => $employee->status,
             'updatedat' => date('Y-m-d h:i:s'),
         );
-        
-        echo $id = (int)$employee->employee_id;
-        if ($this->getEmployee($id)) {
-            $this->tableGateway->update($data, array('employee_id' => $id));
+        $id = (int)$employee->id;
+        if ($this->getEmployeeDetails($id)) {
+            $this->tableGateway->update($data, array('id' => $id));
         } else {
             throw new \Exception('Employee with id does not exist');
         }

@@ -67,6 +67,7 @@ class MenuController extends AbstractActionController {
         return new ViewModel(
             array(
                 'menu' => $this->getRequest()->getPost(),
+                'menus' => $this->getMenuTable()->fetchAll(),
             )
         );
     }
@@ -82,6 +83,7 @@ class MenuController extends AbstractActionController {
 
         return new ViewModel(array(
             'menu' => $this->getMenuTable()->getMenu($id),
+             'menus' => $this->getMenuTable()->fetchAll(),
         ));
     }
 

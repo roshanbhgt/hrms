@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col-md-9">
-        <h1 class="page-title">Update your password</h1>
+        <div class="page-header">
+            <h1>Update your password</h1>
+        </div>
         <div class="page-body">
             <form class="form-horizontal" role="form" method="post" action="<?php echo $this->serverUrl($this->url('employee', array('action'=>'changepass'))); ?>">
                 <input type="hidden" name="id" value="<?php echo $id; ?>" />

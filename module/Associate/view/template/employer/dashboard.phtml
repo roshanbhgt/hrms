@@ -70,16 +70,12 @@
 </script>
 <div class="row">
     <div class="col-md-12">
-        <div class="col-md-9">
-            <div class="span4">
-                <blockquote>
-                    <p>Welcome <?php echo $employer->company; ?>!</p>
-                </blockquote>
-                <p>
-                    <i class="glyphicon glyphicon-envelope"></i> <?php echo $employer->email; ?> <br>
-                    <i class="glyphicon glyphicon-time"></i> Since <?php echo $this->dateFormat(new DateTime($associate->createdat), IntlDateFormatter::LONG,IntlDateFormatter::MEDIUM); ?>
-                </p>
-            </div>
+        <div class="page-header">
+            <h1>Welcome <?php echo $employer->company; ?>!</h1>
+        </div>
+        <div class="page-body">
+            <i class="glyphicon glyphicon-envelope"></i> <?php echo $employer->email; ?> <br>
+            <i class="glyphicon glyphicon-time"></i> Since <?php echo $this->dateFormat(new DateTime($associate->createdat), IntlDateFormatter::LONG,IntlDateFormatter::MEDIUM); ?>
         </div>
     </div>
 </div> 

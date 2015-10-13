@@ -1,6 +1,8 @@
 <div class="row">
-    <div class="col-md-9">
-        <h1 class="page-title">Change logo</h1>
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Change logo</h1>
+        </div>
         <div class="page-body">
             <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo $this->serverUrl($this->url('company', array('action'=>'changelogo'))); ?>">
                 <input type="hidden" name="id" value="<?php echo $id; ?>" />

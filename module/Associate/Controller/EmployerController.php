@@ -242,17 +242,39 @@ class EmployerController extends AbstractActionController
         
         $id = (int) $this->params()->fromRoute('id', 0);
         
-         if($this->getRequest()->isPost()){
+        if($this->getRequest()->isPost()){
+           $data = $this->getRequest()->getPost();
+           if($userid = $this->getAssociateTable()->saveAssociate($data)){
+               $data['employee_id'] = $userid;
+               if($this->getEmployeeTable()->saveEmployee($data)){
+                   $this->flashmessenger()->addMessage('Employee information saved successfully.');
+               }
+           }
+           return $this->redirect()->toRoute('company', array('action' => 'employee'));
+        }
+    }
+    
+    public function editemployeeAction()
+    {
+        if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('associate');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        if($this->getRequest()->isPost()){
             $data = $this->getRequest()->getPost();
-            if($userid = $this->getAssociateTable()->saveAssociate($data)){
-                $data['employee_id'] = $userid;
-                if($this->getEmployeeTable()->saveEmployee($data)){
-                    $this->flashmessenger()->addMessage('Employee information saved successfully.');
-                }
+            if($this->getEmployeeTable()->updateEmployee($data)){
+                $this->flashmessenger()->addMessage('Employee information updated successfully.');
             }
-         }
-         
-        return $this->redirect()->toRoute('company', array('action' => 'employee'));
+            return $this->redirect()->toRoute('company', array('action' => 'employee', 'id' => $id));
+        }
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'associate' => $this->getAssociateTable()->fetchAll(),
+            'employee' => $this->getEmployeeTable()->getEmployee($id),
+        ));
     }
     
     public function genpayslipAction(){

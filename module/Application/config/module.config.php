@@ -145,6 +145,14 @@ return array(
                         ),
             ),
             array(
+                'label' => 'FAQ',
+                'route' => 'page',
+                'params' => array(
+                            'action' => 'index',
+                            'url' => 'faq',
+                        ),
+            ),
+            array(
                 'label' => 'Contact Us',
                 'route' => 'contact',
             ),
