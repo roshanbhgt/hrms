@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="page-header">
+        <div class="panel-title">Raise your ticket</div>
+    </div>
+    <div class="page-body">
+        <form id="signupform" class="form-horizontal" role="form"
+              action="<?php echo $this->serverUrl($this->url('employee', array('action'=>'grievance'))); ?>" method="post">
+            <input type="hidden" name="employee_id" value="<?php echo $id; ?>" />            
+            <div class="form-group">
+                <label for="Name" class="col-md-3 control-label">Name</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="name" placeholder="Full Name" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="location" class="col-md-3 control-label">Location</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="location" placeholder="Your Location" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="client" class="col-md-3 control-label">Client / Company Name</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="client" placeholder="Client/Company Name" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-md-3 control-label">Email</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="email" placeholder="Email" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="contact" class="col-md-3 control-label">Contact No.</label>
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="contact" placeholder="Contact No" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="complaint" class="col-md-3 control-label">Country</label>
+
+                <div class="col-md-6">
+                    <select id="complaint" class="form-control"  name="complaint">
+                        <option selected="" value="-1">---- Select from options ----</option>
+                        <option value="breach of human rights">breach of human rights</option>
+                        <option value="breach of Business Principles">breach of Business Principles</option>
+                        <option value="non-compliance with internal policies and procedures">non-compliance with internal policies and procedures</option>
+                        <option value="discrimination">discrimination</option>
+                        <option value="racism">racism</option>
+                        <option value="sexual or other harassment,&nbsp; intimidation">sexual or other harassment,&nbsp; intimidation</option>
+                        <option value="health and safety failures">health and safety failures</option>
+                        <option value="accounting/financial reporting issues">accounting/financial reporting issues</option>
+                        <option value="breach of internal controls">breach of internal controls</option>
+                        <option value="breach of competition and antitrust laws">breach of competition and antitrust laws</option>
+                        <option value="breach of laws on insider trading and market abuse of shares or securities">breach of laws on insider trading and market abuse of shares or securities</option>
+                        <option value="breach of other law(s) and regulation(s)">breach of other law(s) and regulation(s)</option>
+                        <option value="breach of confidentiality or privacy">breach of confidentiality or privacy</option>
+                        <option value="improper management practices">improper management practices</option>
+                        <option value="misuse of property for personal purposes">misuse of property for personal purposes</option>
+                        <option value="abuse of alcohol or drugs">abuse of alcohol or drugs</option>
+                        <option value="fraud">fraud</option>
+                        <option value="theft">theft</option>
+                        <option value="corruption/bribery">corruption/bribery</option>
+                        <option value="Income Tax Queries">Income Tax Queries</option>
+                        <option value="Form 16 Queries">Form 16 Queries</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="message" class="col-md-3 control-label">Enter your grievance</label>
+
+                <div class="col-md-6">
+                    <textarea class="form-control" name="message" placeholder="Enter your grievance" ></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <!-- Button -->
+                <div class="col-md-offset-3 col-md-9">
+                    <button id="btn-signup" type="submit" class="btn btn-primary"><i class="icon-hand-right"></i>
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

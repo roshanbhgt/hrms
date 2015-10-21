@@ -1,0 +1,1350 @@
+<div class="row">
+    <div class="page-header">
+        <div class="panel-title">Investment Declaration</div>
+    </div>
+    <div class="page-body">
+    <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+        <tbody>
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" border="1" style="padding: 5px;
+                    width: 100%; table-layout: auto; border-collapse: collapse; border-spacing: 1px;
+                    empty-cells: show;" frame="void">
+                    <tbody>
+						<tr>
+							<td align="center">
+								<b>Please read the notes before filling up this form.</b>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>
+									<ul>
+										<li>Provident fund and life insurance premium deductions through salary should not be shown in this form.</li>
+										<li>Amount paid / payable during the year april <?php echo date("Y"); ?> - march <?php echo date("Y")+1; ?> should be shown under 'amount' column.</li>
+										<li>If you have not yet applied for PAN, <a target="_blank" href="https://tin.tin.nsdl.com/pan/form49A.html">please apply</a> for the same immediately.</li>
+									</ul>
+								</p>
+								<p>
+									<b>Note:</b> <small style="color:red">
+										<ul>
+											<li>PAN not available TDS will be deducted @ 20%.</li>
+											<li>PAN submitted from 1st to 15th will be considered in current month payroll.</li>
+											<li>PAN submitted after 15th will be consdered in next month payroll.</li>
+										</ul>
+									</small>
+								</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 10px"></td>
+        </tr>
+        <tr>
+            <td>
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">INCOME TAX DECLARATION FOR THE FINANCIAL YEAR <?php echo date("Y"); ?>-<?php echo date("Y")+1; ?></h3>
+						</div>
+						<div class="panel-body">
+							<table cellspacing="0" cellpadding="0" border="1" style="padding: 5px;
+							width: 100%; table-layout: auto; border-collapse: collapse; border-spacing: 1px;
+							empty-cells: show;" frame="void" >
+								<tbody>
+									<tr>
+										<td >
+											Employee Code
+										</td>
+										<td >
+											<?php echo $associate->username; ?>
+										</td>
+									</tr>
+									<tr>
+										<td >
+											Employee Name(in capital letter)
+										</td>
+										<td >
+											<?php echo $employee->firstname.' '.$employee->lastname; ?>
+										</td>
+									</tr>
+									<tr>
+										<td >
+											Date of Joining
+										</td>
+										<td >
+											<span  id="lbldoj"><?php echo $this->dateFormat(new DateTime($employee->doj), IntlDateFormatter::LONG,IntlDateFormatter::MEDIUM); ?></span>
+										</td>
+									</tr>
+									<tr>
+										<td >
+											Gender
+										</td>
+										<td >
+											<span  id="LblGender"><?php echo ucfirst($employee->gender); ?></span>
+										</td>
+									</tr>
+									<tr>
+										<td >
+											PAN Number
+										</td>
+										<td>
+											<input type="text" class="ele_input" id="TxtPan" readonly="readonly" value="AVQPS7477N" name="TxtPan">
+										</td>
+									</tr>
+									<tr>
+										<td >
+											Don't have PAN Number
+										</td>
+										<td>
+											<span disabled="disabled" class="E_checkBox"><input type="radio" disabled="disabled" value="optPan" name="optPan" id="optPan"><label for="optPan">pan applied</label></span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 10px">
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="height: 5px">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">INVESTMENT PLAN FOR THE FINANCIAL YEAR <?php echo date("Y"); ?>-<?php echo date("Y")+1; ?></h3>
+						</div>
+						<div class="panel-body">
+							<table cellspacing="0" cellpadding="0" border="1" style="padding: 5px;
+								width: 100%; table-layout: auto; border-collapse: collapse; border-spacing: 1px;
+								empty-cells: show;" frame="void">
+								<tbody>
+									<tr>
+										<td >
+											I here by declare that my Investment plan for the current financial year is as follows:
+											<br/><br/>investments proposal under Section 80 C: 
+										</td>
+										<tr>
+											<td style="height: 10px">
+											</td>
+										</tr>
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" border="1" style="padding: 5px;
+                    width: 100%; table-layout: auto; border-collapse: collapse; border-spacing: 1px;
+                    empty-cells: show;" frame="void" >
+                    <tbody><tr>
+                        <td style="background-color: #f9f9f9;" >
+                            SrNo.
+                        </td>
+                        <td style="background-color: #f9f9f9;" >
+                            Type of Investment
+                        </td>
+                        <td style="background-color: #f9f9f9;" >
+                            Amount (in Rs.)
+                        </td>
+                        <td style="background-color: #f9f9f9;" >
+                            Proof Required Later
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            1
+                        </td>
+                        <td  style="width: 500px">
+                            Life insurance premium paid for self/spouse/children<br>
+                            (excluding the deductions through salary)
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="1" id="TxtLICSelf" value="7240" name="TxtLICSelf">
+                        </td>
+                        <td  style="width: 250px">
+                            Copy of premium receipt
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            2
+                        </td>
+                        <td  style="width: 500px">
+                            Public provident fund subscriptions for
+                            <br>
+                            self/spouse/children
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="2" id="TxtPPFSelf" value="0" name="TxtPPFSelf">
+                        </td>
+                        <td  style="width: 250px">
+                            Deposit receipt for PPF
+                            <br>
+                            account / passbook
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            3
+                        </td>
+                        <td  style="width: 500px">
+                            NSC (only in the name of self)
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="3" id="TxtNSCSelf" value="0" name="TxtNSCSelf">
+                        </td>
+                        <td  style="width: 250px">
+                            Copy of NSC certificate
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            4
+                        </td>
+                        <td  style="width: 500px">
+                            NSC accrued interest - please download the NSC<br>
+                            accrued interest calculation MS Excel<br>
+                            sheet available <a class="ele_L4" target="_blank" href="NSC Accrued Interest Template and Table.xls">here</a> and use it to calculate the NSC
+                            <br>
+                            accrued interest.
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="4" id="TxtNSCInterest" value="0" name="TxtNSCInterest">
+                        </td>
+                        <td  style="width: 250px">
+                            Copy of NSC certificate
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            5
+                        </td>
+                        <td  style="width: 500px">
+                            Unit linked Insurance plan (ULIP)
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="5" id="TxtUlip" value="0" name="TxtUlip">
+                        </td>
+                        <td  style="width: 250px">
+                            Acknowledgement copy
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            6
+                        </td>
+                        <td  style="width: 500px">
+                            Principal repayment on housing loan
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="6" id="TxtPrHLoan" value="0" name="TxtPrHLoan">
+                        </td>
+                        <td  style="width: 250px">
+                            Certificate of principal repayment from<br>
+                            the financial institution
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            7
+                        </td>
+                        <td  style="width: 500px">
+                            Infrastructure company’s tax saving bonds
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="7" id="TxtInCSavingBond" value="0" name="TxtInCSavingBond">
+                        </td>
+                        <td  style="width: 250px">
+                            Copy of Bond /acknowledgement copy<br>
+                            of payment
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            8
+                        </td>
+                        <td  style="width: 500px">
+                            Equity linked saving scheme (ELSS)
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="8" id="TxtELSS" value="0" name="TxtELSS">
+                        </td>
+                        <td  style="width: 250px">
+                            Proof of investment made
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            9
+                        </td>
+                        <td  style="width: 500px">
+                            Children education expenses (please
+                            <br>
+                            mention number of children going to school/college)<br>
+                            <br>
+                            no. of children going to school/college<br>
+                            <table border="0" onclick="ChkNone();" id="optSch">
+    <tbody><tr>
+    <td><input type="radio" checked="checked" value="0" name="optSch" id="optSch_0"><label for="optSch_0">none</label></td><td><input type="radio" value="1" name="optSch" id="optSch_1"><label for="optSch_1">1</label></td><td><input type="radio" value="2" name="optSch" id="optSch_2"><label for="optSch_2">2</label></td>
+    </tr>
+    </tbody></table>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+            </td>
+        </tr>
+        
+        
+                            <br>
+
+
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="9" id="TxtChildExp" value="0" name="TxtChildExp">
+                        </td>
+                        <td  style="width: 250px">
+                            Proof of expenses incurred (only the school
+                            <br>
+                            fees, excluding donations/building fund)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            10
+                        </td>
+                        <td  style="width: 500px">
+                            Tax Saving Mutual Funds.
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="10" id="TxtTaxSMFund" value="0" name="TxtTaxSMFund">
+                        </td>
+                        <td  style="width: 250px">
+                            Proof of investment
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            11
+                        </td>
+                        <td  style="width: 500px">
+                            Tax saving fixed deposits (minimum<br>
+                            lock in period of 5 years).
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="11" id="TxtTaxSFixedDP" value="0" name="TxtTaxSFixedDP">
+                        </td>
+                        <td  style="width: 250px">
+                            proof of investment
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            12
+                        </td>
+                        <td  style="width: 500px">
+                            Systematic investment plans (SIP).
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="12" id="TxtSIP" value="0" name="TxtSIP">
+                        </td>
+                        <td  style="width: 250px">
+                            Proof of investment
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            13
+                        </td>
+                        <td  style="width: 500px">
+                            Post office time deposits
+                            <br>
+                            (minimum lock in period of 5 years).
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="13" id="TxtPSDep" value="0" name="TxtPSDep">
+                        </td>
+                        <td  style="width: 250px">
+                            Proof of investment
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td  style="width: 60px">
+                            14
+                        </td>
+                        <td  style="width: 500px">
+                            National pension scheme (NPS)
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="13" id="TxtNPR" value="0" name="TxtNPR">
+                        </td>
+                        <td  style="width: 250px">
+                            Proof of investment
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            15
+                        </td>
+                        <td  style="width: 500px">
+                            National saving scheme(NSS)
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="13" id="TxtNSS" value="0" name="TxtNSS">
+                        </td>
+                        <td  style="width: 250px">
+                            Proof of investment
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            16
+                        </td>
+                        <td  style="width: 500px">
+                            Sukanya Samriddhi Scheme
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="13" id="TxtSukanya" value="0" name="TxtSukanya">
+                        </td>
+                        <td  style="width: 250px">
+                            Proof of investment
+                        </td>
+                    </tr>
+
+                </tbody></table>
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 10px">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" border="1" style="padding: 5px;
+                    width: 100%; table-layout: auto; border-collapse: collapse; border-spacing: 1px;
+                    empty-cells: show;" frame="void" >
+                    <tbody><tr>
+                        <td style="background-color: #f9f9f9;" >
+                            Sr. No.
+                        </td>
+                        <td style="background-color: #f9f9f9;" >
+                            Section
+                        </td>
+                        <td style="background-color: #f9f9f9;" >
+                            Remarks
+                        </td>
+                        <td style="background-color: #f9f9f9;" >
+                            Amount (in Rs.)
+                        </td>
+                        <td style="background-color: #f9f9f9;" >
+                            Proof required later
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            1
+                        </td>
+                        <td  style="width: 400px">
+                            <b>Section 80CCC</b><br>
+                            Pension scheme (Section 80 CCC)
+                        </td>
+                        <td  style="width: 250px">
+                            Investments made in jeevan
+                            <br>
+                            suraksha of LIC or any other insurer.
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="14" id="TxtSec80CCC" value="0" name="TxtSec80CCC">
+                        </td>
+                        <td  style="width: 250px">
+                            Copy of premium paid receipt
+                        </td>
+                    </tr>
+
+                    <tr  style="width: 60px" id="tr80ccf">
+    <td  style="width: 60px">
+                            2
+                        </td>
+    <td  style="width: 400px">
+                            <b>Section 80CCG</b>
+                        </td>
+    <td  style="width: 250px">
+                            Rajiv Gandhi equity saving scheme
+                            <br>
+                            <input type="checkbox" onclick="checkrajiv()" text="please tick for first time" id="chkrajiv" name="chkrajiv">Tick for first time
+                            <br>
+                        </td>
+    <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return false" class="inputn" tabindex="15" disabled="disabled" id="TxtSec80CCF" value="0" name="TxtSec80CCF">
+                            <br>
+                            <br>
+                            <input type="text" style="width:150px;" onblur="javascript:SetZero(this);" onfocus="javascript:SetnoZero(this);" class="inputn" disabled="disabled" id="Txtrajiv" value="0" name="Txtrajiv">
+                        </td>
+    <td  style="width: 250px">
+                            Proof of investments made
+                        </td>
+    </tr>
+
+                    <tr>
+                        <td colspan="5">
+                            Note:<span style="color: Red;"> A first-timer is one who has not opened a demat account
+                                as a 'first holder' before the notification date of 23 November 2012, even if his
+                                name appears in a joint demat account opened before this date. The investor who
+                                has opened a demat account as first holder before the notification date but has
+                                not bought any shares or traded in the futures and options segment will also be
+                                considered as a first-time investor.Deduction under this section would be maximum
+                                of Rs.50000 or 50% of the invested amount. Deduction for this Scheme is available
+                                only for those employees having gross total income not exceeding Rs.12,50,000.
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="width: 60px">
+                            3
+                        </td>
+                        <td  style="width: 400px">
+                            <b>Section 80D</b><br>
+                            Mediclaim insurance premium
+                        </td>
+                        <td  style="width: 250px">
+                            Premium should be paid by cheque<br>
+                            only to avail deduction
+                        </td>
+                        <td  style="width: 150px">
+                            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" id="TxtSec80D" value="0" name="TxtSec80D" disabled="">
+                        </td>
+                        <td  style="width: 250px">
+                            Copy of premium paid receipt
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="style1">
+                            3a
+                        </td>
+                        <td class="style2">
+                            &nbsp; <b>Section 80D</b><br>
+                            Mediclaim insurance premium
+                        </td>
+                        <td colspan="3">
+                            <div style="width: 500px; height: 260px;">
+                                <table align="left">
+                                    <tbody><tr align="center">
+                                        <td>
+                                            Relation
+                                        </td>
+                                        <td>
+                                            Dob(dd/mm/yyyy)
+                                        </td>
+                                        <td>
+                                            Age
+                                        </td>
+                                        <td>
+                                            Amount
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 75px">
+                                            <input type="checkbox" onclick="checktxt(this,'father');" id="chkfather" name="chkfather">
+                                            <b>Father</b>
+                                            <br>
+                                            <br>
+                                        </td>
+                                        <td>
+                                            <input type="text" style="width:120px;" onblur="DateCheck(this,'father');" onfocus="DateCheck(this,'father');" class="inputn" id="TxtfatherDOB" value="0" name="TxtfatherDOB" disabled="">
+                                        </td>
+                                        <td>
+                                            <input type="text" style="width:120px;" onkeypress="return false;" class="inputn" id="TxtfatherAGE" value="0" name="TxtfatherAGE" disabled="">
+                                        </td>
+                                        <td>
+                                            <input type="text" style="width:120px;" onfocus="javascript:SetnoZero(this);" onblur="Chk80D(this,'father');" onkeypress="return noNumbers(event)" class="inputn" id="TxtfatherAmt" value="0" name="TxtfatherAmt" disabled="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" onclick="javascript:checktxt(this,'mother');" id="chkmother" name="chkmother"><b>Mother</b>
+                                            <br>
+                                            <br>
+                                        </td>
+                                        <td>
+                                            <input type="text" style="width:120px;" onblur="DateCheck(this,'mother');" class="inputn" id="TxtmotherDOB" value="0" name="TxtmotherDOB" disabled="">
+                                        </td>
+
+                        <td>
+                            <input type="text" style="width:120px;" onkeypress="return false;" class="inputn" id="TxtmotherAGE" value="0" name="TxtmotherAGE" disabled="">
+                        </td>
+                        <td>
+                            <input type="text" style="width:120px;" onfocus="javascript:SetnoZero(this);" onblur="Chk80D(this,'mother');" class="inputn" id="TxtmotherAmt" value="0" name="TxtmotherAmt" disabled="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" onclick="javascript:checktxt(this,'self');" id="chkself" name="chkself"><b>Self</b>
+                            <br>
+                            <br>
+                        </td>
+                        <td>
+                            <input type="text" style="width:120px;" onblur="DateCheck(this,'self');" class="inputn" id="TxtselfDOB" value="0" name="TxtselfDOB" disabled="">
+                        </td>
+
+            <td>
+                <input type="text" style="width:120px;" onkeypress="return false;" class="inputn" id="TxtselfAGE" value="0" name="TxtselfAGE" disabled="">
+            </td>
+            <td>
+                <input type="text" style="width:120px;" onblur="Chk80Dself(this);" onfocus="javascript:SetnoZero(this);" onkeypress="return noNumbers(event)" class="inputn" id="TxtselfAmt" value="0" name="TxtselfAmt" disabled="">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" onclick="javascript:checktxt(this,'spouse');" id="chkspouse" name="chkspouse">
+                <b>Spouse</b>
+                <br>
+                <br>
+            </td>
+            <td>
+                <input type="text" style="width:120px;" onblur="DateCheck(this,'spouse');" class="inputn" id="TxtspouseDOB" value="0" name="TxtspouseDOB" disabled="">
+            </td>
+
+            <td>
+                <input type="text" style="width:120px;" onkeypress="return false;" class="inputn" id="TxtspouseAGE" value="0" name="TxtspouseAGE" disabled="">
+            </td>
+            <td>
+                <input type="text" style="width:120px;" onblur="Chk80Dself(this);" onfocus="javascript:SetnoZero(this);" onkeypress="return noNumbers(event)" class="inputn" id="TxtspouseAmt" value="0" name="TxtspouseAmt" disabled="">
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="checkbox" onclick="javascript:checktxt(this,'child1');" id="chkchild1" name="chkchild1">
+                <b>Child 1</b>
+                <br>
+                <br>
+            </td>
+            <td>
+                <input type="text" style="width:120px;" onblur="DateCheck(this,'child1');" class="inputn" id="Txtchild1DOB" value="0" name="Txtchild1DOB" disabled="">
+            </td>
+            <td>
+                <input type="text" style="width:120px;" onkeypress="return false;" class="inputn" id="Txtchild1AGE" value="0" name="Txtchild1AGE" disabled="">
+            </td>
+            <td>
+                <input type="text" style="width:120px;" onblur="Chk80Dself(this);" onfocus="javascript:SetnoZero(this);" onkeypress="return noNumbers(event)" class="inputn" id="Txtchild1Amt" value="0" name="Txtchild1Amt" disabled="">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" onclick="javascript:checktxt(this,'child2');" id="chkchild2" name="chkchild2">
+                <b>Child 2</b>
+                <br>
+                <br>
+            </td>
+            <td>
+                <input type="text" style="width:120px;" onblur="DateCheck(this,'child2');" class="inputn" id="Txtchild2DOB" value="0" name="Txtchild2DOB" disabled="">
+            </td>
+            <td>
+                <input type="text" style="width:120px;" onkeypress="return false;" class="inputn" id="Txtchild2AGE" value="0" name="Txtchild2AGE" disabled="">
+            </td>
+            <td>
+                <input type="text" style="width:120px;" onblur="Chk80Dself(this);" class="inputn" id="Txtchild2Amt" value="0" name="Txtchild2Amt" disabled="">
+            </td>
+        </tr>
+    </tbody></table>
+    </div> </td> </tr>
+    <tr>
+        <td  style="width: 60px">
+            4
+        </td>
+        <td  style="width: 400px">
+            <b>Section 80E</b><br>
+            Education loan interest repayment
+        </td>
+        <td  style="width: 250px">
+            Repayment of education loan interest<br>
+            for self and dependant.
+        </td>
+        <td  style="width: 150px">
+            <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="34" id="TxtSec80E" value="0" name="TxtSec80E">
+        </td>
+        <td  style="width: 250px">
+            Certificate from lender
+        </td>
+    </tr>
+    <tr>
+        <td  style="width: 60px">
+            5
+        </td>
+        <td  style="width: 400px">
+            <b>Section 80 DD</b><br>
+            Maintenance / medical treatment<br>
+            of handicapped dependant
+        </td>
+        <td  style="width: 250px">
+            Say yes/no and mention your
+            <br>
+            relationship with the dependant<br>
+            <br>
+            <table border="0" id="optSec80DD">
+    <tbody><tr>
+    <td><input type="radio" onclick="javascript:setTimeout('__doPostBack(\'optSec80DD$0\',\'\')', 0)" value="Yes" name="optSec80DD" id="optSec80DD_0"><label for="optSec80DD_0">yes</label></td><td><input type="radio" checked="checked" value="No" name="optSec80DD" id="optSec80DD_1"><label for="optSec80DD_1">no</label></td>
+    </tr>
+    </tbody></table>
+            <br>
+
+        </td>
+        <td  style="width: 150px">
+            <input type="text" style="width:150px;" onkeypress="return noNumbers(event)" class="inputn" tabindex="35" id="TxtSec80DD" readonly="readonly" value="0" name="TxtSec80DD">
+        </td>
+        <td  style="width: 250px">
+            Self- declaration of expenditure<br>
+            incurred &amp; certificate from
+            <br>
+            govt.doctor
+        </td>
+    </tr>
+    <tr>
+        <td  style="width: 60px">
+            6
+        </td>
+        <td  style="width: 400px">
+            <b>Section 80U</b><br>
+            Deduction in respect of person
+            <br>
+            with disability
+        </td>
+        <td  style="width: 250px">
+            Deduction is allowed to a person<br>
+            suffering from a permanent physical disability<br>
+            select disability level<br>
+            <select style="width:160px;" class="ele_select" id="DrpSec80U" onchange="javascript:setTimeout('__doPostBack(\'DrpSec80U\',\'\')', 0)" name="DrpSec80U">
+    <option value="0" selected="selected">Not Applicable</option>
+    <option value="1">Normal Disability</option>
+    <option value="2">Severe Disability(80% &amp; above)</option>
+
+    </select>
+        </td>
+        <td  style="width: 150px">
+            <input type="text" style="width:150px;" onkeypress="return noNumbers(event)" class="inputn" tabindex="37" id="TxtSec80U" readonly="readonly" value="0" name="TxtSec80U">
+        </td>
+        <td  style="width: 250px">
+            Certificate from govt, doctor
+        </td>
+    </tr>
+    <tr>
+        <td  style="width: 60px">
+            7
+        </td>
+        <td  style="width: 400px">
+            <b>Previous employment income details</b><br>
+            (if DOJ in the present organization is after<br>
+            1st april'<span  id="lblspyear">2015</span>
+            <br>
+            the previous employees details)
+        </td>
+        <td colspan="2"  style="width: 400px">
+            <table width="100%" cellspacing="1" cellpadding="1" border="0">
+                <tbody><tr>
+                    <td  style="width: 250px">
+                        Salary income after deduction under Sec.10
+                    </td>
+                    <td  style="width: 150px">
+                        <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="38" disabled="disabled" id="TxtSalSec10" value="0" name="TxtSalSec10">
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="width: 250px">
+                        Previous PT
+                    </td>
+                    <td  style="width: 150px">
+                        <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="39" disabled="disabled" id="TxtPrevPT" value="0" name="TxtPrevPT">
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="width: 250px">
+                        Previous PF
+                    </td>
+                    <td  style="width: 150px">
+                        <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="40" disabled="disabled" id="TxtPrevPF" value="0" name="TxtPrevPF">
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="width: 250px">
+                        Tax deducted by previous employer
+                    </td>
+                    <td  style="width: 150px">
+                        <input type="text" style="width:150px;" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="41" disabled="disabled" id="TxtPrevTDS" value="0" name="TxtPrevTDS">
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span style="color: Red;">Note:your DOJ should be greater than the financial start date
+                            to enter previous employement details</span>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+        <td  style="width: 250px">
+            Form 16 from previous employer /<br>
+            submit 12B signed along with self
+            <br>
+            attested annual tax computation certified
+            <br>
+            by previous employer in the same month
+            <br>
+            to finance
+        </td>
+    </tr>
+    </tbody></table> </td> </tr>
+    <tr>
+        <td style="height: 10px">
+        </td>
+    </tr>
+    <tr>
+        <td >
+            House rent details
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 5px">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table cellspacing="0" cellpadding="0" border="1" style="padding: 5px;
+                width: 100%; table-layout: auto; border-collapse: collapse; border-spacing: 1px;
+                empty-cells: show;" frame="void" >
+                <tbody><tr>
+                    <td style="background-color: #f9f9f9;" >
+                        Sr No.
+                    </td>
+                    <td style="background-color: #f9f9f9;" >
+                        Particulars
+                    </td>
+                    <td style="background-color: #f9f9f9;" >
+                        Proof required later
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="width: 60px">
+                        1
+                    </td>
+                    <td  style="width: 650px">
+                        <table width="100%" cellspacing="2" cellpadding="2" border="1">
+                            <tbody><tr>
+                                <td >
+                                    Month
+                                </td>
+                                <td >
+                                    Amount(in Rs.)
+                                </td>
+                                <td >
+                                    City name
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    april
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(1,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="42" id="Txt1" value="0" name="Txt1">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp1" onchange="javascript:setTimeout('__doPostBack(\'Drp1\',\'\')', 0)" name="Drp1">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    may
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(2,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="43" id="Txt2" value="0" name="Txt2">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp2" onchange="javascript:setTimeout('__doPostBack(\'Drp2\',\'\')', 0)" name="Drp2">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    june
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(3,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="44" id="Txt3" value="0" name="Txt3">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp3" onchange="javascript:setTimeout('__doPostBack(\'Drp3\',\'\')', 0)" name="Drp3">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    july
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(4,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="45" id="Txt4" value="0" name="Txt4">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp4" onchange="javascript:setTimeout('__doPostBack(\'Drp4\',\'\')', 0)" name="Drp4">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    august
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(5,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="46" id="Txt5" value="0" name="Txt5">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp5" onchange="javascript:setTimeout('__doPostBack(\'Drp5\',\'\')', 0)" name="Drp5">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    september
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(6,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="47" id="Txt6" value="0" name="Txt6">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp6" onchange="javascript:setTimeout('__doPostBack(\'Drp6\',\'\')', 0)" name="Drp6">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    october
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(7,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="48" id="Txt7" value="0" name="Txt7">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp7" onchange="javascript:setTimeout('__doPostBack(\'Drp7\',\'\')', 0)" name="Drp7">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    november
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(8,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="49" id="Txt8" value="0" name="Txt8">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp8" onchange="javascript:setTimeout('__doPostBack(\'Drp8\',\'\')', 0)" name="Drp8">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    december
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(9,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="50" id="Txt9" value="0" name="Txt9">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp9" onchange="javascript:setTimeout('__doPostBack(\'Drp9\',\'\')', 0)" name="Drp9">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    january
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(10,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="51" id="Txt10" value="0" name="Txt10">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp10" onchange="javascript:setTimeout('__doPostBack(\'Drp10\',\'\')', 0)" name="Drp10">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    february
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(11,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="52" id="Txt11" value="0" name="Txt11">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp11" onchange="javascript:setTimeout('__doPostBack(\'Drp11\',\'\')', 0)" name="Drp11">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 150px" >
+                                    march
+                                </td>
+                                <td style="width: 300px" >
+                                    <input type="text" style="width:150px;" onkeyup="javascript:SetHRAmt(12,this);" onfocus="javascript:SetnoZero(this);" onblur="javascript:SetZero(this);" onkeypress="return noNumbers(event)" class="inputn" tabindex="53" id="Txt12" value="0" name="Txt12">
+                                </td>
+                                <td style="width: 150px" >
+                                    <select style="width:150px;" class="ele_select" id="Drp12" onchange="javascript:setTimeout('__doPostBack(\'Drp12\',\'\')', 0)" name="Drp12">
+    <option value="--Select--" selected="selected">--Select--</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Kolkatta">Kolkatta</option>
+    <option value="Non-Metro">Non-Metro</option>
+
+    </select>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                    <td  style="width: 250px">
+                        Rent receipts / copy
+                        <br>
+                        of rental agreement.
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 5px">
+        </td>
+    </tr>
+    <tr>
+        <td >
+            Income / ( loss ) from house property
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 5px">
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #f9f9f9;" >
+            Property 1
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table cellspacing="0" cellpadding="0" border="1" style="padding: 5px;
+                width: 100%; table-layout: auto; border-collapse: collapse; border-spacing: 1px;
+                empty-cells: show;" frame="void" >
+                <tbody><tr>
+                    <td  style="width: 60px">
+                        1
+                    </td>
+                    <td  style="width: 400px">
+                        Interest on housing loan 1<br>
+                        (Section 24)
+                    </td>
+                    <td  style="width: 250px">
+                        Mention whether the<br>
+                        property is (self occupied/let out)<br>
+                        <table border="0" id="optLoan1">
+    <tbody><tr>
+    <td><input type="radio" onclick="javascript:setTimeout('__doPostBack(\'optLoan1$0\',\'\')', 0)" value="S" name="optLoan1" id="optLoan1_0"><label for="optLoan1_0">self occupied</label></td><td><input type="radio" onclick="javascript:setTimeout('__doPostBack(\'optLoan1$1\',\'\')', 0)" value="L" name="optLoan1" id="optLoan1_1"><label for="optLoan1_1">let out</label></td>
+    </tr>
+    </tbody></table>
+                    </td>
+                    <td  style="width: 150px">
+                        Amt of interest paid:<br>
+
+                        <br>
+
+                    </td>
+                    <td  style="width: 250px">
+                        Certificate from lender
+                        <br>
+                        along with form 12 C
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="width: 60px">
+                        1a
+                    </td>
+                    <td  style="width: 400px">
+                        Loan taken on
+                    </td>
+                    <td  style="width: 250px">
+                        <select style="width:60px;" onchange="javascript:ValidateMonthYear('Loan', 1);" class="ele_select" id="DrpLoan1Month" name="DrpLoan1Month">
+    <option value="0" selected="selected">--MM--</option>
+    <?php for($m=1; $m<=12; $m++) { ?>
+		<option value="<?php echo $m; ?>"><?php echo $m; ?></option>
+	<?php } ?>
+
+    </select>
+	<select style="width:60px;" onchange="javascript:ValidateMonthYear('Loan', 1);" class="ele_select" id="DrpLoan1Year" name="DrpLoan1Year">
+		<option value="0" selected="selected">--YYYY--</option>
+		<?php for($y=1990; $y<=date("Y"); $y++) { ?>
+			<option value="<?php echo $y; ?>"><?php echo $y; ?></option>
+		<?php } ?>
+    </select>
+                    </td>
+                    <td  style="width: 150px">
+                        Date of possession /
+                        <br>
+                        expected date of possession:
+                    </td>
+                    <td  style="width: 250px">
+                        <select style="width:60px;" onchange="javascript:ValidateMonthYear('Exp', 1);" class="ele_select" id="DrpExp1Month" name="DrpExp1Month">
+    <option value="0" selected="selected">--MM--</option>
+    <?php for($m=1; $m<=12; $m++) { ?>
+		<option value="<?php echo $m; ?>"><?php echo $m; ?></option>
+	<?php } ?>
+    </select>
+	<select style="width:60px;" onchange="javascript:ValidateMonthYear('Exp', 1);" class="ele_select" id="DrpExp1Year" name="DrpExp1Year">
+    <option value="0" selected="selected">--YYYY--</option>
+    <?php for($y=1990;$y<=date("Y");$y++) {?>
+		<option value="<?php echo $y; ?>"><?php echo $y; ?></option>
+	<?php } ?>
+    </select>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 10px">
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #f9f9f9;" >
+            Property 2
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table cellspacing="0" cellpadding="0" border="1" style="padding: 5px;
+                width: 100%; table-layout: auto; border-collapse: collapse; border-spacing: 1px;
+                empty-cells: show;" frame="void" >
+                <tbody><tr>
+                    <td  style="width: 60px">
+                        2
+                    </td>
+                    <td  style="width: 400px">
+                        Interest on housing loan 2<br>
+                        (Section 24)
+                    </td>
+                    <td  style="width: 250px">
+                        Mention whether the
+                        <br>
+                        property is (self occupied/let out)<br>
+                        <table border="0" id="optLoan2">
+    <tbody><tr>
+    <td><input type="radio" onclick="javascript:setTimeout('__doPostBack(\'optLoan2$0\',\'\')', 0)" value="S" name="optLoan2" id="optLoan2_0"><label for="optLoan2_0">self occupied</label></td><td><input type="radio" onclick="javascript:setTimeout('__doPostBack(\'optLoan2$1\',\'\')', 0)" value="L" name="optLoan2" id="optLoan2_1"><label for="optLoan2_1">let out</label></td>
+    </tr>
+    </tbody></table>
+                    </td>
+                    <td  style="width: 150px">
+                        Amt of interest paid:<br>
+
+                        <br>
+
+                    </td>
+                    <td  style="width: 250px">
+                        Certificate from lender
+                        <br>
+                        along with form 12 C
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="width: 60px">
+                        2a
+                    </td>
+                    <td  style="width: 400px">
+                        Loan taken on
+                    </td>
+                    <td  style="width: 250px">
+                        <select style="width:60px;" onchange="javascript:ValidateMonthYear('Loan', 2);" class="ele_select" id="DrpLoan2Month" name="DrpLoan2Month">
+    <option value="0" selected="selected">--MM--</option>
+	<?php for($m=1;$m<=12;$m++) {?>
+		<option value="<?php echo $m; ?>"><?php echo $m; ?></option>
+	<?php } ?>
+    </select>
+	<select style="width:60px;" onchange="javascript:ValidateMonthYear('Loan', 2);" class="ele_select" id="DrpLoan2Year" name="DrpLoan2Year">
+    <option value="0" selected="selected">--YYYY--</option>
+	<?php for($y=1990;$y<=date("Y");$y++) {?>
+		<option value="<?php echo $y; ?>"><?php echo $y; ?></option>
+	<?php } ?>
+    </select>
+                    </td>
+                    <td  style="width: 150px">
+                        Date of possession /
+                        <br>
+                        expected date of possession:
+                    </td>
+                    <td  style="width: 250px">
+                        <select style="width:60px;" onchange="javascript:ValidateMonthYear('Exp', 2);" class="ele_select" id="DrpExp2Month" name="DrpExp2Month">
+    <option value="0" selected="selected">--MM--</option>
+    <?php for($m=1;$m<=12;$m++) {?>
+		<option value="<?php echo $m; ?>"><?php echo $m; ?></option>
+	<?php } ?>
+
+    </select>
+                        <select style="width:60px;" onchange="javascript:ValidateMonthYear('Exp', 2);" class="ele_select" id="DrpExp2Year" name="DrpExp2Year">
+    <option value="0" selected="selected">--YYYY--</option>
+    <?php for($y=1990;$y<=date("Y");$y++) {?>
+		<option value="<?php echo $y; ?>"><?php echo $y; ?></option>
+	<?php } ?>
+    </select>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 10px">
+        </td>
+    </tr>
+    <tr>
+        <td >
+            DECLARATION:
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 5px">
+        </td>
+    </tr>
+    <tr>
+        <td >
+            I hereby declare the information given above is true &amp; correct. I undertake to inform
+            immediately of any change in the above facts. Any Income tax liability arising out
+            of wrong declaration will be my responsibility.
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 10px">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table width="100%" cellspacing="0" cellpadding="0" border="0" >
+                <tbody><tr>
+                    <td >
+                        date :
+                    </td>
+                    <td >
+                        <input type="text" style="width:150px;" class="ele_input" id="TxtDate" readonly="readonly" value="<?php echo date("d/m/Y"); ?>" name="TxtDate">
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 10px">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" class="btn btn-info" id="cmdSubmit" onclick="return CheckHRA();" value="submit" name="cmdSubmit">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+            &nbsp;&nbsp;
+            <div style="float: left; padding-left: 15px;">
+                <div style="display:none;" id="UpdateProgress1">
+
+                        <img src="images/loading.gif" alt="">
+
+    </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 10px">
+        </td>
+    </tr>
+    <tr>
+        <td >
+        <font color="red">*</font> kindly take a print out of the form and send the singed filled form at the nearest Goyal HR office within                                                            
+    30 days of online declaration of investment. otherwise the online declaration would not be considered for tax calculation.
+        </td>
+       </tr>
+    <tr>
+        <td>
+
+        </td>
+    </tr>
+    </tbody></table>
+                                
+
+    </div>
+</div>

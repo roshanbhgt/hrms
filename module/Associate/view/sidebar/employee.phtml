@@ -46,7 +46,17 @@
         <li>
             <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'payslips', 'id' => $employee->id))); ?>">
             <i class="glyphicon glyphicon-list"></i>
-            My Payslip</a>
+            My Pay Slip</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'investmentdeclare', 'id' => $employee->id))); ?>">
+            <i class="glyphicon glyphicon-list"></i>
+            Investment Declaration</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->serverUrl($this->url('employee', array('action'=>'grievance', 'id' => $employee->id))); ?>">
+            <i class="fa fa-ticket"></i>
+            Grievance Zone</a>
         </li>
         <li>
             <a href="<?php echo $this->serverUrl($this->url('associate', array('action'=>'logout'))); ?>" >

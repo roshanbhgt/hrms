@@ -28,6 +28,9 @@ use Associate\Model\EmployeeAttendance;
 use Associate\Model\EmployeeAttendanceTable;
 use Associate\Model\EmployeePayslips;
 use Associate\Model\EmployeePayslipsTable;
+use Associate\Model\EmployeeGrievance;
+use Associate\Model\EmployeeGrievanceTable;
+
 
 class Module
 {
@@ -127,6 +130,17 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new EmployeePayslips());
                     return new TableGateway('associate_user_payslips', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Associate\Model\EmployeeGrievanceTable' =>  function($sm) {
+                    $tableGateway = $sm->get('EmployeeGrievanceTableGateway');
+                    $table = new EmployeeGrievanceTable($tableGateway);
+                    return $table;
+                },
+                'EmployeeGrievanceTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new EmployeeGrievance());
+                    return new TableGateway('associate_user_grievance', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

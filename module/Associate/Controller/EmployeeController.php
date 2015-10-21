@@ -24,6 +24,7 @@ class EmployeeController extends AbstractActionController
     protected $employerTable;
     protected $payslipsTable;
     protected $countryTable;
+    protected $grievanceTable;
 
     public function getAuthService()
     {
@@ -93,6 +94,15 @@ class EmployeeController extends AbstractActionController
             $this->countryTable = $sm->get('Application\Model\CountryTable');
         }
         return $this->countryTable;
+    }
+    
+    public function getGrievanceTable()
+    {
+        if (!$this->grievanceTable) {
+            $sm = $this->getServiceLocator();
+            $this->grievanceTable = $sm->get('Associate\Model\EmployeeGrievanceTable');
+        }
+        return $this->grievanceTable;
     }
     
     public function indexAction()
@@ -252,6 +262,42 @@ class EmployeeController extends AbstractActionController
             'employee' => $employee,
             'employer' => $employer,
             'payslip' => $payslip
+        ));
+    }
+    
+    public function grievanceAction()
+    {
+        if (!$this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('associate');
+        }
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if($this->getRequest()->isPost()){
+            $data = $this->getRequest()->getPost(); 
+            if($this->getGrievanceTable()->save($data)){
+                $this->flashMessenger()->addSuccessMessage('You complaints posted successfully.');
+            }else{
+                $this->flashMessenger()->addErrorMessage('Unable to post you ticket.');
+            }
+            $id = $data['id'];
+        }
+        
+        return new ViewModel(array(
+            'id' => $id,
+        ));
+    }
+    
+    public function investmentdeclareAction()
+    {
+        if (!$this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('associate');
+        }
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $employee = $this->getEmployeeTable()->getEmployee($id);
+		$associate = $this->getAssociateTable()->getAssociate($id);
+        return new ViewModel(array(
+            'id' => $id,
+			'employee' => $employee,
+			'associate' => $associate
         ));
     }
 }

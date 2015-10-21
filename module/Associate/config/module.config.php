@@ -154,6 +154,8 @@ return array(
             'associate/employer/editemployee' => __DIR__ . '/../view/template/employer/employeedit.phtml',
             'associate/employee/payslips' => __DIR__ . '/../view/template/employee/payslip.phtml',
             'associate/employee/payslipsdownload' => __DIR__ . '/../view/template/employee/payslipdownloads.phtml',
+            'associate/employee/grievance' => __DIR__ . '/../view/template/employee/grievance.phtml',
+            'associate/employee/investmentdeclare' => __DIR__ . '/../view/template/employee/investmentdeclare.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
