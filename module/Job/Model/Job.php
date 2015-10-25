@@ -19,6 +19,7 @@ class Job
     public $status;
     public $postedat;
     public $updatedat;
+    public $recentpost;
         
     public function exchangeArray($data)
     {
@@ -37,5 +38,6 @@ class Job
         $this->status = (!empty($data['status'])) ? $data['status'] : null;
         $this->postedat = (!empty($data['postedat'])) ? $data['postedat'] : null;
         $this->updatedat  = (!empty($data['updatedat'])) ? $data['updatedat'] : null;
+        $this->recentpost  = (!empty($data['recentpost'])) ? $data['recentpost'] : null;
     }
 }

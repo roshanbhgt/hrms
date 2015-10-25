@@ -95,10 +95,10 @@ class UserTable
         $this->tableGateway->delete(array('id' => $id));
     }
     
-    public function isDuplcateEmail($email, $type){
-        $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('email' => $id, 'type'=> $type));
+    public function isDuplcateEmail($email, $type){        
+        $rowset = $this->tableGateway->select(array('email' => $email, 'type'=> $type));
         $row = $rowset->current();
+        
         if (!$row) {
             return FALSE;
         }

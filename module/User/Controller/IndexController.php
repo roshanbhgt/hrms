@@ -13,6 +13,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Password;
 use Zend\Session\Container;
+use Zend\File\Transfer\Adapter\Http;
 
 class IndexController extends AbstractActionController
 {
@@ -20,6 +21,9 @@ class IndexController extends AbstractActionController
     protected $authservice;
     protected $userTable;
     protected $countryTable;
+    protected $companyTable;
+    protected $jobseekerTable;
+    protected $resumeTable;
 
     public function getAuthService()
     {
@@ -62,6 +66,33 @@ class IndexController extends AbstractActionController
             $this->countryTable = $sm->get('Application\Model\CountryTable');
         }
         return $this->countryTable;
+    }
+    
+    public function getCompanyTable()
+    {
+        if (!$this->companyTable) {
+            $sm = $this->getServiceLocator();
+            $this->companyTable = $sm->get('User\Model\CompanyTable');
+        }
+        return $this->companyTable;
+    }
+    
+    public function getJobseekerTable()
+    {
+        if (!$this->jobseekerTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobseekerTable = $sm->get('User\Model\JobseekerTable');
+        }
+        return $this->jobseekerTable;
+    }
+    
+    public function getResumeTable()
+    {
+        if (!$this->resumeTable) {
+            $sm = $this->getServiceLocator();
+            $this->resumeTable = $sm->get('User\Model\ResumeTable');
+        }
+        return $this->resumeTable;
     }
 
     public function loginAction()
@@ -153,7 +184,12 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toRoute('user');
         }
 
-        $view = new ViewModel();
+       $view = new ViewModel(
+                    array( 
+                        'messages'  => $this->flashmessenger()->getMessages(),
+                        'countrys'  => $this->getCountryTable()->fetchAll()
+                    )
+                );
         return $view;
     }
 	
@@ -205,12 +241,49 @@ class IndexController extends AbstractActionController
         if ($request->isPost()){
             $data = $request->getPost();
             if ($request->getPost('type') == 'employer') {
-                if($this->getUserCompanyTable()->saveCompany($data)){
-                    $this->flashmessenger()->addMessage('Your company information saved successfully.');
+                if($userid = $this->getUserTable()->saveUser($data)){
+                    $data['userid'] = $userid;
+                    if($this->getCompanyTable()->saveCompany($data)){
+                        $this->flashmessenger()->addMessage('Your company information saved successfully.');
+                    }
                 }
             } elseif($request->getPost('type') == 'jobseeker') {
-                if($this->getUserTable()->saveUser($request->getPost())){
+                
+                if($userid = $this->getUserTable()->saveUser($data)){
+                    // Make certain to merge the files info!
+                    $data = array_merge_recursive(
+                        $request->getPost()->toArray(),
+                        $request->getFiles()->toArray()
+                    );
+                    
+                    $data['id'] = $userid;
+                    $data['title'] = 'Curriculum Vitae';
+
+                    // Define a transport and set the destination on the server
+                    $upload = new Http();
+                    $upload->setDestination("D:\webserver\htdocs\hrconsultancy\public\media\cv");
+
+                    try {
+                        // This takes care of the moving and making sure the file is there
+                        if($upload->receive()){
+                            $data['resume'] = str_replace("D:\webserver\htdocs\hrconsultancy\public", '',$upload->getFileName());
+                            $data['resume'] = str_replace('\\', '/', $data['resume']);
+                            echo '<pre>';
+                print_r($data);
+                exit;
+                            if($data['resume'] != ''){ 
+                                if($this->getResumeTable()->saveResume($data)){
+                                    $this->flashMessenger()->addSuccessMessage('Picture updated successfully.');
+                                }
+                            }else{
+                                $this->flashMessenger()->addErrorMessage('Please upload valid doc file.');
+                            }
+                        }
+                    } catch (Zend_File_Transfer_Exception $e) {
+                        echo $e->message();
+                    }
                     $this->flashmessenger()->addMessage('You personal information saved successfully.');
+                   
                 }
             }
         }

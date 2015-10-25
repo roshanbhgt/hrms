@@ -98,4 +98,18 @@ class JobTable
         $this->tableGateway->delete(array('id' => $id));
     }
     
+    
+    public function recentJob($id)
+    {
+        if ($this->getJob($id))
+        {
+            $data['recentpost'] = 'active';
+            $data['updatedat'] = date('y-m-d h:i:s');
+            $this->tableGateway->update($data, array('id' => $id));
+        } else {
+            throw new \Exception('User with id does not exist');
+        }
+    }
+    
+    
 }

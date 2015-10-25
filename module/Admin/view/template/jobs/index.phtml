@@ -1,0 +1,39 @@
+
+<?php
+$title = 'Jobs Management';
+$this->headTitle($title);
+?>
+<div class="row">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <table class="table">
+        <tr style="background-color:#2a6496;color: #ffffff">
+            <th style="width:10%;">Id</th>
+            <th style="width:15%;">Title</th>
+            <th style="width:15%;">Position</th>
+            <th style="width:40%;">Description</th>
+            <th style="width:40%;">Vacancy</th>
+            <th style="width:40%;">Status</th>
+            <th style="width:40%;">Recent Job</th>
+            <th style="width:20%;">Posted At</th>
+            <th style="width:10%;">&nbsp;</th>
+        </tr>
+        <?php foreach ($jobs as $val) : ?>
+            <tr style="background-color: <?php echo $this->cycle(array('#FFF', '#F0F0F0'))->next(); ?>">
+                <td><?php echo $this->escapeHtml($val->id);?></td>
+                <td><?php echo $this->escapeHtml($val->title);?></td>
+                <td><?php echo $this->escapeHtml($val->position);?></td>
+                <td><?php echo $this->escapeHtml($val->description);?></td>
+                <td><?php echo $this->escapeHtml($val->vacancy);?></td>
+                <td><?php echo $this->escapeHtml(ucfirst($val->status));?></td>
+                <td><?php echo $this->escapeHtml(ucfirst($val->recentpost));?></td>
+                <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->postedat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
+                <td>
+                    <a href="<?php echo $this->serverUrl($this->url('admin-jobs',
+                            array('action'=>'addinrecentjob', 'id' => $val->id)));?>" title="Mark as recent"><i class="glyphicon glyphicon-tag"></i></a>
+                    <a href="<?php echo $this->serverUrl($this->url('admin-jobs',
+                        array('action'=>'delete', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

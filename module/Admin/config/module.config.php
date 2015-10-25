@@ -333,6 +333,22 @@ return array(
                     ),
                 ),
             ),
+            'admin-jobs' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/jobs[/:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Jobs',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -363,10 +379,11 @@ return array(
             'Admin\Controller\User' => 'Admin\Controller\UserController',
             'Admin\Controller\Page' => 'Admin\Controller\PageController',
             'Admin\Controller\Banner' => 'Admin\Controller\BannerController',
-			'Admin\Controller\Menu' => 'Admin\Controller\MenuController',
-			'Admin\Controller\Country' => 'Admin\Controller\CountryController',
-			'Admin\Controller\Region' => 'Admin\Controller\RegionController',
+            'Admin\Controller\Menu' => 'Admin\Controller\MenuController',
+            'Admin\Controller\Country' => 'Admin\Controller\CountryController',
+            'Admin\Controller\Region' => 'Admin\Controller\RegionController',
             'Admin\Controller\Contact' => 'Admin\Controller\ContactController',
+            'Admin\Controller\Jobs' => 'Admin\Controller\JobsController',
         ),
     ),
     'view_manager' => array(
@@ -409,6 +426,7 @@ return array(
             'admin/region/add' => __DIR__ . '/../view/template/region/add.phtml',
             'admin/region/edit' => __DIR__ . '/../view/template/region/edit.phtml',
             'admin/contact/index' => __DIR__ . '/../view/template/contact/index.phtml',
+            'admin/jobs/index' => __DIR__ . '/../view/template/jobs/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -429,6 +447,11 @@ return array(
                 array(
                     'label' => 'Pages',
                     'route' => 'admin-page',
+                    'icon' => ''
+                ),
+                array(
+                    'label' => 'Jobs',
+                    'route' => 'admin-jobs',
                     'icon' => ''
                 ),
                 array(
