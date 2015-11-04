@@ -14,6 +14,7 @@ use Zend\View\Model\ViewModel;
 use Application\Model\Password;
 use Zend\Session\Container;
 use Zend\File\Transfer\Adapter\Http;
+use Zend\Mail;
 
 class IndexController extends AbstractActionController
 {
@@ -172,8 +173,28 @@ class IndexController extends AbstractActionController
         if ($this->getAuthService()->hasIdentity()){
             return $this->redirect()->toRoute('user');
         }
+        
+        $request = $this->getRequest();
+        if ($request->isPost()){
+            $data = $request->getPost();
+            if($this->getUserTable()->passwordReset($data)){
+                $this->flashMessenger()->addSuccessMessage('Your password has been reset successfully.');                
+                try{
+                    $mail = new Mail\Message();
+                    $mail->setBody('Your password has been reset to password. <br/>Please change your password at earliest.');
+                    $mail->setFrom('support@goyalhr.com', 'Support');
+                    $mail->addTo($data['email'], '');
+                    $mail->setSubject('Goyal HR : New password notification.');
 
-        $view = new ViewModel(array( 'messages'  => $this->flashmessenger()->getMessages()));
+                    $transport = new Mail\Transport\Sendmail();
+                    $transport->send($mail);
+                } catch (Exception $ex) {}
+            }else{
+                $this->flashMessenger()->addErrorMessage('Unable to reset password at this movement please try gain in some time.');                
+            }
+        }
+
+        $view = new ViewModel(array('messages'  => $this->flashMessenger()->getMessages()));
         return $view;
     }
    

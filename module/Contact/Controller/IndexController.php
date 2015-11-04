@@ -31,16 +31,16 @@ class IndexController extends AbstractActionController
             $data = $request->getPost();
             if($this->getContactTable()->saveContact($data)){
                 $this->flashMessenger()->addSuccessMessage('Your message has been posted successfully.');                
+                try{
+                    $mail = new Mail\Message();
+                    $mail->setBody('New query has been posted from someone, please check inbox at support@goyalhr.com');
+                    $mail->setFrom($data['email'], $data['name']);
+                    $mail->addTo('support@goyalhr.com', 'Support');
+                    $mail->setSubject('Goyal HR : New contact message');
 
-                $mail = new Mail\Message();
-                $mail->setBody('New query has been posted from someone, please check inbox at support@goyalhr.com');
-                $mail->setFrom($data['email'], $data['name']);
-                $mail->addTo('support@goyalhr.com', 'Support');
-                $mail->setSubject('Goyal HR : New contact message');
-
-                $transport = new Mail\Transport\Sendmail();
-                $transport->send($mail);
-
+                    $transport = new Mail\Transport\Sendmail();
+                    $transport->send($mail);
+                } catch (Exception $ex) {}
             }else{
                 $this->flashMessenger()->addErrorMessage('Unable to post your queries.');
             }

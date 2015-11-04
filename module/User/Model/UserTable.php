@@ -125,4 +125,17 @@ class UserTable
             }
         }
     }
+    
+    public function passwordReset($data)
+    {
+        $email = $data->email;
+        $password = new Password();
+        
+        $data = array(
+            'email' => $data->email,
+            'password' => $password->create('password')
+        );
+       
+        return $this->tableGateway->update($data, array('email' => $email));
+    }
 }
