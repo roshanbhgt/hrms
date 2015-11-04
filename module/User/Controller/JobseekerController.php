@@ -215,7 +215,7 @@ class JobseekerController extends AbstractActionController
 
         $id = (int) $this->params()->fromRoute('id', 0);
         
-        $request = $this->getRequest();
+        $request = $this->getRequest(); 
         if ($request->isPost()) {
             // Make certain to merge the files info!
             $data = array_merge_recursive(
@@ -225,12 +225,12 @@ class JobseekerController extends AbstractActionController
             
             // Define a transport and set the destination on the server
             $upload = new Http();
-            $upload->setDestination("D:\webserver\htdocs\hrconsultancy\public\media\jobseeker");
+            $upload->setDestination($_SERVER['DOCUMENT_ROOT']."/public/media/jobseeker");
 
             try {
                 // This takes care of the moving and making sure the file is there
                 if($upload->receive()){
-                    $data['picture'] = str_replace("D:\webserver\htdocs\hrconsultancy\public", '',$upload->getFileName());
+                    $data['picture'] = str_replace($_SERVER['DOCUMENT_ROOT']."/public", '',$upload->getFileName());
                     $data['picture'] = str_replace('\\', '/', $data['picture']);
                     if($data['picture'] != ''){ 
                         if($this->getJobseekerTable()->updatePicture($data)){
@@ -268,12 +268,12 @@ class JobseekerController extends AbstractActionController
             
             // Define a transport and set the destination on the server
             $upload = new Http();
-            $upload->setDestination("D:\webserver\htdocs\hrconsultancy\public\media\cv");
+            $upload->setDestination($_SERVER['DOCUMENT_ROOT']."/public/media/cv");
 
             try {
                 // This takes care of the moving and making sure the file is there
                 if($upload->receive()){
-                    $data['resume'] = str_replace("D:\webserver\htdocs\hrconsultancy\public", '',$upload->getFileName());
+                    $data['resume'] = str_replace($_SERVER['DOCUMENT_ROOT']."/public", '',$upload->getFileName());
                     $data['resume'] = str_replace('\\', '/', $data['resume']);
                     if($data['resume'] != ''){ 
                         if($this->getResumeTable()->saveResume($data)){

@@ -34,6 +34,7 @@ class ContactTable
         $data = array(
             'name' => $contact->name,
             'email'  => $contact->email,
+            'phone'  => $contact->phone,
             'message'  => $contact->message,
         );
 

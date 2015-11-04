@@ -4,6 +4,7 @@ namespace Contact\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Mail;
 
 class IndexController extends AbstractActionController
 {
@@ -29,7 +30,17 @@ class IndexController extends AbstractActionController
         if($request->isPost()){
             $data = $request->getPost();
             if($this->getContactTable()->saveContact($data)){
-                $this->flashMessenger()->addSuccessMessage('Your message has been posted successfully.');
+                $this->flashMessenger()->addSuccessMessage('Your message has been posted successfully.');                
+
+                $mail = new Mail\Message();
+                $mail->setBody('New query has been posted from someone, please check inbox at support@goyalhr.com');
+                $mail->setFrom($data['email'], $data['name']);
+                $mail->addTo('support@goyalhr.com', 'Support');
+                $mail->setSubject('Goyal HR : New contact message');
+
+                $transport = new Mail\Transport\Sendmail();
+                $transport->send($mail);
+
             }else{
                 $this->flashMessenger()->addErrorMessage('Unable to post your queries.');
             }

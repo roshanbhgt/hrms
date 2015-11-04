@@ -10,6 +10,7 @@ $this->headTitle($title);
             <th style="width:10%;">Id</th>
             <th style="width:15%;">Name</th>
             <th style="width:15%;">Email</th>
+            <th style="width:15%;">Phone</th>
             <th style="width:40%;">Message</th>
             <th style="width:20%;">Created At</th>
             <th style="width:10%;">&nbsp;</th>
@@ -19,6 +20,7 @@ $this->headTitle($title);
                 <td><?php echo $this->escapeHtml($val->id);?></td>
                 <td><?php echo $this->escapeHtml($val->name);?></td>
                 <td><?php echo $this->escapeHtml($val->email);?></td>
+                <td><?php echo $this->escapeHtml($val->phone);?></td>
                 <td><?php echo $this->escapeHtml($val->message);?></td>
                 <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
                 <td>

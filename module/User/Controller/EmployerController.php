@@ -175,12 +175,12 @@ class EmployerController extends AbstractActionController
             
             // Define a transport and set the destination on the server
             $upload = new Http();
-            $upload->setDestination("D:\webserver\htdocs\hrconsultancy\public\media\company");
+            $upload->setDestination($_SERVER['DOCUMENT_ROOT']."/public/media/company");
 
             try {
                 // This takes care of the moving and making sure the file is there
                 if($upload->receive()){
-                    $data['logo'] = str_replace("D:\webserver\htdocs\hrconsultancy\public", '',$upload->getFileName());
+                    $data['logo'] = str_replace($_SERVER['DOCUMENT_ROOT']."/public", '',$upload->getFileName());
                     $data['logo'] = str_replace('\\', '/', $data['logo']);
                     if($data['logo'] != ''){ 
                         if($this->getCompanyTable()->updateLogo($data)){

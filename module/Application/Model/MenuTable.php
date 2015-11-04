@@ -20,7 +20,14 @@ class MenuTable
     
     public function fetchAllSubmenu($id)
     {
-       $resultSet = $this->tableGateway->select(array('parent_id' => $id));
+        $resultSet = $this->tableGateway->select(array('parent_id' => $id));
+//        $resultSet = $this->tableGateway->select(
+//            function (\Zend\Db\Sql\Select $select) {
+//                $select->where(array('parent_id' => $ident));
+//                $select->order('sort_order ASC')->limit(10);
+//            }
+//        );
+
         return $resultSet;
     }
 

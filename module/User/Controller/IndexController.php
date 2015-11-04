@@ -124,7 +124,7 @@ class IndexController extends AbstractActionController
             foreach($result->getMessages() as $message)
             {
                 //save message temporary into flashmessenger
-                $this->flashmessenger()->addMessage("You have been login successfully.");
+                $this->flashmessenger()->addMessage($message);
             }
 
             if ($result->isValid()) {
@@ -261,12 +261,12 @@ class IndexController extends AbstractActionController
 
                     // Define a transport and set the destination on the server
                     $upload = new Http();
-                    $upload->setDestination("D:\webserver\htdocs\hrconsultancy\public\media\cv");
+                    $upload->setDestination($_SERVER['DOCUMENT_ROOT']."/public/media/cv");
 
                     try {
                         // This takes care of the moving and making sure the file is there
                         if($upload->receive()){
-                            $data['resume'] = str_replace("D:\webserver\htdocs\hrconsultancy\public", '',$upload->getFileName());
+                            $data['resume'] = str_replace($_SERVER['DOCUMENT_ROOT']."/public", '',$upload->getFileName());
                             $data['resume'] = str_replace('\\', '/', $data['resume']);
                             echo '<pre>';
                 print_r($data);
