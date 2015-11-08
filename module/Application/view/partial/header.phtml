@@ -3,20 +3,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-xs-4">
-                    <div class="top-number"><p><i class="fa fa-phone-square"></i> or <i class="fa fa-whatsapp"></i>&nbsp;+91 9835 565 108</p></div>
+                    <div class="top-number"><p><i class="fa fa-phone-square"></i> +91 6572 230 746 or <i class="fa fa-whatsapp"></i>&nbsp;+91 9263 189 425</p></div>
                 </div>
                 <div class="col-sm-6 col-xs-8">
                    <div class="social">
                         <ul class="social-share">
                             <li><a href="https://www.facebook.com/Goyal-HR-Consulting-897871160248188" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="https://twitter.com/GoyalHrConsult" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://plus.google.com/u/0/115960799716399067901" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="https://www.linkedin.com/company/goyal-hr-consulting" target="_blank"><i class="fa fa-linkedin"></i></a></li> 
+                            <li><a href="https://twitter.com/GoYaL_HR_" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://plus.google.com/u/0/102503102919997052004/about" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="https://www.linkedin.com/company/10210054" target="_blank"><i class="fa fa-linkedin"></i></a></li> 
                             <li><a href="skype:goyalhrconsulting" target="_blank"><i class="fa fa-skype"></i></a></li>
                         </ul>
                         <div class="search">
-                            <form role="form">
-                                <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                            <form method="post" action="<?php echo $this->serverUrl($this->url('job', array('action'=>'search'))); ?>" role="form">
+                                <input type="text" class="search-form" autocomplete="off" placeholder="Search" name="keyword" />
                                 <i class="fa fa-search"></i>
                             </form>
                        </div>

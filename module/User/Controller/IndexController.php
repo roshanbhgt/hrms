@@ -340,4 +340,6 @@ class IndexController extends AbstractActionController
             'user' => $this->getUserTable()->fetchAll(),
         ));
     }
+	
+	
 }

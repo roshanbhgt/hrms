@@ -69,4 +69,29 @@ class IndexController extends AbstractActionController
         
         return $this->redirect()->toRoute('job');
     }
+    
+    public function searchAction(){
+        
+        $request = $this->getRequest();        
+        
+        if($request->getPost()){
+            $data = $request->getPost();
+            // grab the paginator from the JobTable
+            $paginator = $this->getJobTable()->getSearchResult($data['keyword']);
+            // set the current page to what has been passed in query string, or to 1 if none set
+            $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+            // set the number of items per page to 10
+            $paginator->setItemCountPerPage(10);
+            if(count($paginator)){
+                return new ViewModel(array(
+                    'paginator' => $paginator
+                ));
+            }else{
+                return new ViewModel(array(
+                    'paginator' => $paginator,
+                ));
+            }
+        }        
+    }
+    
 }

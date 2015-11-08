@@ -155,48 +155,38 @@
                     <br />
                     <!-- Carousel items -->
                     <div class="carousel-inner">
-                        <div class="item active">
+						<?php
+							$i = 0;
+							if(count($recentjobs)){
+								foreach($recentjobs as $job){ 
+									if($job->status == 'active'){
+						?>
+                        <div class="item <?php if($i==0) { echo 'active'; } ?>">
                             <div class="row">
-                                <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a href="javascript::void(0);"> <img src="/media/company/job.png" class="thumbnail"
-                                        alt="Image" /></a>
+                                <div class="col-xs-5 col-sm-5 col-md-5">
+                                    <a href="<?php echo $this->serverUrl($this->url('job', array('action'=>'view', 'id'=>$job->id))); ?>"> 
+										<img src="/media/company/job.jpe" class="thumbnail" alt="Image" />
+									</a>
                                 </div>
                                 <div class="col-xs-7 col-sm-7 col-md-7">
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    euismod tincidunt ut laoreet..
+                                    <a href="<?php echo $this->serverUrl($this->url('job', array('action'=>'view', 'id'=>$job->id))); ?>" >
+										<b><?php echo $job->title; ?></b>
+									</a><br/>
+									Type : <?php echo ucfirst($job->type); ?><br/>
+									Vacancies : <?php echo $job->vacancy; ?><br/>
+									Location : <?php echo $job->location; ?>
                                 </div>
                             </div>
                             <!--/row-fluid-->
                         </div>
-                        <!--/item-->
-                        <div class="item ">
-                            <div class="row">
-                                <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a href="javascript::void(0);"> <img src="/media/company/job.png" class="thumbnail"
-                                        alt="Image" /></a>
-                                </div>
-                                <div class="col-xs-7 col-sm-7 col-md-7">
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    euismod tincidunt ut laoreet..
-                                </div>
-                            </div>
-                            <!--/row-fluid-->
-                        </div>
-                        <!--/item-->
-                        <div class="item ">
-                            <div class="row">
-                              <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a href="javascript::void(0);"> <img src="/media/company/job.png" class="thumbnail"
-                                        alt="Image" /></a>
-                                </div>
-                                <div class="col-xs-7 col-sm-7 col-md-7">
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    euismod tincidunt ut laoreet..
-                                </div>
-                            </div>
-                            <!--/row-fluid-->
-                        </div>
-                        <!--/item-->
+                        <?php 
+									$i++;
+									}
+								}
+							}else{
+								echo 'No recent jobs to display';
+							}	
+						?>
                     </div>
                     <br>
                     <div class="row">
@@ -212,49 +202,57 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="carousel-brand" class="carousel slide carousel-brand">
-                 
-                    <ol class="carousel-indicators">
-                        <li data-target="#Carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#Carousel" data-slide-to="1"></li>
-                    </ol>
-
-                    <!-- Carousel items -->
-                <div class="carousel-inner">
-
-                    <div class="item active">
-                            <div class="row">
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                            </div><!--.row-->
-                    </div><!--.item-->
-                    <div class="item">
-                            <div class="row">
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                                <div class="col-md-2"><a href="javascript::void(0);" class="thumbnail"><img src="/media/company/brand.png" alt="Image" style="max-width:100%;"></a></div>
-                            </div><!--.row-->
-                    </div><!--.item-->
-
-                    </div><!--.carousel-inner-->
-                        <a data-slide="prev" href="#carousel-brand" class="left carousel-control">
-                            <i class="fa fa-chevron-left"></i>
-                        </a>
-                        <a data-slide="next" href="#carousel-brand" class="right carousel-control">
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-                    </div><!--.Carousel-->
-                 
+    <div class="col-md-12">
+		<div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Recent Employer</h3>
+            </div>
+            <div class="panel-body">
+			<div id="carousel-brand" class="carousel slide carousel-brand">
+			 <?php if(count($recentemployers)> 4 ){ ?>
+				<ol class="carousel-indicators">
+					<li data-target="#Carousel" data-slide-to="0" class="active"></li>
+					<li data-target="#Carousel" data-slide-to="1"></li>
+				</ol>
+			<?php } ?> 
+				<!-- Carousel items -->
+			<div class="carousel-inner">
+				<?php
+					$i = 0;
+					if(count($recentemployers)){
+				?>
+				<div class="item <?php if($i==0) { echo 'active'; } ?>">
+					<div class="row">
+					<?php 
+						foreach($recentemployers as $employer){ 
+					?> 
+						<div class="col-md-2">
+							<a href="javascript::void(0);" class="thumbnail">
+								<img src="<?php echo $employer->logo; ?>" alt="Image" style="max-width:100%;" title="<?php echo $employer->companyname; ?>" >
+							</a>
+							<b><?php echo $employer->companyname; ?></b>
+						</div>
+					<?php 	
+							$i++;
+						} 
+					?>
+					</div><!--.row-->
+				</div><!--.item-->
+				 <?php 
+					}else{
+						echo 'No recent employers to display';
+					}	
+				?>
+				</div><!--.carousel-inner-->
+				<?php if(count($recentemployers)> 4 ){ ?>
+					<a data-slide="prev" href="#carousel-brand" class="left carousel-control">
+						<i class="fa fa-chevron-left"></i>
+					</a>
+					<a data-slide="next" href="#carousel-brand" class="right carousel-control">
+						<i class="fa fa-chevron-right"></i>
+					</a>
+				<?php } ?> 
+			</div><!--.Carousel-->
 		</div>
 	</div>
     </div><!--.container-->

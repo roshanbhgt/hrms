@@ -76,6 +76,7 @@ return array(
         'template_map' => array(
             'job/index/index' => __DIR__ . '/../view/template/index/index.phtml',
             'job/index/view' => __DIR__ . '/../view/template/index/view.phtml',
+			'job/index/search' => __DIR__ . '/../view/template/index/search.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

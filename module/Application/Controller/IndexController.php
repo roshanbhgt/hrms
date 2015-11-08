@@ -16,6 +16,8 @@ class IndexController extends AbstractActionController
 { 
     
     protected $bannerTable;
+	protected $jobTable;
+	protected $companyTable;
     
     public function getBannerTable()
     {
@@ -25,15 +27,37 @@ class IndexController extends AbstractActionController
         }
         return $this->bannerTable;
     }
+	
+	public function getJobTable()
+    {
+        if (!$this->jobTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobTable = $sm->get('Job\Model\JobTable');
+        }
+        return $this->jobTable;
+    }
+	
+	public function getCompanyTable()
+    {
+        if (!$this->companyTable) {
+            $sm = $this->getServiceLocator();
+            $this->companyTable = $sm->get('User\Model\CompanyTable');
+        }
+        return $this->companyTable;
+    }
     
     public function indexAction()
     {
         $banners = array();
+		$recentjobs = array();
+		$recentemployers = array();
         
         $view = new ViewModel(
                     array(
                         'banners' => $this->getBannerTable()->fetchAll(),
                         'bannersmenu' => $this->getBannerTable()->fetchAll(),
+						'recentjobs' => $this->getJobTable()->fetchAllRecent(),
+						'recentemployers' => $this->getCompanyTable()->fetchAllRecent(),
                     )
                 );
         return $view;

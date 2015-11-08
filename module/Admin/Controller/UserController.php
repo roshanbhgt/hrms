@@ -15,6 +15,7 @@ class UserController extends AbstractActionController {
     protected $storage;
     protected $authservice;
     protected $userTable;
+	protected $companyTable;
 
     public function getAuthService()
     {
@@ -43,6 +44,15 @@ class UserController extends AbstractActionController {
             $this->userTable = $sm->get('Admin\Model\UserTable');
         }
         return $this->userTable;
+    }
+	
+	public function getCompanyTable()
+    {
+        if (!$this->companyTable) {
+            $sm = $this->getServiceLocator();
+            $this->companyTable = $sm->get('User\Model\CompanyTable');
+        }
+        return $this->companyTable;
     }
 
     public function employerAction()
@@ -101,4 +111,14 @@ class UserController extends AbstractActionController {
         
         return $this->redirect()->toRoute('admin-user');
     }
+	
+	public function addinrecentemployerAction(){
+		if (! $this->getAuthService()->hasIdentity()){
+            return $this->redirect()->toRoute('login');
+        }
+        
+        $id = (int) $this->params()->fromRoute('id', 0);
+		$this->getCompanyTable()->recentEmployer($id);
+		return $this->redirect()->toRoute('admin-user', array('action' => 'employer'));
+	}
 } 

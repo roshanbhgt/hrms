@@ -45,8 +45,12 @@ class JobApplicationTable
         $resultSet = $this->tableGateway->select(array('userid' => $id));
         return $resultSet;
     }
-     
     
+	public function fetchAllByJobId($id){
+        $resultSet = $this->tableGateway->select(array('jobid' => $id));
+        return $resultSet;
+    }
+	
     public function saveJobApplication($job)
     {
         $data = array(

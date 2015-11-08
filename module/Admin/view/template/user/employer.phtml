@@ -30,10 +30,12 @@ $this->headTitle($title);
                 <td><?php echo $this->escapeHtml($val->email);?></td>
                 <td><?php echo $this->escapeHtml($val->type);?></td>
                 <td><?php echo $this->escapeHtml($val->state);?></td>
-                <td><?php echo $this->escapeHtml($val->country);?></td>
+                <td><?php echo $this->escapeHtml($val->country);?></td>				
                 <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
                 <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->lastloginat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
                 <td>
+					<a href="<?php echo $this->serverUrl($this->url('admin-user',
+                            array('action'=>'addinrecentemployer', 'id' => $val->id)));?>" title="Mark as recent"><i class="glyphicon glyphicon-tag"></i></a> &nbsp;
                     <a href="<?php echo $this->serverUrl($this->url('admin-user',
                         array('action'=>'edit', 'id' => $val->id)));?>"><i class="glyphicon glyphicon-edit"></i></a> &nbsp;
                     <a href="<?php echo $this->serverUrl($this->url('admin-user',

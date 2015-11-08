@@ -26,7 +26,7 @@ $this->headTitle($title);
                 <td><?php echo $this->escapeHtml($val->title);?></td>
                 <td><?php echo $this->escapeHtml($val->identifier);?></td>
                 <td><?php echo $this->escapeHtml($val->author);?></td>
-                <td><?php echo $this->escapeHtml($val->description);?></td>
+                <td><?php echo $val->description;?></td>
                 <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
                 <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($val->updatedat), IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM));?></td>
                 <td>

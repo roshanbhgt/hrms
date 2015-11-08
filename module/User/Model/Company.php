@@ -21,6 +21,7 @@ class Company
     public $description;
     public $url;
     public $logo;
+	public $recentemployer;
         
     public function exchangeArray($data)
     {
@@ -41,5 +42,6 @@ class Company
         $this->description  = (!empty($data['description'])) ? $data['description'] : null;
         $this->url  = (!empty($data['url'])) ? $data['url'] : null;
         $this->logo  = (!empty($data['logo'])) ? $data['logo'] : null;
+		$this->recentemployer  = (!empty($data['recentemployer'])) ? $data['recentemployer'] : null;
     }
 }

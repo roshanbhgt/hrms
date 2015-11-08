@@ -137,4 +137,22 @@ class CompanyTable
             }
         }
     }
+	
+	public function recentEmployer($id)
+    {
+        if ($this->getCompany($id))
+        {
+            $data['recentemployer'] = 'active';
+            $this->tableGateway->update($data, array('userid' => $id));
+        } else {
+            throw new \Exception('User with id does not exist');
+        }
+    }
+    
+    public function fetchAllRecent()
+    {
+        $resultSet = $this->tableGateway->select(array('recentemployer' => 'active'));
+        
+        return $resultSet;
+    }
 }

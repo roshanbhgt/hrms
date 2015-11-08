@@ -111,5 +111,34 @@ class JobTable
         }
     }
     
+    public function fetchAllRecent()
+    {
+        $resultSet = $this->tableGateway->select(array('recentpost' => 'active', 'status' => 'active'));
+        
+        return $resultSet;
+    }
     
+    public function getSearchResult($keyword, $paginated=true)
+    {   
+        if ($paginated) {
+             // create a new Select object for the table album
+             $select = new Select('user_company_jobpost');
+             $select->where->like('title', $keyword);             
+             // create a new result set based on the Album entity
+             $resultSetPrototype = new ResultSet();
+             $resultSetPrototype->setArrayObjectPrototype(new Job());
+             // create a new pagination adapter object
+             $paginatorAdapter = new DbSelect(
+                 // our configured select object
+                 $select,
+                 // the adapter to run it against
+                 $this->tableGateway->getAdapter(),
+                 // the result set to hydrate
+                 $resultSetPrototype
+             );
+             $paginator = new Paginator($paginatorAdapter);
+             return $paginator;
+         }
+         return ;
+    }
 }

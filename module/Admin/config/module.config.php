@@ -427,6 +427,8 @@ return array(
             'admin/region/edit' => __DIR__ . '/../view/template/region/edit.phtml',
             'admin/contact/index' => __DIR__ . '/../view/template/contact/index.phtml',
             'admin/jobs/index' => __DIR__ . '/../view/template/jobs/index.phtml',
+			'admin/jobs/view' => __DIR__ . '/../view/template/jobs/view.phtml',
+			'admin/jobs/jobapplication' => __DIR__ . '/../view/template/jobs/jobapplication.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

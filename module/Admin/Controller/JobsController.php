@@ -15,6 +15,8 @@ class JobsController extends AbstractActionController {
     protected $storage;
     protected $authservice;
     protected $jobTable;
+	protected $jobseekerTable;
+	protected $jobapplicationTable;
 
     public function getAuthService()
     {
@@ -42,6 +44,24 @@ class JobsController extends AbstractActionController {
             $this->jobTable = $sm->get('Job\Model\JobTable');
         }
         return $this->jobTable;
+    }
+	
+	public function getJobApplicationTable()
+    {
+        if (!$this->jobapplicationTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobapplicationTable = $sm->get('Job\Model\JobApplicationTable');
+        }
+        return $this->jobapplicationTable;
+    }
+	
+	public function getJobseekerTable()
+    {
+        if (!$this->jobseekerTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobseekerTable = $sm->get('User\Model\JobseekerTable');
+        }
+        return $this->jobseekerTable;
     }
 
     public function indexAction()
@@ -87,4 +107,32 @@ class JobsController extends AbstractActionController {
 
         return $this->redirect()->toRoute('admin-jobs');
     }
+	
+	public function viewAction(){
+		if (! $this->getServiceLocator()
+            ->get('AuthService')->hasIdentity()){
+            return $this->redirect()->toRoute('admin-login');
+        }
+		
+		$id = (int) $this->params()->fromRoute('id', 0);
+        return new ViewModel(array(
+            'job' => $this->getJobTable()->getJob($id),
+        ));
+		
+	}
+	
+	public function jobapplicationAction(){
+		if (! $this->getServiceLocator()
+            ->get('AuthService')->hasIdentity()){
+            return $this->redirect()->toRoute('admin-login');
+        }
+		
+		$id = (int) $this->params()->fromRoute('id', 0);
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'jobapplication' => $this->getJobApplicationTable()->fetchAllByJobId($id),
+			'jobseeker' => $this->getJobseekerTable()->fetchAll()
+        ));
+	}
 } 
