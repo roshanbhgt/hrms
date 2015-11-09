@@ -89,7 +89,7 @@ class JobsController extends AbstractActionController {
             $this->flashmessenger()->addSuccessMessage('Query has been deleted successfully.');
         }
 
-        return $this->redirect()->toRoute('admin-contact');
+        return $this->redirect()->toRoute('admin-jobs');
     }
     
     public function addinrecentjobAction()
@@ -122,17 +122,17 @@ class JobsController extends AbstractActionController {
 	}
 	
 	public function jobapplicationAction(){
-		if (! $this->getServiceLocator()
-            ->get('AuthService')->hasIdentity()){
-            return $this->redirect()->toRoute('admin-login');
-        }
-		
-		$id = (int) $this->params()->fromRoute('id', 0);
-        
-        return new ViewModel(array(
-            'id' => $id,
-            'jobapplication' => $this->getJobApplicationTable()->fetchAllByJobId($id),
-			'jobseeker' => $this->getJobseekerTable()->fetchAll()
-        ));
+            if (! $this->getServiceLocator()
+                ->get('AuthService')->hasIdentity()){
+                return $this->redirect()->toRoute('admin-login');
+            }
+
+            $id = (int) $this->params()->fromRoute('id', 0);
+
+            return new ViewModel(array(
+                'id' => $id,
+                'jobapplication' => $this->getJobApplicationTable()->fetchAllByJobId($id),
+                'jobseekers' => $this->getJobseekerTable()->fetchAll()
+            ));
 	}
 } 

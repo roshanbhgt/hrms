@@ -16,13 +16,15 @@ class JobseekerTable
     public function fetchAll()
     {
         $resultSet = $this->tableGateway->select();
-        return $resultSet;
+        $resultSet->buffer();
+        return $resultSet; 
     }
 
     public function getJobseeker($id)
     {
         $id  = (int) $id;
         $rowset = $this->tableGateway->select(array('userid' => $id));
+        
         $row = $rowset->current();
         if (!$row) {
             return FALSE;

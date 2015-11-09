@@ -177,11 +177,19 @@ class IndexController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()){
             $data = $request->getPost();
+            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+            $pass = array(); //remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+            for ($i = 0; $i < 8; $i++) {
+                $n = rand(0, $alphaLength);
+                $pass[] = $alphabet[$n];
+            }
+            $data['password'] = implode($pass); 
             if($this->getUserTable()->passwordReset($data)){
                 $this->flashMessenger()->addSuccessMessage('Your password has been reset successfully.');                
                 try{
                     $mail = new Mail\Message();
-                    $mail->setBody('Your password has been reset to password. <br/>Please change your password at earliest.');
+                    $mail->setBody('Your password has been reset to '.$data['password'].'. Please change your password at earliest.');
                     $mail->setFrom('support@goyalhr.com', 'Support');
                     $mail->addTo($data['email'], '');
                     $mail->setSubject('Goyal HR : New password notification.');

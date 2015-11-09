@@ -7,7 +7,13 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-2 text-center">
                             <div class="entry-meta">
-                                <span id="publish_date"><?php echo $this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::LONG); ?></span>
+                                <span id="publish_date">
+                                <?php 
+                                	// echo $this->dateFormat(new DateTime($val->createdat), IntlDateFormatter::LONG); 
+                                	// echo date("F j, Y, g:i a", strtotime($val->createdat));
+                                	echo date("F j, Y", strtotime($val->createdat));
+                              	?>
+                                </span>
                                 <span><i class="fa fa-user"></i> <a href="#"><?php echo $val->author; ?></a></span>
                                 <span><i class="fa fa-comment"></i> <a href="blog-item.html#comments">2 Comments</a></span>
                                 <span><i class="fa fa-heart"></i><a href="#"> 56 Likes</a></span>

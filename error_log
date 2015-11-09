@@ -1,0 +1,61 @@
+[09-Nov-2015 03:34:06 Etc/GMT] PHP Fatal error:  Class 'IntlDateFormatter' not found in /home/goyalpqc/public_html/module/Blog/view/template/index/index.phtml on line 10
+[09-Nov-2015 03:34:27 Etc/GMT] PHP Fatal error:  Class 'IntlDateFormatter' not found in /home/goyalpqc/public_html/module/Blog/view/template/index/index.phtml on line 10
+[09-Nov-2015 03:37:37 Etc/GMT] PHP Notice:  Undefined variable: row in /home/goyalpqc/public_html/module/User/Controller/IndexController.php on line 162
+[09-Nov-2015 03:37:37 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/goyalpqc/public_html/module/User/Controller/IndexController.php on line 162
+[09-Nov-2015 03:37:37 Etc/GMT] PHP Notice:  Undefined variable: row in /home/goyalpqc/public_html/module/User/Controller/IndexController.php on line 164
+[09-Nov-2015 03:37:37 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/goyalpqc/public_html/module/User/Controller/IndexController.php on line 164
+[09-Nov-2015 03:37:52 Etc/GMT] PHP Fatal error:  Class 'IntlDateFormatter' not found in /home/goyalpqc/public_html/module/User/view/template/employer/dashboard.phtml on line 83
+[09-Nov-2015 03:46:29 Etc/GMT] PHP Fatal error:  Class 'IntlDateFormatter' not found in /home/goyalpqc/public_html/module/Admin/view/template/index/index.phtml on line 51
+[09-Nov-2015 07:19:10 Etc/GMT] PHP Warning:  Creating default object from empty value in /home/goyalpqc/public_html/module/User/Controller/IndexController.php on line 155
+[09-Nov-2015 07:19:11 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/goyalpqc/public_html/module/User/Controller/JobseekerController.php on line 145
+[09-Nov-2015 07:20:13 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/goyalpqc/public_html/module/User/Controller/JobseekerController.php on line 145
+[09-Nov-2015 10:11:21 Etc/GMT] PHP Fatal error:  Class 'IntlDateFormatter' not found in /home/goyalpqc/public_html/module/Blog/view/template/index/view.phtml on line 77
+[09-Nov-2015 10:11:28 Etc/GMT] PHP Fatal error:  Class 'IntlDateFormatter' not found in /home/goyalpqc/public_html/module/Blog/view/template/index/view.phtml on line 77
+[09-Nov-2015 16:37:35 Etc/GMT] PHP Fatal error:  Uncaught exception 'Zend\Session\Exception\RuntimeException' with message 'Session validation failed' in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php:123
+Stack trace:
+#0 /home/goyalpqc/public_html/module/Application/Module.php(145): Zend\Session\SessionManager->start()
+#1 /home/goyalpqc/public_html/module/Application/Module.php(37): Application\Module->bootstrapSession(Object(Zend\Mvc\MvcEvent))
+#2 [internal function]: Application\Module->onBootstrap(Object(Zend\Mvc\MvcEvent))
+#3 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('bootstrap', Object(Zend\Mvc\MvcEvent), Array)
+#5 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(156): Zend\Eve in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php on line 123
+[09-Nov-2015 16:40:06 Etc/GMT] PHP Fatal error:  Uncaught exception 'Zend\Session\Exception\RuntimeException' with message 'Session validation failed' in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php:123
+Stack trace:
+#0 /home/goyalpqc/public_html/module/Application/Module.php(145): Zend\Session\SessionManager->start()
+#1 /home/goyalpqc/public_html/module/Application/Module.php(37): Application\Module->bootstrapSession(Object(Zend\Mvc\MvcEvent))
+#2 [internal function]: Application\Module->onBootstrap(Object(Zend\Mvc\MvcEvent))
+#3 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('bootstrap', Object(Zend\Mvc\MvcEvent), Array)
+#5 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(156): Zend\Eve in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php on line 123
+[09-Nov-2015 16:40:15 Etc/GMT] PHP Fatal error:  Uncaught exception 'Zend\Session\Exception\RuntimeException' with message 'Session validation failed' in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php:123
+Stack trace:
+#0 /home/goyalpqc/public_html/module/Application/Module.php(145): Zend\Session\SessionManager->start()
+#1 /home/goyalpqc/public_html/module/Application/Module.php(37): Application\Module->bootstrapSession(Object(Zend\Mvc\MvcEvent))
+#2 [internal function]: Application\Module->onBootstrap(Object(Zend\Mvc\MvcEvent))
+#3 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('bootstrap', Object(Zend\Mvc\MvcEvent), Array)
+#5 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(156): Zend\Eve in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php on line 123
+[09-Nov-2015 16:40:25 Etc/GMT] PHP Fatal error:  Uncaught exception 'Zend\Session\Exception\RuntimeException' with message 'Session validation failed' in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php:123
+Stack trace:
+#0 /home/goyalpqc/public_html/module/Application/Module.php(145): Zend\Session\SessionManager->start()
+#1 /home/goyalpqc/public_html/module/Application/Module.php(37): Application\Module->bootstrapSession(Object(Zend\Mvc\MvcEvent))
+#2 [internal function]: Application\Module->onBootstrap(Object(Zend\Mvc\MvcEvent))
+#3 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('bootstrap', Object(Zend\Mvc\MvcEvent), Array)
+#5 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(156): Zend\Eve in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php on line 123
+[09-Nov-2015 16:40:30 Etc/GMT] PHP Fatal error:  Uncaught exception 'Zend\Session\Exception\RuntimeException' with message 'Session validation failed' in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php:123
+Stack trace:
+#0 /home/goyalpqc/public_html/module/Application/Module.php(145): Zend\Session\SessionManager->start()
+#1 /home/goyalpqc/public_html/module/Application/Module.php(37): Application\Module->bootstrapSession(Object(Zend\Mvc\MvcEvent))
+#2 [internal function]: Application\Module->onBootstrap(Object(Zend\Mvc\MvcEvent))
+#3 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('bootstrap', Object(Zend\Mvc\MvcEvent), Array)
+#5 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(156): Zend\Eve in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php on line 123
+[09-Nov-2015 16:40:37 Etc/GMT] PHP Fatal error:  Uncaught exception 'Zend\Session\Exception\RuntimeException' with message 'Session validation failed' in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php:123
+Stack trace:
+#0 /home/goyalpqc/public_html/module/Application/Module.php(145): Zend\Session\SessionManager->start()
+#1 /home/goyalpqc/public_html/module/Application/Module.php(37): Application\Module->bootstrapSession(Object(Zend\Mvc\MvcEvent))
+#2 [internal function]: Application\Module->onBootstrap(Object(Zend\Mvc\MvcEvent))
+#3 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('bootstrap', Object(Zend\Mvc\MvcEvent), Array)
+#5 /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(156): Zend\Eve in /home/goyalpqc/public_html/vendor/zendframework/zendframework/library/Zend/Session/SessionManager.php on line 123

@@ -41,7 +41,7 @@ class ContactTable
         $id = (int)$contact->id;
         if ($id == 0) {
             $data['createdat'] = date('y-m-d h:i:s');
-            $this->tableGateway->insert($data);
+            return $this->tableGateway->insert($data);
         }
     }
 

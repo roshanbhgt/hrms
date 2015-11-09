@@ -8,7 +8,11 @@
                 </blockquote>
                 <p>
                     <i class="glyphicon glyphicon-envelope"></i> <?php echo $user->email; ?> <br>
-                    <i class="glyphicon glyphicon-time"></i> Since <?php echo $this->dateFormat(new DateTime($user->createdat), IntlDateFormatter::LONG,IntlDateFormatter::MEDIUM); ?>
+                    <i class="glyphicon glyphicon-time"></i> Since 
+                    <?php 
+                    	// echo $this->dateFormat(new DateTime($user->createdat), IntlDateFormatter::LONG,IntlDateFormatter::MEDIUM); 
+			echo date("F j, Y, g:i a", strtotime($user->createdat));
+                    ?>
                 </p>
             </div>
         </div>
