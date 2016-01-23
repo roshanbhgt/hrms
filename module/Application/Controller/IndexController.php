@@ -18,6 +18,7 @@ class IndexController extends AbstractActionController
     protected $bannerTable;
 	protected $jobTable;
 	protected $companyTable;
+    protected $blockTable;
     
     public function getBannerTable()
     {
@@ -45,6 +46,15 @@ class IndexController extends AbstractActionController
         }
         return $this->companyTable;
     }
+
+    public function getBlockTable()
+    {
+        if (!$this->blockTable) {
+            $sm = $this->getServiceLocator();
+            $this->blockTable = $sm->get('Block\Model\BlockTable');
+        }
+        return $this->blockTable;
+    }
     
     public function indexAction()
     {
@@ -58,6 +68,8 @@ class IndexController extends AbstractActionController
                         'bannersmenu' => $this->getBannerTable()->fetchAll(),
 						'recentjobs' => $this->getJobTable()->fetchAllRecent(),
 						'recentemployers' => $this->getCompanyTable()->fetchAllRecent(),
+                        'employersolutions' => $this->getBlockTable()->getBlockByIdentifier('employer-solutions'),
+                        'jobseekersolutions' => $this->getBlockTable()->getBlockByIdentifier('jobseeker-solutions'),
                     )
                 );
         return $view;

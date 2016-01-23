@@ -105,7 +105,7 @@ class IndexController extends AbstractActionController
             foreach($result->getMessages() as $message)
             {
                 //save message temporary into flashmessenger
-                $this->flashmessenger()->addSuccessMessage("You have been login successfully.");
+                $this->flashmessenger()->addSuccessMessage($message);
             }
 
 

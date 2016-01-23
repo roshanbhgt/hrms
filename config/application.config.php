@@ -6,6 +6,7 @@ return array(
         'Application',
         'Admin',
         'Blog',
+        'Block',
         'Page',
         'User',
         'Job',

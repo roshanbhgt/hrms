@@ -32,6 +32,8 @@ use Admin\Model\User;
 use Admin\Model\UserTable;
 use Admin\Model\Page;
 use Admin\Model\PageTable;
+use Admin\Model\Block;
+use Admin\Model\BlockTable;
     /**
      * Module class for Admin
      *
@@ -169,6 +171,17 @@ Feature\BootstrapListenerInterface
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Page());
                     return new TableGateway('page', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Admin\Model\BlockTable' =>  function($sm) {
+                    $tableGateway = $sm->get('BlockTableGateway');
+                    $table = new BlockTable($tableGateway);
+                    return $table;
+                },
+                'BlockTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Block());
+                    return new TableGateway('block', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

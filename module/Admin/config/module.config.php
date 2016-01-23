@@ -109,6 +109,17 @@ return array(
                     ),
                 ),
             ),
+            'admin-block' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/block',
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Block',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
 			'admin-menu' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -269,6 +280,22 @@ return array(
                     ),
                 ),
             ),
+            'admin-block' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/admin/block[/:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Block',
+                        'action'     => 'index',
+                        'layout'     => 'layout/admin',
+                    ),
+                ),
+            ),
 			'admin-menu' => array(
                 'type'    => 'Segment',
                 'options' => array(
@@ -378,6 +405,7 @@ return array(
             'Admin\Controller\Blogcategory' => 'Admin\Controller\BlogcategoryController',
             'Admin\Controller\User' => 'Admin\Controller\UserController',
             'Admin\Controller\Page' => 'Admin\Controller\PageController',
+            'Admin\Controller\Block' => 'Admin\Controller\BlockController',
             'Admin\Controller\Banner' => 'Admin\Controller\BannerController',
             'Admin\Controller\Menu' => 'Admin\Controller\MenuController',
             'Admin\Controller\Country' => 'Admin\Controller\CountryController',
@@ -412,6 +440,9 @@ return array(
             'admin/page/index' => __DIR__ . '/../view/template/page/index.phtml',
             'admin/page/add' => __DIR__ . '/../view/template/page/add.phtml',
             'admin/page/edit' => __DIR__ . '/../view/template/page/edit.phtml',
+            'admin/block/index' => __DIR__ . '/../view/template/block/index.phtml',
+            'admin/block/add' => __DIR__ . '/../view/template/block/add.phtml',
+            'admin/block/edit' => __DIR__ . '/../view/template/block/edit.phtml',
             'admin/blogcomments/index' => __DIR__ . '/../view/template/blogcomments/index.phtml',
             'admin/blogcategory/index' => __DIR__ . '/../view/template/blogcategory/index.phtml',
             'admin/blogcategory/add' => __DIR__ . '/../view/template/blogcategory/add.phtml',
@@ -447,11 +478,6 @@ return array(
                     'icon' => ''
                 ),
                 array(
-                    'label' => 'Pages',
-                    'route' => 'admin-page',
-                    'icon' => ''
-                ),
-                array(
                     'label' => 'Jobs',
                     'route' => 'admin-jobs',
                     'icon' => ''
@@ -460,6 +486,23 @@ return array(
                     'label' => 'Contact Us',
                     'route' => 'admin-contact',
                     'icon' => ''
+                ),
+                array(
+                    'label' => 'CMS',
+                    'uri' => '#',
+                    'icon' => '',
+                    'pages' => array(
+                        array(
+                            'label' => 'Pages',
+                            'route' => 'admin-page',
+                            'icon' => ''
+                        ),
+                        array(
+                            'label' => 'Static Block',
+                            'route' => 'admin-block',
+                            'icon' => ''
+                        ),
+                    )
                 ),
                 array(
                     'label' => 'Blog',

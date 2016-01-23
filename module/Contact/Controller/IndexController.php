@@ -9,6 +9,7 @@ use Zend\Mail;
 class IndexController extends AbstractActionController
 {
     protected $contactTable;
+    protected $blockTable;
     
     public function getContactTable()
     {
@@ -18,10 +19,24 @@ class IndexController extends AbstractActionController
         }
         return $this->contactTable;
     }
+
+    public function getBlockTable()
+    {
+        if (!$this->blockTable) {
+            $sm = $this->getServiceLocator();
+            $this->blockTable = $sm->get('Block\Model\BlockTable');
+        }
+        return $this->blockTable;
+    }
     
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel(
+            array(
+                'contactheder' => $this->getBlockTable()->getBlockByIdentifier('contact-us-header'),
+                'contactinfo' => $this->getBlockTable()->getBlockByIdentifier('contact-us'),
+            )
+        );
     }
 
     public function saveAction()

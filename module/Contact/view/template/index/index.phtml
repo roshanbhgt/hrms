@@ -6,22 +6,9 @@ $this->headTitle($title);
     <div class="col-md-12">
         <div class="page-header"><h1><?php echo $title; ?></h1></div>
         <div class="page-body">
-            <p>We would like to respond your queries that you may have. You can directly mail your query on below location and contact no. +91 9263 189 425.</p>
+            <div class="col-md-12"><p><?php echo $contactheder->content; ?></p></div>
             <div class="col-md-4">
-                <p>
-                    <strong>Address</strong><br/>
-                    G/4, Ground Floor<br/>
-                    Birenu Asha Palace<br/>
-                    121, Sanjay Road<br/>
-                    Sakchi, Jamshedpur, Jharkhand, India - 831001. 
-                </p>
-                <p>
-                    <strong>Contact No's</strong><br/>
-                    <p><i class="glyphicon glyphicon-phone"></i> <abbr title="Phone">P</abbr>: +91 6572 230 746.</p>
-                    <p><i class="fa fa-whatsapp"></i> <abbr title="Whatsapp">M</abbr>: +91 9263 189 425.</p>
-                    <p><i class="fa fa-envelope"></i> <abbr title="Email">E</abbr>: <a href="mailto:support@goyalhr.com">support@goyalhr.com</a></p>
-                    <p><i class="glyphicon glyphicon-time"></i> <abbr title="Hours">H</abbr>: Monday - Saturday: 10:00 AM to 6:00 PM</p>
-                </p>
+                <?php echo $contactinfo->content; ?>
             </div>
             <div class="col-md-8">
                 <div class="gmap">

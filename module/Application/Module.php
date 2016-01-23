@@ -130,7 +130,10 @@ class Module
                 },
                 'reCaptchaService' => function($sm) {
                     $config = $sm->get('Config');
-                    return new ReCaptcha($config['recaptcha']);
+                    if(isset($config['recaptcha'])){
+                        return new ReCaptcha($config['recaptcha']);
+                    }
+                    return new ReCaptcha();
                 },
             ),
         );
