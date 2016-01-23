@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="page-header"><h1>Search result for <span style="color:red;"><?php echo $_POST['keyword']; ?></span></h1></div>
+        <div class="page-header"><h1>Search result for <span style="color:red;"><?php echo $_GET['q']; ?></span></h1></div>
         <?php if(count($this->paginator)){ ?>
         <?php foreach ($this->paginator as $val) : ?>
 				<?php if($val->status == 'active'){ ?>

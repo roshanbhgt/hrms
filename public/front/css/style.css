@@ -206,6 +206,14 @@ div.container a.brand {
 .search {
     display: inline-block;
 }
+.search .btn-primary, .search .btn-info {
+    background: #c52d2f none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 0;
+    padding: 1px 10px;
+}
 
 ul.social-share li {
     display: inline-block;

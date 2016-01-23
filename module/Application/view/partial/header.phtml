@@ -2,10 +2,31 @@
     <div class="top-bar">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-xs-4">
+                <div class="col-sm-4 col-xs-4">
                     <div class="top-number"><p><i class="fa fa-phone-square"></i> +91 6572 230 746 or <i class="fa fa-whatsapp"></i>&nbsp;+91 9263 189 425</p></div>
                 </div>
-                <div class="col-sm-6 col-xs-8">
+                <div class="col-sm-5 col-xs-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="search">
+                                <form method="get"  action="<?php echo $this->serverUrl($this->url('job', array('action'=>'search'))); ?>" class="form-horizontal" >
+                                    <div class="input-group" style="float:left">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                        <input name="q" class="span12" type="text"  placeholder="Enter the keyword" autocomplete="off" required="required">
+                                    </div>
+                                    <div class="input-group" style="float:left">
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                        <input name="loc" class="span12" type="text"  placeholder="Enter the location" autocomplete="off">
+                                    </div>
+                                    <div class="input-group" style="float:left;margin:0 5px;">
+                                        <button type="submit" class="btn btn-primary">Search Dream Job</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-3">
                    <div class="social">
                         <ul class="social-share">
                             <li><a href="https://www.facebook.com/Goyal-HR-Consulting-897871160248188" target="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -14,12 +35,6 @@
                             <li><a href="https://www.linkedin.com/company/10210054" target="_blank"><i class="fa fa-linkedin"></i></a></li> 
                             <li><a href="skype:goyalhrconsulting" target="_blank"><i class="fa fa-skype"></i></a></li>
                         </ul>
-                        <div class="search">
-                            <form method="post" action="<?php echo $this->serverUrl($this->url('job', array('action'=>'search'))); ?>" role="form">
-                                <input type="text" class="search-form" autocomplete="off" placeholder="Search" name="keyword" />
-                                <i class="fa fa-search"></i>
-                            </form>
-                       </div>
                    </div>
                 </div>
             </div>

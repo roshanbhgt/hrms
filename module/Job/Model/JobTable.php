@@ -118,26 +118,33 @@ class JobTable
         return $resultSet;
     }
     
-    public function getSearchResult($keyword, $paginated=true)
+    public function getSearchResult($q, $loc=null, $paginated=true)
     {   
         if ($paginated) {
-             // create a new Select object for the table album
-             $select = new Select('user_company_jobpost');
-             $select->where->like('title', $keyword);             
-             // create a new result set based on the Album entity
-             $resultSetPrototype = new ResultSet();
-             $resultSetPrototype->setArrayObjectPrototype(new Job());
-             // create a new pagination adapter object
-             $paginatorAdapter = new DbSelect(
-                 // our configured select object
+            $sql = $this->tableGateway->getSql();
+            $select = $sql->select();
+            $select->where
+                ->NEST->
+                    like('title', "%$q%")
+                ->OR->
+                    like('description', "%$q%")
+                ->OR->
+                    like('skills', "%$q%")
+                ->OR->
+                    like('location', "%$loc%")
+                ->UNNEST;
+            $select->limit(100);
+            $resultSetPrototype = new ResultSet();
+            $resultSetPrototype->setArrayObjectPrototype(new Job());
+            $paginatorAdapter = new DbSelect(
                  $select,
-                 // the adapter to run it against
                  $this->tableGateway->getAdapter(),
-                 // the result set to hydrate
                  $resultSetPrototype
              );
-             $paginator = new Paginator($paginatorAdapter);
-             return $paginator;
+            $paginator = new Paginator($paginatorAdapter);
+            // echo $sql->getSqlstringForSqlObject($select);
+            // die;
+            return $paginator;
          }
          return ;
     }
